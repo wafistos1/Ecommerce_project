@@ -1,0 +1,48 @@
+._1xp7y {
+    padding: 0;
+
+}
+._1xp7y {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0 1rem;
+    position: relative;
+}
+._1xp7y {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1066px;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+* {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+body {
+    font-size: 1.3em;
+    color: #1a1a1a;
+    line-height: 1.5;
+}
+html {
+    font-family: OpenSans;
+    font-size: 62.5%;
+    font-size: 0.625em;
+    font-size: calc(1em * .625 + 0%);
+    -webkit-text-size-adjust: 100%;
+}
+html {
+    font-family: sans-serif;
+}
+
