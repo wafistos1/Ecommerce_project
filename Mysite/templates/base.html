@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,10 +9,11 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <title>Document</title>
+  {% block title %}<title>Document</title>{% endblock title %}
 </head>
 
 <body>
+  {% block navbar %}
   <div class="container">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -63,7 +66,9 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    {% endblock navbar %}
 
+    {% block content %}
     <div class="jumbotron">
       <h1>HEADER</h1>
       <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
@@ -99,18 +104,21 @@
         </div>
       </div>
     </div>
-
+    {% endblock content %}
 
 
 
   </div>
+
   <div class="container">
+    {% bolck footer %}
   <div class="jumbotron">
     <h1>FOOTER</h1>
     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
       Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
   </div>
+  {% endblock foteer %}
 </div>
  
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
