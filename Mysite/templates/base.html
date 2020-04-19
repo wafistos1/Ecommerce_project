@@ -66,41 +66,30 @@
               </ul>
             </li>
             <li>
-              <div class="text-center">
-                <!-- Button HTML (to Trigger Modal) -->
-                <a href="#myModal" class="btn btn-info" data-toggle="modal">login</a>
-              </div>
+              <li class="nav-item">
+                <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
+                <ul class="dropdown-menu login-form">					
+                  <li>
+                    <form action="/examples/actions/confirmation.php" method="post">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" required="required">
+                      </div>
+                      <div class="form-group">
+                        <div class="clearfix">
+                          <label>Password</label>
+                          <a href="#" class="pull-right text-muted"><small>Forgot?</small></a>
+                        </div>
+                        
+                        <input type="password" class="form-control" required="required">
+                      </div>
+                      <input type="submit" class="btn btn-primary btn-block" value="Login">
+                    </form>
+                  </li>
+                </ul>
+              </li>
               
-              <!-- Modal HTML -->
-              <div id="myModal" class="modal fade">
-                <div class="modal-dialog modal-login">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <div class="avatar">
-                        <img src="/examples/images/avatar.png" alt="Avatar">
-                      </div>				
-                      <h4 class="modal-title">Member Login</h4>	
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                      <form action="/examples/actions/confirmation.php" method="post">
-                        <div class="form-group">
-                          <input type="text" class="form-control" name="username" placeholder="Username" required="required">		
-                        </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" name="password" placeholder="Password" required="required">	
-                        </div>        
-                        <div class="form-group">
-                          <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <a href="#">Forgot Password?</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
 
 
             </li>
