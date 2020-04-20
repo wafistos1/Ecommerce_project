@@ -1,1 +1,30 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="signup-form">
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+		<h2>Register</h2>
+		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        {{ user_form|crispy}}
+        {{ adresse_form|crispy }}
+        {{ profile_form|crispy }}
+        <div class="form-group">
+			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+		</div>
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+
+    </form>
+	<div class="text-center">Already have an account? <a href="{% url 'login' %}">Sign in</a></div>
+</div>
+
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
