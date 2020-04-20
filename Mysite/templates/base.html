@@ -9,96 +9,62 @@
   <!-- Latest compiled and minified CSS -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}"
-
-  {% block title %}<title>Document</title>{% endblock title %}
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
+  {% block title %}
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% endblock title %}
 </head>
 
 <body>
   {% block navbar %}
   <div class="container">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">LOGO</a>
-        </div>
+    <nav id="navbarcolor" class="navbar navbar-inverse navbar-expand-xl navbar-dark navbar-fixed-top">
+      <div class="navbar-header d-flex col">
+        <a class="navbar-brand" href="#"><i class="fa fa-cube"></i>Ya<b>Tach</b></a>  		
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+          <span class="navbar-toggler-icon"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <!-- Collection of nav links, forms, and other content for toggling -->
+      <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
+        <form class="navbar-form form-inline">
+          <div class="btn btn-lg">
+            <button href="#" class="btn btn-default btn" >Deposer Annonces</button>							
+          </div>
+          <div class="input-group search-box">								
+            <input type="text" id="search" class="form-control" placeholder="Recherche">
+            <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right ml-auto">
+          <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link"><i class="fa fa-home"></i><span>Home</span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-envelope"></i><span>Messages</span></a></li>		
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a></li>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav ">
-            <li class="active"><a href="#">Deposer une annonce <span class="sr-only">(current)</span></a></li>
-
-          </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Recherche</button>
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#" class="glyphicon glyphicon-envelope lg"> Messages</a>
-            </li>
-            <li>
-              <a href="#" class="glyphicon glyphicon-bell lg"> Notifications</a>
-            </li>
-            <li>
-              <a href="#" class="glyphicon glyphicon-search lg"> Mes recherche</a>
-            </li>
-            <li>
-              <a href="{% url 'register' %}" > Sign in</a>
-            </li>
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                aria-expanded="false">Profile <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">logout</a></li>
-                <li><a href="#">Compte</a></li>
-                <li><a href="#">Favoris</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
-            <li>
-              <li class="nav-item">
-                <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
-                <ul class="dropdown-menu login-form">					
-                  <li>
-                    <form action="/examples/actions/confirmation.php" method="post">
-                      <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" required="required">
-                      </div>
-                      <div class="form-group">
-                        <div class="clearfix">
-                          <label>Password</label>
-                          <a href="#" class="pull-right text-muted"><small>Forgot?</small></a>
-                        </div>
-                        
-                        <input type="password" class="form-control" required="required">
-                      </div>
-                      <input type="submit" class="btn btn-primary btn-block" value="Login">
-                    </form>
-                  </li>
-                </ul>
-              </li>
-              
-              
-
-
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+          {% if user.is_authenficated %}
+          <li class="nav-item dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> Antonio Moreno <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+              <li><a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></li>
+              <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li><a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class="fa fa-sign-in"></i><span>S'inscrir</span></a></li>
+          <li class="nav-item"><a href="#myModal" class="nav-link" data-toggle="modal"><i class="fa fa-user"></i><span>Se connecter</span></a></li>
+          {% endif%}
+        </ul>
+      </div>
     </nav>
     {% endblock navbar %}
 
@@ -132,8 +98,7 @@
               <div class="thumbnail">
 
                 <img data-src="holder.js/300x200" alt="300x200"
-                  style="width: 300px; height: 165px;float:left;padding-right:10px" src="#"
-                  class="img-responsive">
+                  style="width: 300px; height: 165px;float:left;padding-right:10px" src="#" class="img-responsive">
                 <div class="caption">
                   <h3>Thumbnail label</h3>
 
@@ -146,8 +111,7 @@
               <div class="thumbnail">
 
                 <img data-src="holder.js/300x200" alt="300x200"
-                  style="width: 300px; height: 165px;float:left;padding-right:10px" src="#"
-                  class="img-responsive">
+                  style="width: 300px; height: 165px;float:left;padding-right:10px" src="#" class="img-responsive">
                 <div class="caption">
                   <h3>Thumbnail label</h3>
 
@@ -162,11 +126,12 @@
         </div>
         <div class="col-sm-3 col-md-3">
           <div class='well info'></div>
-               
-          
+
+
         </div>
       </div>
     </div>
+
     {% endblock content %}
 
 
@@ -180,6 +145,36 @@
       <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
         Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog modal-login">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="avatar">
+              <img src="/examples/images/avatar.png" alt="Avatar">
+            </div>
+            <h4 class="modal-title">Member Login</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form action="/examples/actions/confirmation.php" method="post">
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a href="#">Forgot Password?</a>
+          </div>
+        </div>
+      </div>
     </div>
     {% endblock footer %}
   </div>
