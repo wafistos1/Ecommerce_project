@@ -84,15 +84,89 @@ body {
 
 
 
-
-
-
-body{
-	padding-top: 20px;
-	color: #fff;
-	background: #63738a;
-	font-family: 'Roboto', sans-serif;
+.form-control {
+	box-shadow: none;
+	border-color: #ddd;
 }
+.form-control:focus {
+	border-color: #45287a; 
+}
+.login-form {
+	width: 350px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+.login-form form {
+	color: #434343;
+	border-radius: 1px;
+	margin-bottom: 15px;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+.login-form h4 {
+	text-align: center;
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+.login-form .avatar {
+	color: #fff;
+	margin: 0 auto 30px;
+	text-align: center;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #7655b4;
+	padding: 15px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.login-form .avatar i {
+	font-size: 62px;
+}
+.login-form .form-group {
+	margin-bottom: 20px;
+}
+.login-form .form-control, .login-form .btn {
+	min-height: 40px;
+	border-radius: 2px; 
+	transition: all 0.5s;
+}
+.login-form .close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+.login-form .btn {
+	background: #7655b4;
+	border: none;
+	line-height: normal;
+}
+.login-form .btn:hover, .login-form .btn:focus {
+	background: #7655b4;
+}
+.login-form .checkbox-inline {
+	float: left;
+}
+.login-form input[type="checkbox"] {
+	margin-top: 2px;
+}
+.login-form .forgot-link {
+	float: right;
+}
+.login-form .small {
+	font-size: 13px;
+}
+.login-form a {
+	color: #4aba70;
+}
+
+
+
+
+
+
 .form-control{
 	height: 40px;
 	box-shadow: none;
@@ -108,7 +182,7 @@ body{
 	width: 400px;
 	margin: 0 auto;
 	padding: 30px 0;
-	margin-top: 50px;
+	margin-top: 150px;
 }
 .signup-form h2{
 	color: #636363;
@@ -150,7 +224,9 @@ body{
 .signup-form input[type="checkbox"]{
 	margin-top: 3px;
 }
-.signup-form .btn{        
+.signup-form .btn{ 
+	background-color: #433361;
+	color: #fff;   
 	font-size: 16px;
 	font-weight: bold;		
 	min-width: 140px;
@@ -181,10 +257,7 @@ body{
 
 
 
-body{
-	background: #eeeeee;
-	font-family: 'Varela Round', sans-serif;
-}
+
 .form-inline {
 	display: inline-block;
 }
@@ -358,4 +431,11 @@ body{
 
 #navbarcolor {
 	background-color: #433361;
+}
+
+.login-form {
+	padding-top: 150px;
+}
+#header-section{
+	padding-top: 150px;
 }

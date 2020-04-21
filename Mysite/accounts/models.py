@@ -18,7 +18,7 @@ class Profile(models.Model):
     """ Class for user registration
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='picture/', default='default,jpg')
+    avatar = models.ImageField(upload_to='picture/', default='default.jpg')
     adresse = models.ForeignKey(Adresse, on_delete=models.CASCADE)
     telephone = models.CharField(max_length=100)
 
