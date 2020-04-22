@@ -18,7 +18,7 @@
 			{% endfor%}	
 			<div class="form-group small clearfix">
 				<label class="checkbox-inline"><input type="checkbox"> Remember me</label>
-				<a href="#" class="forgot-link">Forgot Password?</a>
+				<a href="{% url 'password_reset' %}" class="forgot-link">Forgot Password?</a>
 			</div> 
 			<input type="submit"  id="login-botton" class="btn btn-primary btn-block btn-lg" value="Login">              
 		</form>
