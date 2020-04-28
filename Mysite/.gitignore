@@ -87,6 +87,7 @@ Winenv/
 .Winenv
 winVenv/
 myenv/
+lvenv/
 
 # mkdocs documentation 
 /site 
