@@ -8,19 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Latest compiled and minified CSS -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
-  {% block title %}
-  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" >  
   <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  {% endblock title %}
+
+  
+  {% block head_title %}
+  
+  <title>Document</title>
+{% endblock head_title %}
 </head>
 
 <body>
   {% block navbar %}
+ 
   <div class="container">
     <nav id="navbarcolor" class="navbar navbar-inverse navbar-expand-xl navbar-dark navbar-fixed-top">
       <div class="navbar-header d-flex col">
@@ -52,18 +55,18 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item dropdown">
-            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="{{user.profile.avatar.url}}" class="avatar" alt="Avatar"> {{user.username}} <b class="caret"></b></a>
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="{{user.picture.url}}" class="avatar" alt="Avatar"> {{user.username}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="{% url 'compte' %}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+              <li><a href="{% url 'profile'%}"" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
               <li><a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></li>
               <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
               <li class="divider dropdown-divider"></li>
-              <li><a href="{% url 'logout' %}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+              <li><a href="{% url 'account_logout'%}"" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
             </ul>
           </li>
           {% else %}
-          <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class="fa fa-sign-in"></i><span>Inscription</span></a></li>
-          <li class="nav-item"><a href="{% url 'login'%}" class="nav-link" data-toggle="modal"><i class="fa fa-user"></i><span>Connexion</span></a></li>
+          <li class="nav-item"><a href="{% url 'account_signup'%}" class="nav-link"><i class="fa fa-sign-in"></i><span>Inscription</span></a></li>
+          <li class="nav-item"><a href="{% url 'account_login'%}" class="nav-link" data-toggle="modal"><i class="fa fa-user"></i><span>Connexion</span></a></li>
           {% endif%}
         </ul>
       </div>
@@ -122,7 +125,7 @@
 
                   <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id
                     elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies
-                    vehicula ut id elit.</p>
+                    vehicula ut id elit.</p>30px
                 </div>
 
               </div>
@@ -154,7 +157,9 @@
     
     {% endblock footer %}
   </div>
+  
 
+{% block extra_body %}{%endblock%}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 

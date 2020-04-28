@@ -1,52 +1,38 @@
 
-from django.contrib.auth.models import User
+
+from .models import Profile
 from django import forms
-from accounts.models import Profile, Adresse
-from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 
-class UserRegisterForm(UserCreationForm):
-    """ Class form for user registration
-    """
-    
+User = get_user_model()
 
-    def __init__(self, *args, **kwargs):
-        """Hide help message for register user
-        """
-        super(UserCreationForm, self).__init__(*args, **kwargs)
-        for fieldname in ['username', 'password1', 'password2']:
-            self.fields['username'].widget.attrs.update({'class': 'form-control'})
-            self.fields['first_name'].widget.attrs.update({'class': 'form-control'})
-            self.fields['email'].widget.attrs.update({'class': 'form-control'})
-            self.fields['password1'].widget.attrs.update({'class': 'form-control'})
-            self.fields['password2'].widget.attrs.update({'class': 'form-control'})
-            self.fields[fieldname].help_text = None
+
+class SignupForm(forms.Form):
+
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    picture = forms.FileField()
+    adress1 = forms.CharField(max_length=255)
+    adress2 = forms.CharField(max_length=255)
+    ville = forms.CharField(max_length=255)
+    codezip = forms.CharField(max_length=50)
+    contry = forms.CharField(max_length=50)
+    phone = forms.CharField(max_length=50)
+    discriptions = forms.CharField(max_length=255)
 
     class Meta:
-        """ Display field to input text
-        """
-        model = User
-        fields = ['username', 'email', 'password1', 'password2', 'first_name']
+        model = get_user_model()
+        fields = ('email', 'username', 'password1',  'password2', 'first_name', 'last_name','picture',)
+    def save(self, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.picture = self.cleaned_data['picture']
+        user.adress1 = self.cleaned_data['adress1']
+        user.adress2 = self.cleaned_data['adress2']
+        user.ville = self.cleaned_data['ville']
+        user.codezip = self.cleaned_data['codezip']
+        user.phone = self.cleaned_data['phone']
+        user.discriptions = self.cleaned_data['discriptions']
+        user.save()
 
-class adresseForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['rue'].widget.attrs.update({'class': 'form-control'})
-        self.fields['ville'].widget.attrs.update({'class': 'form-control'})
-        self.fields['Zip'].widget.attrs.update({'class': 'form-control'})
-        self.fields['pays'].widget.attrs.update({'class': 'form-control'})
-    class Meta:
-        model = Adresse
-        fields = "__all__"
-        
 
-class profileForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-    
-        self.fields['avatar'].widget.attrs.update({'class': 'form-control'})
-        self.fields['telephone'].widget.attrs.update({'class': 'form-control'})
-    class Meta:
-        model = Profile
-        fiels = ('avatar', 'telephone' )
-        exclude = ['user', 'adresse']

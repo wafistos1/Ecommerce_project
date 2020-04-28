@@ -39,9 +39,37 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # The following apps are required:
+    'django.contrib.sites',
+
+    # django-allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+
+    # include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
+    
+    # local app
     'accounts',
     'crispy_forms',
 ]
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +96,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -76,13 +105,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Mysite.wsgi.application'
 
 
+AUTHENTICATION_BACKENDS = (
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+)
+
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'p2',
+        'NAME': 'p1',
         'USER': 'postgres',
         'PASSWORD': '123',
         'HOST': 'localhost',
@@ -142,25 +182,22 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 LOGIN_REDIRECT_URL ='home'
-LOGIN_URL = 'login'
+LOGIN_URL = 'account_login'
 
 
-EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = EMAIL_HOST
-EMAIL_PORT =  EMAIL_PORT
-EMAIL_USE_TLS = EMAIL_USE_TLS
-EMAIL_USE_SSL = EMAIL_USE_SSL
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
+AUTH_USER_MODEL = 'accounts.Profile'
+# email console for test
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# email backend for google
 
-print(EMAIL_HOST_PASSWORD)
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT =  465
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = True
-# EMAIL_HOST_USER = 'mameri.wafi@gmail.com'
-# EMAIL_HOST_PASSWORD = 'gsxxhdrumxeemurf'
+# EMAIL_BACKEND = EMAIL_BACKEND
+# EMAIL_HOST = EMAIL_HOST
+# EMAIL_PORT =  EMAIL_PORT
+# EMAIL_USE_TLS = EMAIL_USE_TLS
+# EMAIL_USE_SSL = EMAIL_USE_SSL
+# EMAIL_HOST_USER = EMAIL_HOST_USER
+# EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 

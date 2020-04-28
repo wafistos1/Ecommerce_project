@@ -355,13 +355,10 @@
 }
 
 
-.emp-profile {
-	padding-top: 100px;
-}
-
 .emp-profile{
-    padding: 3%;
-    margin-top: 3%;
+	padding: 3%;
+	padding-top: 5%;
+    margin-top: 10%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background: #fff;
