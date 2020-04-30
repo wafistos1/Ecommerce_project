@@ -1,0 +1,31 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<h1 class='changeStyle'>{% trans "Edit Profile" %}</h1>
+
+<div class="login-form">
+  <h2>{% trans "Edit Profile" %}</h2>
+  <form  method="post" enctype="multipart/form-data" action="{% url 'edit' %}">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      {{ form.picture.label_tag}}
+      {{ form.picture}}
+    </div>
+    {% for field in form %}
+        <div class="fieldWrapper">
+            <p class="alert alert-danger">{{ field.errors }}</p>
+            {% if field.help_text %}
+            <p class="alert alert-warning">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    <button type="submit">{% trans "Edit" %}</button>  
+  </form>
+  </div>
+{% endblock %}

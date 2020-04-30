@@ -13,7 +13,7 @@ path('', views.home, name='home'),
 
 # path('accounts/user', views.register, name='register'),
 # path('accounts/login', views.loginPage, name='login'),
-# path('accounts/logout', views.logoutPage, name='logout'),
+path('accounts/edit_profile', views.edit, name='edit'),
 path('accounts/compte', views.compte, name='profile'),
 
 # # reset password urls

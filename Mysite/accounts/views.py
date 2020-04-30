@@ -2,11 +2,24 @@ from django.shortcuts import render, redirect
 # from django.core.mail import send_mail
 # from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-# from accounts.forms import profileForm, UserRegisterForm, adresseForm
+from accounts.forms import editform
 # from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # # Create your views here.
 def home(request):
     return render(request, 'base.html')
+
+def edit(request):
+    if request.POST:
+        form = editform(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            form = editform(request.POST, request.FILES, instance=request.user)
+            return render(request, 'edit_profile.html', {'form': form})
+    form = editform()  
+    
+    return render(request, 'accounts/edit_profile.html', {'form': form})
 # def login(request):
 #     return render(request, 'accounts/login.html')
 

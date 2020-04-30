@@ -1,13 +1,20 @@
-
+from django.contrib.auth.forms import UserChangeForm  
 
 from .models import Profile
 from django import forms
 from django.contrib.auth import get_user_model
+from django.forms import ModelForm, CharField, Textarea
 
 User = get_user_model()
 
 
 class SignupForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        
+        self.fields['first_name'].widget.attrs['placeholder', 'first_name']
+        self.fields['username'].widget.attrs['placeholder', 'username']
+        self.fields['username'].widget.attrs['placeholder', 'username']
 
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
@@ -23,6 +30,13 @@ class SignupForm(forms.Form):
     class Meta:
         model = get_user_model()
         fields = ('email', 'username', 'password1',  'password2', 'first_name', 'last_name','picture',)
+        # widgets = {
+        #     'first_name': Textarea(attrs={'class': 'form-control'}),
+        #     'email': Textarea(attrs={'class': 'form-control'}),
+        #     'username': Textarea(attrs={'class': 'form-control'}),
+        #     'last_name': Textarea(attrs={'class': 'form-control'}),
+        #     'picture': Textarea(attrs={'class': 'form-control'}),
+        # }
     def save(self, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -31,8 +45,17 @@ class SignupForm(forms.Form):
         user.adress2 = self.cleaned_data['adress2']
         user.ville = self.cleaned_data['ville']
         user.codezip = self.cleaned_data['codezip']
+        user.contry = self.cleaned_data['contry']
         user.phone = self.cleaned_data['phone']
         user.discriptions = self.cleaned_data['discriptions']
         user.save()
 
 
+class editform(UserChangeForm):
+    template_name='/accounts/edit_profile.html'
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'picture',
+        )
