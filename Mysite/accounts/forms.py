@@ -9,12 +9,6 @@ User = get_user_model()
 
 
 class SignupForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(SignupForm, self).__init__(*args, **kwargs)
-        
-        self.fields['first_name'].widget.attrs['placeholder', 'first_name']
-        self.fields['username'].widget.attrs['placeholder', 'username']
-        self.fields['username'].widget.attrs['placeholder', 'username']
 
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
@@ -29,14 +23,17 @@ class SignupForm(forms.Form):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'username', 'password1',  'password2', 'first_name', 'last_name','picture',)
+        fields = ('email', 'username', 'password1',  'password2', 'first_name',
+                  'last_name', 'picture', 'adress1', 'adress2', 'ville', 'codezip',
+                  'contry', 'phone', 'discriptions')
         # widgets = {
-        #     'first_name': Textarea(attrs={'class': 'form-control'}),
-        #     'email': Textarea(attrs={'class': 'form-control'}),
-        #     'username': Textarea(attrs={'class': 'form-control'}),
-        #     'last_name': Textarea(attrs={'class': 'form-control'}),
-        #     'picture': Textarea(attrs={'class': 'form-control'}),
-        # }
+        #      'first_name': Textarea(attrs={'class': 'form-control'}),
+        #      'email': Textarea(attrs={'class': 'form-control'}),
+        #      'username': Textarea(attrs={'class': 'form-control'}),
+        #      'last_name': Textarea(attrs={'class': 'form-control'}),
+        #      'picture': Textarea(attrs={'class': 'form-control'}),
+        #  }
+
     def save(self, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']

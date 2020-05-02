@@ -89,6 +89,8 @@ winVenv/
 myenv/
 lvenv/
 ../lvenv/
+.idea
+../lvenv
 # mkdocs documentation 
 /site 
 

@@ -12,54 +12,71 @@
   <h2>{% trans "Signup" %}</h2>
   <form class="signup" id="signup_form" method="post" enctype="multipart/form-data" action="{% url 'account_signup' %}">
     {% csrf_token %}
-    <div class="form-group">
-      <div class="row">
-        <div class="col-xs-6"> {{ form.username.label_tag}} {{ form.username }}</div>
+  <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.username|as_crispy_field }}
       </div>
-      <div class="row">
-        <div class="col-xs-6">{{ form.first_name.label_tag}} {{ form.first_name }}</div>
-        <div class="col-xs-6">{{ form.last_name.label_tag}} {{ form.last_name }}</div>
+
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.first_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.last_name|as_crispy_field }}
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-6"> {{ form.email.label_tag}} {{ form.email}}</div>
+    <div class="form-row">
+          <div class="form-group col-md-6 mb-0">
+            {{ form.email|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-6 mb-0">
+            {{ form.password1|as_crispy_field }}
+          </div>
+        </div>
+
+   <div class="form-row">
+          <div class="form-group col-md-6 mb-0">
+            {{ form.password2|as_crispy_field }}
+          </div>
+
+        </div>
+<div class="form-row">
+      <div class="form-group col-md-5 mb-0">
+
+        {{ form.adress2|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-5 mb-0">
+        {{ form.adress1|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-2 mb-0">
+
+        {{ form.phone|as_crispy_field }}
+      </div>
     </div>
-    <div class="row">
-      <div class="col-xs-6"> {{ form.password1.label_tag}} {{ form.password1}}</div>
-      <div class="col-xs-6">{{ form.password2.label_tag}} {{ form.password2}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6"> {{ form.phone.label_tag}} {{ form.phone}}</div>
+  <div class="form-row">
+      <div class="form-group col-md-5 mb-0">
+
+        {{ form.ville|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-5 mb-0">
+
+        {{ form.contry|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-2 mb-0">
+          {{ form.codezip|as_crispy_field }}
+
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-6"> {{ form.adress1.label_tag}} {{ form.adress1}}</div>
-      <div class="col-xs-6">{{ form.adress2.label_tag}} {{ form.adress2}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6"> {{ form.codezip.label_tag}} {{ form.codezip}}</div>
-      <div class="col-xs-6">{{ form.ville.label_tag}} {{ form.ville}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6">{{ form.contry.label_tag}} {{ form.contry}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6">{{ form.discriptions.label_tag}} {{ form.discriptions}}</div>
+      <div class="col-xs-12">{{form.discriptions|as_crispy_field }}</div>
     </div>
     <div class="form-group">
-      {{ form.picture.label_tag}}
-      {{ form.picture}}
+      {{ form.picture|as_crispy_field}}
     </div>
-    {% for field in form %}
-        <div class="fieldWrapper">
-            <p class="alert alert-danger">{{ field.errors }}</p>
-            {% if field.help_text %}
-            <p class="alert alert-warning">{{ field.help_text|safe }}</p>
-            {% endif %}
-        </div>
-        {% endfor %}
     {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    <input type="hidden" class="btn btn-primary" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <button type="submit">{% trans "Sign Up" %} &raquo;</button>
   
