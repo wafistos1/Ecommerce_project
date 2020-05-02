@@ -39,7 +39,7 @@
       <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
         <form class="navbar-form form-inline">
           <div class="btn btn-lg">
-            <button href="#" class="btn btn-default btn">Deposer Annonce</button>
+            <button href="{% url 'add_annonce' %}" class="btn btn-default btn">Deposer Annonce</button>
           </div>
           <div class="input-group search-box">
             <input type="text" id="search" class="form-control" placeholder="Recherche">
@@ -79,6 +79,7 @@
     </nav>
     {% endblock navbar %}
 
+    <!-- block content -->
     {% block content %}
     <div class="jumbotron  " id="header-section">
       {% for message in messages %}
@@ -89,7 +90,8 @@
         Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
     </div>
-
+        <!-- block categories -->
+        {% block categories %}
 
     <div class="col-md-3 ">
       <div class='well categories'>
@@ -100,6 +102,10 @@
         <h3> - High tech</h3>
       </div>
     </div>
+        {% endblock categories %}
+        <!-- block categories -->
+
+
     <div class="col-md-9">
 
       <div class="row">
@@ -107,6 +113,9 @@
 
         <div class="col-sm-6 col-md-9">
           <div class="well">
+
+        <!-- block annonce -->
+            {% block annonce %}
             <h2>Les annonces</h2>
             <div class="well">
               <div class="thumbnail">
@@ -136,7 +145,11 @@
 
               </div>
             </div>
+
+            {% endblock annonce %}
+             <!-- block annonce -->py
           </div>
+
         </div>
         <div class="col-sm-3 col-md-3">
           <div class='well info'></div>
@@ -146,8 +159,9 @@
       </div>
     </div>
 
-    {% endblock content %}
 
+    {% endblock content %}
+<!-- block content -->
 
 
   </div>

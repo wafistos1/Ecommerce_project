@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     
     # local app
     'accounts',
+    'annonce',
     'crispy_forms',
+
 ]
 
 SITE_ID = 1
