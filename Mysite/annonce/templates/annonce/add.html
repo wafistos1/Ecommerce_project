@@ -6,6 +6,26 @@
 {% block head_title %}{% trans "add annonce" %}{% endblock %}
 
 {% block annonce %}
+<h1>Add Annonce</h1>
 
+    <form class="annonce" id="add-annonce" method="post" enctype="multipart/form-data" action="{% url 'add_annonce' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ a_form|crispy}}
+    </div>
+    {% if redirect_field_value %}
+    <input type="hidden" class="btn btn-primary" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    {% for field in a_form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    <button type="submit">{% trans "Add annonce" %} </button>
+
+   </form>
 {% endblock annonce %}
 
