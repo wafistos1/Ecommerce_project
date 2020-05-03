@@ -118,6 +118,7 @@
             {% block annonce %}
             <h2>Les annonces</h2>
             <div class="well" >
+            <!--Loop list of annonces -->
                 {% for detail in lists %}
               <div class="thumbnail" style="width: 500px; height: 230px">
 
@@ -129,6 +130,7 @@
                   <p>{{ detail.description }}</p>
                 </div>
               <h3>{{ detail.price }}</h3>
+              <h2><a href="{{ detail.get_absolute_url }}">detail</a></h2>
 
               </div>
             {% endfor %}

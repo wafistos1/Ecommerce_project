@@ -7,18 +7,16 @@
 
 
 {% block annonce %}
-    {% for detail in details %}
-              <div class="thumbnail" style="width: 500px">
+              <div class="thumbnail" style="width: 500px; height:600px;">
 
                 <img data-src="holder.js/300x200" alt="300x200"
-                  style="width: 250px; height: 100px;float:left;padding-right:10px" src="{{ detail.image.url }}" class="img-responsive">
+                  style="width: 300px; height: 200px;float:left;padding-right:10px" src="{{ details.image.url }}" class="img-responsive">
                 <div class="caption">
-                  <h3>{{ detail.title }}</h3>
+                  <h3>{{ details.title }}</h3>
 
-                  <p>{{ detail.description }}</p>
+                  <p>{{ details.description }}</p>
                 </div>
-              {{ detail.price }}
+              {{ details.price }}
 
               </div>
-            {% endfor %}
 {% endblock annonce %}
