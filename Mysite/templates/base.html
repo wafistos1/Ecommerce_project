@@ -39,18 +39,20 @@
       <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
         <form class="navbar-form form-inline">
           <div class="btn btn-lg">
-            <a  href="{% url 'add_annonce' %}" class="btn btn-default ">Deposer Annonce</a>
+            <a href="{% url 'add_annonce' %}" class="btn btn-default ">Deposer Annonce</a>
           </div>
           <div class="input-group search-box">
-            <input type="text" id="search" class="form-control" placeholder="Recherche">
+            <input type="text" id="search" class="form-control" placeholder="Recherche Annonce">
             <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right ml-auto">
           <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link"><i
                 class="fa fa-home"></i><span>Home</span></a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-envelope"></i><span>Messages</span></a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-envelope"><span
+                  class="badge">42</span></i><span>Messages</span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-bell"><span
+                  class="badge">42</span></i><span>Notifications</span></a>
           </li>
 
 
@@ -90,20 +92,23 @@
         Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
     </div>
-        <!-- block categories -->
-        {% block categories %}
+    <!-- block categories -->
+    {% block categories %}
 
     <div class="col-md-3 ">
-      <div class='well categories'>
-        <h2>Categorie</h2>
-        <h3> - Informatique</h3>
-        <h3> - Jeux</h3>
-        <h3> - Fashion</h3>
-        <h3> - High tech</h3>
+      <h1 class="my-4">Categorie</h1>
+      <div class="list-group">
+        {% for list in categories %}
+
+        <a href="#" class="list-group-item">{{ list.name }} </a>
+
+        {% endfor %}
       </div>
     </div>
-        {% endblock categories %}
-        <!-- block categories -->
+
+
+    {% endblock categories %}
+    <!-- block categories -->
 
 
     <div class="col-md-9">
@@ -114,63 +119,90 @@
         <div class="col-sm-6 col-md-9">
           <div class="well">
 
-        <!-- block annonce -->
+            <!-- block annonce -->
             {% block annonce %}
             <h2>Les annonces</h2>
-            <div class="well" >
-            <!--Loop list of annonces -->
-                {% for detail in lists %}
+            <div class="well">
+              <!--Loop list of annonces -->
+              <!-- {% for detail in lists %}
               <div class="thumbnail" style="width: 500px; height: 230px">
 
                 <img data-src="holder.js/300x200" alt="300x200"
-                  style="width: 250px; height: 150px;float:left;padding-right:10px" src="{{ detail.image.url }}" class="img-responsive">
+                  style="width: 250px; height: 150px;float:left;padding-right:10px" src="{{ detail.image.url }}"
+                  class="img-responsive">
                 <div class="caption">
                   <h3>{{ detail.title }}</h3>
 
                   <p>{{ detail.description }}</p>
                 </div>
-              <h3>{{ detail.price }}</h3>
-              <h2><a href="{{ detail.get_absolute_url }}">detail</a></h2>
+                <h3>{{ detail.price }}</h3>
+                <h2><a href="{{ detail.get_absolute_url }}">detail</a></h2>
 
               </div>
-            {% endfor %}
-            <!--Pagitation -->
-                  <div class="pagination">
-          <span class="step-links">
-              {% if page_obj.has_previous %}
+
+
+              {% endfor %} -->
+              {% for detail in annonces %}
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="card h-100" style="border: 1px solid rgb(207, 142, 191);">
+                  <a href="#"><img data-src="holder.js/300x200" alt="300x200" style="width: 150px; height: 100px;float:left;padding-right:10px;border-width:10px;
+                    border-color: violet;" class="card-img-top"
+                      src="{% if detail.image %}{{ detail.image.url }}{% else %}{% static 'img/no-image.png' %}{% endif %}"
+                      alt=""></a>
+                  <div class="card-body" style="margin-top: 2px; margin-right: 2px">
+                    <h4 class="card-title">
+                      <a href="{{ detail.get_absolute_url }}">{{detail.title}}</a>
+                    </h4>
+                    <h5>${{detail.price}}</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                      aspernatur!</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <!--Pagitation -->
+              <div class="pagination">
+                <span class="step-links">
+                  {% if page_obj.has_previous %}
                   <a href="?page=1">&laquo; first</a>
                   <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-              {% endif %}
+                  {% endif %}
 
-              <span class="current">
-                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-              </span>
+                  <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  </span>
 
-              {% if page_obj.has_next %}
+                  {% if page_obj.has_next %}
                   <a href="?page={{ page_obj.next_page_number }}">next</a>
                   <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-              {% endif %}
-          </span>
-      </div>
+                  {% endif %}
+                </span>
+              </div>
 
             </div>
 
             {% endblock annonce %}
-             <!-- block annonce -->
+            <!-- block annonce -->
           </div>
 
         </div>
+
+        <!--Pub-->
         <div class="col-sm-3 col-md-3">
           <div class='well info'></div>
 
 
         </div>
+        <!--fin block Pub-->
       </div>
     </div>
 
 
     {% endblock content %}
-<!-- block content -->
+    <!-- block content -->
 
 
   </div>

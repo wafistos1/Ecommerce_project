@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required
 from accounts.forms import editform
 # from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # # Create your views here.
-def home(request):
-    return render(request, 'base.html')
 
 def edit(request):
     if request.POST:

@@ -9,6 +9,10 @@ from accounts.models import  Profile
 
 class Categorie(models.Model):
     name = models.CharField(max_length=200)
+
+    class Meta:
+        pass
+
     def __str__(self):
         return self.name
 
@@ -17,7 +21,6 @@ class Annonce(models.Model):
     """
     class for Product user
     """
-    categorie = Categorie.objects.all()
     id = models.UUIDField(  # new
         primary_key=True,
         default=uuid.uuid4,
@@ -30,6 +33,9 @@ class Annonce(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     image = models.ImageField(upload_to='image/', default='image_default.jpg')
+
+    class Meta:
+        pass
 
     def __str__(self):
         return self.title

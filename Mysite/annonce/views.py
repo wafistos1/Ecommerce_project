@@ -2,12 +2,22 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import annonceFrom, categorieFrom
+from .forms import annonceFrom
 
 from .models import Annonce, Categorie
 
 # Create your views here.
 
+
+def home(request):
+    """
+    """
+    categorie = Categorie.objects.all()
+    annonce = Annonce.objects.all().order_by('-date')
+    # todo: ajouter la paginations
+
+    context = {'categories': categorie, 'annonces': annonce}
+    return render(request, 'base.html', context)
 
 @login_required(login_url='account_login')
 def add_annonce(request):
@@ -42,12 +52,13 @@ def add_annonce(request):
 class annonceListView(ListView):
     model = Annonce
     context_object_name = 'lists'
-    paginate_by = 4
-    template_name = 'base.html'
+    paginate_by = 12
+    template_name = 'annonce/home.html'
 
 
 class AnnonceDetailView(DetailView):
     model = Annonce
     context_object_name = 'details'
     template_name = 'annonce/detail.html'
+
 
