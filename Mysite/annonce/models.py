@@ -1,8 +1,7 @@
 from django.db import models
 import uuid
-
 from django.urls import reverse
-from accounts.models import  Profile
+from accounts.models import Profile
 
 
 # Create your models here.
@@ -48,8 +47,6 @@ class Annonce(models.Model):
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
 
-    image = models.ImageField(upload_to='image/', default='image_default.jpg', blank=True, null=True)
-
     class Meta:
         pass
 
@@ -58,6 +55,11 @@ class Annonce(models.Model):
 
     def get_absolute_url(self):  # new
         return reverse('annonce_detail', args=[str(self.id)])
+
+
+class Image(models.Model):
+    annonce_images = models.ForeignKey(Annonce, on_delete=models.CASCADE, related_name='image')
+    image = models.FileField(upload_to='image/', default='image_default.jpg', blank=True, null=True)
 
 
 """

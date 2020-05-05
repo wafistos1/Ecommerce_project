@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from django.forms import modelformset_factory
 from django.views.generic import DetailView, ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import annonceFrom
+from .forms import annonceFrom, ImageForm
 
-from .models import Annonce, Categorie
+from .models import Annonce, Categorie, Image
 
 # Create your views here.
 
@@ -14,39 +15,61 @@ def home(request):
     """
     categorie = Categorie.objects.all()
     annonce = Annonce.objects.all().order_by('-created')
+    images = Image.objects.all()
     # todo: ajouter la paginations
 
-    context = {'categories': categorie, 'annonces': annonce}
+    context = {'categories': categorie, 'annonces': annonce, 'image': images}
     return render(request, 'base.html', context)
 
 @login_required(login_url='account_login')
 def add_annonce(request):
+
+    ImageFormSet = modelformset_factory(Image,
+                                        form=ImageForm, extra=4)
+
+    # 'extra' means the number of photos that you can upload   ^
+
     print(request.POST)
     if request.method == "POST":
-        a_form = annonceFrom(request.POST, request.FILES)
-        if a_form.is_valid():
+        a_form = annonceFrom(request.POST)
+        formset = ImageFormSet(request.POST, request.FILES,
+                               queryset=Image.objects.none())
+        if a_form.is_valid() and formset.is_valid():
             print('Is valid')
             user = request.user
-            annonce = a_form.save(commit=False)
-            annonce.owner = user
-            annonce.save()
-            print(annonce)
+            annonceForm = a_form.save(commit=False)
+            annonceForm.owner = user
+            annonceForm.save()
+            for form in formset.cleaned_data:
+                #this helps to not crash if the user   
+                #do not upload all the photos
+                if form:
+                    image = form['image']
+                    photo = Image(annonce_images=annonceForm, image=image)
+                    photo.save()
+
+            print(annonceForm)
             messages.add_message(
                 request, messages.SUCCESS, 'annonce ajouter avec succès'
             )
             return redirect('home')
         else:
             print('Is not valid')
+            print(annonceForm.errors, formset.errors)
             a_form = annonceFrom()
     
     else:
         print('Is not valid')
         a_form = annonceFrom()
+        formset = ImageFormSet(queryset=Image.objects.none())
     
     a_form = annonceFrom()
+    formset = ImageFormSet(queryset=Image.objects.none())
+
     return render(request, 'annonce/add.html', {
-        "a_form": a_form
-    })
+        "a_form": a_form,
+        "formset": formset,
+        })
 
 
 class annonceListView(ListView):

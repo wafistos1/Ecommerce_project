@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Categorie, Annonce
+from .models import Categorie, Annonce, Image
 
 
 class categorieFrom(forms.ModelForm):
@@ -14,3 +14,11 @@ class annonceFrom(forms.ModelForm):
         model = Annonce
         fields = '__all__'
         exclude = ['owner']
+
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
+
+    class Meta:
+        model = Image
+        fields = ('image', )

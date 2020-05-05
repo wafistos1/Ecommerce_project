@@ -13,6 +13,10 @@
     <div class="form-group">
       {{ a_form|crispy}}
     </div>
+    {{ formset.management_form }}
+    {% for form in formset %}
+        {{ form }}
+    {% endfor %}
     {% if redirect_field_value %}
     <input type="hidden" class="btn btn-primary" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
