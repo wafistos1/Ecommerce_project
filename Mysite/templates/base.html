@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +9,12 @@
   <!-- Latest compiled and minified CSS -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  {% block link %}
   <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% endblock link %}
 
   {% block head_title %}
 
@@ -100,7 +102,7 @@
       <div class="list-group">
         {% for list in categories %}
 
-        <a href="#" class="list-group-item">{{ list.name }} </a>
+        <a href="#" class="list-group-item" style="color: rgb(74, 30, 116);">{{ list.name|upper }} </a>
 
         {% endfor %}
       </div>
@@ -116,53 +118,60 @@
       <div class="row">
 
 
-        <div class="col-sm-6 col-md-9">
-          <div class="well">
+        <div class=" col-md-12">
+          
 
             <!-- block annonce -->
             {% block annonce %}
-            <h2>Les annonces</h2>
-            <div class="well">
-              <!--Loop list of annonces -->
-              <!-- {% for detail in lists %}
-              <div class="thumbnail" style="width: 500px; height: 230px">
+            <h2 style="text-align: center;">Les Dernieres annonces</h2>
+           
 
-                <img data-src="holder.js/300x200" alt="300x200"
-                  style="width: 250px; height: 150px;float:left;padding-right:10px" src="{{ detail.image.url }}"
-                  class="img-responsive">
-                <div class="caption">
-                  <h3>{{ detail.title }}</h3>
+              <div class="row">
+                {% for details in annonces %}
+                  <div class="col-sm-4  col-12" style="margin-top: 10px; border-width: 5px; border-color: blueviolet;">
+                  <div class="col-item">
+                    <div class="photo">
+                      <img src="{{details.image.url}}" alt="a" style="height: 200px; width: 250px; " class="img-responsive" />
+                    </div>
+                    <div class="info">
+                      <div class="row">
+                        <div class="price col-md-12">
+                          <h5>
+                            <strong>{{ details.title|upper|truncatewords:3  }}</strong></h5>
+                            <div class="row">
 
-                  <p>{{ detail.description }}</p>
+                              <div class="price col-md-6">
+                          <h5 class="price-text-color">
+                            ${{ details.price|intcomma}}</h5>
+                          </div>
+                          <div class="price col-md-6">
+                            <h6 class="price-text-color" style="color: blueviolet;">
+                              Ajouter-{{ details.created }}</h6>
+                            </div>
+
+                        </div>
+                        </div>
+                        
+                      </div>
+                      <div class="separator clear-left">
+                        <p class="btn-details">
+                          <i class="fa fa-list"></i><a href="{{details.get_absolute_url}}" class="hidden-sm">Details</a></p>
+                            <p class="btn-details">
+                              <i class="fa fa-shopping-bag"></i><a  class="hidden-sm" style="color: blueviolet;">{{details.type_annonce|upper}}
+                                </a></p>
+                      </div>
+                      <div class="clearfix">
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3>{{ detail.price }}</h3>
-                <h2><a href="{{ detail.get_absolute_url }}">detail</a></h2>
+                  {% endfor %}
 
               </div>
 
 
-              {% endfor %} -->
-              {% for detail in annonces %}
-              <div class="col-lg-4 col-md-6 mb-4">
-                  <div class="card h-100" style="border: 1px solid rgb(207, 142, 191);">
-                  <a href="#"><img data-src="holder.js/300x200" alt="300x200" style="width: 150px; height: 100px;float:left;padding-right:10px;border-width:10px;
-                    border-color: violet;" class="card-img-top"
-                      src="{% if detail.image %}{{ detail.image.url }}{% else %}{% static 'img/no-image.png' %}{% endif %}"
-                      alt=""></a>
-                  <div class="card-body" style="margin-top: 2px; margin-right: 2px">
-                    <h4 class="card-title">
-                      <a href="{{ detail.get_absolute_url }}">{{detail.title}}</a>
-                    </h4>
-                    <h5>${{detail.price}}</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                      aspernatur!</p>
-                  </div>
-                  <div class="card-footer">
-                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
+
+
               <!--Pagitation -->
               <div class="pagination">
                 <span class="step-links">
@@ -182,20 +191,16 @@
                 </span>
               </div>
 
-            </div>
+           
 
             {% endblock annonce %}
             <!-- block annonce -->
-          </div>
+          
 
         </div>
 
         <!--Pub-->
-        <div class="col-sm-3 col-md-3">
-          <div class='well info'></div>
 
-
-        </div>
         <!--fin block Pub-->
       </div>
     </div>

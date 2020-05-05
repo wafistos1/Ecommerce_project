@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # The following apps are required:
     'django.contrib.sites',
+    'django.contrib.humanize',
 
     # django-allauth
     'allauth',

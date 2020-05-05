@@ -13,7 +13,7 @@ def home(request):
     """
     """
     categorie = Categorie.objects.all()
-    annonce = Annonce.objects.all().order_by('-date')
+    annonce = Annonce.objects.all().order_by('-created')
     # todo: ajouter la paginations
 
     context = {'categories': categorie, 'annonces': annonce}
@@ -61,4 +61,4 @@ class AnnonceDetailView(DetailView):
     context_object_name = 'details'
     template_name = 'annonce/detail.html'
 
-
+# TODO: ADD remove annonce view
