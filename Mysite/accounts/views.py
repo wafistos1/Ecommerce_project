@@ -3,8 +3,10 @@ from django.shortcuts import render, redirect
 # from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from accounts.forms import editform
+from annonce.models import Annonce
 # from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # # Create your views here.
+
 
 def edit(request):
     if request.POST:
@@ -78,4 +80,8 @@ def edit(request):
 def compte(request):
     """ Display Details of User
     """
-    return render(request, 'accounts/compte.html', locals())
+    annonce = Annonce.objects.filter(owner=request.user)
+    context = {
+        'annonces': annonce
+    }
+    return render(request, 'accounts/compte.html', context)
