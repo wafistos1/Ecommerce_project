@@ -113,7 +113,7 @@
     <!-- block categories -->
 
 
-    <div class="col-md-9">
+    <div class="col-md-9" style="padding-bottom: 10px;">
 
       <div class="row">
 
@@ -177,18 +177,18 @@
               <!--Pagitation -->
               <div class="pagination">
                 <span class="step-links">
-                  {% if page_obj.has_previous %}
+                  {% if annonces.has_previous %}
                   <a href="?page=1">&laquo; first</a>
-                  <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                  <a href="?page={{ annonces.previous_page_number }}">previous</a>
                   {% endif %}
 
                   <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    Page {{ annonces.number }} of {{ annonces.paginator.num_pages }}.
                   </span>
 
-                  {% if page_obj.has_next %}
-                  <a href="?page={{ page_obj.next_page_number }}">next</a>
-                  <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                  {% if annonces.has_next %}
+                  <a href="?page={{ annonces.next_page_number }}">next</a>
+                  <a href="?page={{ annonces.paginator.num_pages }}">last &raquo;</a>
                   {% endif %}
                 </span>
               </div>

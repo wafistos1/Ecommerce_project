@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import annonceFrom, ImageForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .models import Annonce, Categorie, Image
 
@@ -18,6 +19,14 @@ def home(request):
     images = Image.objects.all()
     # todo: ajouter la paginations
 
+    page = request.GET.get('page', 1)
+    paginator = Paginator(annonce, 9)
+    try:
+        annonce = paginator.page(page)
+    except PageNotAnInteger:
+        annonce = paginator.page(1)
+    except EmptyPage:
+        annonce = paginator.page(paginator.num_pages)
     context = {'categories': categorie, 'annonces': annonce, 'image': images}
     return render(request, 'base.html', context)
 
