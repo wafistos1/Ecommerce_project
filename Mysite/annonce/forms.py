@@ -22,3 +22,12 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ('image', )
+
+
+class editAnnonceForm(forms.ModelForm):
+    template_name = '/annonce/update.html'
+
+    class Meta:
+        model = Annonce
+        exclude = ['owner']
+        

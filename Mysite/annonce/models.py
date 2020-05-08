@@ -55,6 +55,12 @@ class Annonce(models.Model):
 
     def get_absolute_url(self):  # new
         return reverse('annonce_detail', args=[str(self.id)])
+    
+    def get_update_url(self):  # new
+        return reverse('annonce_update', args=[str(self.id)])
+    
+    def get_delete_url(self):  # new
+        return reverse('annonce_delete', args=[str(self.id)])
 
 
 class Image(models.Model):

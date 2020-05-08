@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% load humanize %}
+
+{% load i18n %}
+
+
+{% block head_title %}{% trans "detail annonce" %}{% endblock %}
+{% block categories %}{% endblock categories %}
+
+{% block annonce %}
+
+<div class="container">
+<form method="post" action="{{annonce.get_update_url}}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+</div>
+{% endblock annonce %}

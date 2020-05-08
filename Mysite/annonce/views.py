@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.forms import modelformset_factory
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import UpdateView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import annonceFrom, ImageForm
+from .forms import annonceFrom, ImageForm, editAnnonceForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .models import Annonce, Categorie, Image
@@ -50,8 +53,8 @@ def add_annonce(request):
             annonceForm.owner = user
             annonceForm.save()
             for form in formset.cleaned_data:
-                #this helps to not crash if the user   
-                #do not upload all the photos
+                # this helps to not crash if the user
+                # do not upload all the photos
                 if form:
                     image = form['image']
                     photo = Image(annonce_images=annonceForm, image=image)
@@ -59,7 +62,7 @@ def add_annonce(request):
 
             print(annonceForm)
             messages.add_message(
-                request, messages.SUCCESS, 'annonce ajouter avec succès'
+                request, messages.SUCCESS, 'Annonce ajouter avec succès'
             )
             return redirect('home')
         else:
@@ -93,4 +96,35 @@ class AnnonceDetailView(DetailView):
     context_object_name = 'details'
     template_name = 'annonce/detail.html'
 
-# TODO: ADD remove annonce view
+
+class annonceUpdateView(UpdateView):
+    """Simple UpdateView to update a Annonce"""
+    model = Annonce
+    fields = ['title', 'price', 'description']
+    template_name = 'annonce/update.html'   # ame template
+
+    def get_object(self):
+        obj = get_object_or_404(Annonce, pk=self.kwargs.get('pk'))
+        return obj
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
+# def updateAnnonce(request, pk):
+#     obj_annonce = get_object_or_404(Annonce, pk=pk)
+#     print(obj_annonce.product)
+#     print(request.POST)
+#     if request.POST:
+#         form = editAnnonceForm(request.POST, request.FILES, instance=obj_annonce)
+#         if form.is_valid():
+#             print('is valid')
+#             form.save()
+#             return redirect('profile')
+#         else:
+#             print(form)
+#             print('is not valid')
+#             form = editAnnonceForm(request.POST, request.FILES, instance=obj_annonce)
+#             return render(request, 'annonce/update.html', {'form': form})
+#     form = editAnnonceForm()
+#     print('is no thing')
+#     return render(request, 'annonce/update.html', {'form': form}) 

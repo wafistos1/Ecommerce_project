@@ -17,7 +17,7 @@ def edit(request):
         else:
             form = editform(request.POST, request.FILES, instance=request.user)
             return render(request, 'edit_profile.html', {'form': form})
-    form = editform()  
+    form = editform()
     
     return render(request, 'accounts/edit_profile.html', {'form': form})
 # def login(request):

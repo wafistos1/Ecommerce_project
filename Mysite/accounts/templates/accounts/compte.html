@@ -143,7 +143,7 @@
                                                 <td>{{annonce.price}}</td>
                                                 <td>
                                                     <a href="{{annonce.get_absolute_url}}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                    <a href="{% url 'annonce_update' pk=annonce.pk   %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                                                     <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                                                 </td>
                                             </tr>
