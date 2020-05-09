@@ -47,6 +47,7 @@ def add_annonce(request):
         a_form = annonceFrom(request.POST)
         formset = ImageFormSet(request.POST, request.FILES,
                                queryset=Image.objects.none())
+        print(request.POST)
         if a_form.is_valid() and formset.is_valid():
             print('Is valid')
             user = request.user
@@ -68,9 +69,7 @@ def add_annonce(request):
             return redirect('home')
         else:
             print('Is not valid')
-            print(annonceForm.errors, formset.errors)
-            a_form = annonceFrom()
-    
+        
     else:
         print('Is not valid')
         a_form = annonceFrom()

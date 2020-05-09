@@ -17,9 +17,11 @@ class annonceFrom(forms.ModelForm):
         widgets = {
             'title': forms.TextInput({'class': 'form-control'}),
             'product': forms.TextInput({'class': 'form-control'}),
-            'product': forms.TextInput({'class': 'form-control'}),
-            'type_annonce': forms.TextInput({'class': 'form-control'}),
             'price': forms.TextInput({'class': 'form-control'}),
+            'type_annonce': forms.Select({'class': 'form-control'}),
+            'categories': forms.Select({'class': 'form-control'}),
+            'description': forms.Textarea({'class': 'form-control'}),
+
         }
 
 

@@ -6,30 +6,59 @@
 {% block head_title %}{% trans "add annonce" %}{% endblock %}
 
 {% block annonce %}
-<h1>Add Annonce</h1>
 
-    <form class="annonce" id="add-annonce" method="post" enctype="multipart/form-data" action="{% url 'add_annonce' %}">
-    {% csrf_token %}
-    <div class="form-group">
-      {{ a_form|crispy}}
-    </div>
-    {{ formset.management_form }}
+<div class="container">
+<div class="signup-form">
+    <form action="" method="post" enctype="multipart/form-data" action="{% url 'add_annonce' %}">
+        {% csrf_token %}
+        <h2>Add Annonces</h2>
+        <div class="form-group">
+            <label for="Title"><h4>Title</h4></label>
+            {{ a_form.title}}
+        </div>
+        <div class="form-group">
+            <label for="Title"><h4>Product</h4></label>
+            {{ a_form.product}}
+        </div>
+		
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-4"><label for="Title"><h4>Price</h4></label>{{ a_form.price}}</div>
+                <div class="col-xs-4"><label for="Title"><h4>Type annonce</h4></label>{{ a_form.type_annonce}}</div>
+                <div class="col-xs-4"><label for="Title"><h4>Categories</h4></label>{{ a_form.categories}}</div>
+            </div>    
+        </div>
+		<div class="form-group">
+            <label for="Title"><h4>Description</h4></label>
+            {{ a_form.description}}
+        </div>   
+        {{ formset.management_form }}
     {% for form in formset %}
+    <div class="form-group">
+        <div class="col-xs-6">
         {{ form }}
-    {% endfor %}
-    {% if redirect_field_value %}
-    <input type="hidden" class="btn btn-primary" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    {% for field in a_form %}
+        </div>
+    </div>
+    {% endfor %} 
+  {% for field in a_form %}
         <div class="fieldWrapper">
             {{ field.errors }}
             {% if field.help_text %}
             <p class="help">{{ field.help_text|safe }}</p>
             {% endif %}
         </div>
-        {% endfor %}
-    <button type="submit">{% trans "Add annonce" %} </button>
+        {% endfor %}   
+        
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Add annonce</button>
+        </div>
 
-   </form>
+    </form>
+</div>
+</div>
+
+
+
 {% endblock annonce %}
 
+{% block categories%} {% endblock categories%}

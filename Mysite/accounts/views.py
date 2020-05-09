@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from accounts.forms import editform
 from annonce.models import Annonce
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 # from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # # Create your views here.
 
@@ -79,6 +81,16 @@ def edit(request):
     
 @login_required(login_url='login')
 def compte(request):
+    annonce = Annonce.objects.filter(owner=request.user)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(annonce, 9)
+    try:
+        annonce = paginator.page(page)
+    except PageNotAnInteger:
+        annonce = paginator.page(1)
+    except EmptyPage:
+        annonce = paginator.page(paginator.num_pages)
+
     if request.POST:
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -88,5 +100,5 @@ def compte(request):
             form = editform(request.POST, request.FILES, instance=request.user)
             return render(request, 'accounts/compte.html', {'form': form})
     form = editform(instance=request.user)
-    
-    return render(request, 'accounts/compte.html', {'form': form})
+    context = {'annonces': annonce, 'form': form}
+    return render(request, 'accounts/compte.html', context)
