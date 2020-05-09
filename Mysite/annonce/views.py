@@ -3,7 +3,7 @@ from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import annonceFrom, ImageForm, editAnnonceForm
@@ -95,6 +95,13 @@ class AnnonceDetailView(DetailView):
     model = Annonce
     context_object_name = 'details'
     template_name = 'annonce/detail.html'
+
+
+class AnnonceDeletelView(DeleteView):
+    model = Annonce
+    context_object_name = 'obj_delte'
+    template_name = 'annonce/delete.html'
+    success_url = reverse_lazy('profile')
 
 
 # class annonceUpdateView(UpdateView):

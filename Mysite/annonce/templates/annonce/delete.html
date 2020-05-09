@@ -1,0 +1,29 @@
+
+
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "add annonce" %}{% endblock %}
+
+{% block annonce %}
+
+<div class="container">
+<div class="signup-form">
+
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ obj_delte.title }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+
+
+
+{% endblock annonce %}
+
+{% block categories%} {% endblock categories%}
