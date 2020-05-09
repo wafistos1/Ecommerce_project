@@ -9,6 +9,7 @@ from annonce.models import Annonce
 
 
 def edit(request):
+    
     if request.POST:
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -17,7 +18,7 @@ def edit(request):
         else:
             form = editform(request.POST, request.FILES, instance=request.user)
             return render(request, 'edit_profile.html', {'form': form})
-    form = editform()
+    form = editform(instance=request.user)
     
     return render(request, 'accounts/edit_profile.html', {'form': form})
 # def login(request):
@@ -78,10 +79,14 @@ def edit(request):
     
 @login_required(login_url='login')
 def compte(request):
-    """ Display Details of User
-    """
-    annonce = Annonce.objects.filter(owner=request.user)
-    context = {
-        'annonces': annonce
-    }
-    return render(request, 'accounts/compte.html', context)
+    if request.POST:
+        form = editform(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            form = editform(request.POST, request.FILES, instance=request.user)
+            return render(request, 'accounts/compte.html', {'form': form})
+    form = editform(instance=request.user)
+    
+    return render(request, 'accounts/compte.html', {'form': form})

@@ -66,6 +66,19 @@ class Annonce(models.Model):
 class Image(models.Model):
     annonce_images = models.ForeignKey(Annonce, on_delete=models.CASCADE, related_name='image')
     image = models.FileField(upload_to='image/', default='image_default.jpg', blank=True, null=True)
+    
+    class Meta:
+        pass
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse("annonce_update_image", kwargs={"pk": self.pk})
+    
+    def get_update_url(self): 
+        return reverse("annonce_image", kwargs={"pk": self.pk})
+    
 
 
 """

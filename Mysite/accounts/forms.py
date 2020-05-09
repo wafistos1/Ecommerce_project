@@ -54,5 +54,15 @@ class editform(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = (
-            'picture',
+            'picture','first_name','last_name','adress1','adress2','ville','codezip','contry','phone',
         )
+        widgets = {
+            'first_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'adress1' : forms.TextInput(attrs={'class': 'form-control'}),
+            'adress2' : forms.TextInput(attrs={'class': 'form-control'}),
+            'codezip' : forms.TextInput(attrs={'class': 'form-control'}),
+            'contry' : forms.TextInput(attrs={'class': 'form-control'}),
+            'ville' : forms.TextInput(attrs={'class': 'form-control'}),
+            'phone' : forms.TextInput(attrs={'class': 'form-control'}),
+        }

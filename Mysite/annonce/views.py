@@ -33,6 +33,7 @@ def home(request):
     context = {'categories': categorie, 'annonces': annonce, 'image': images}
     return render(request, 'base.html', context)
 
+
 @login_required(login_url='account_login')
 def add_annonce(request):
 
@@ -97,34 +98,64 @@ class AnnonceDetailView(DetailView):
     template_name = 'annonce/detail.html'
 
 
-class annonceUpdateView(UpdateView):
-    """Simple UpdateView to update a Annonce"""
-    model = Annonce
-    fields = ['title', 'price', 'description']
-    template_name = 'annonce/update.html'   # ame template
+# class annonceUpdateView(UpdateView):
+    # """Simple UpdateView to update a Annonce"""
+    # model = Annonce
+    
+    # fields = ['title', 'price', 'description']
+    # template_name = 'annonce/update.html'   # ame template
 
-    def get_object(self):
-        obj = get_object_or_404(Annonce, pk=self.kwargs.get('pk'))
-        return obj
+    # def get_object(self):
+    #     obj = get_object_or_404(Annonce, pk=self.kwargs.get('pk'))
+    #     return obj
 
-    def get_success_url(self):
-        return reverse_lazy('profile')
+    # def get_success_url(self):
+    #     return reverse_lazy('profile')
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super(annonceUpdateView, self).get_context_data(**kwargs)
+    #     owner = self.request.user
 
-# def updateAnnonce(request, pk):
-#     obj_annonce = get_object_or_404(Annonce, pk=pk)
-#     print(obj_annonce.product)
-#     print(request.POST)
-#     if request.POST:
-#         form = editAnnonceForm(request.POST, request.FILES, instance=obj_annonce)
-#         if form.is_valid():
-#             print('is valid')
-#             form.save()
-#             return redirect('profile')
-#         else:
-#             print(form)
-#             print('is not valid')
-#             form = editAnnonceForm(request.POST, request.FILES, instance=obj_annonce)
-#             return render(request, 'annonce/update.html', {'form': form})
-#     form = editAnnonceForm()
-#     print('is no thing')
-#     return render(request, 'annonce/update.html', {'form': form}) 
+    #     if not self.request.POST:
+    #         context['annonceFrom'] = annonceFrom()
+    #         context['ImageForm'] = ImageForm()
+    #         return context
+
+    #     def post(self, request, *args, **kwargs):
+    #         self.object = self.get_object()
+    #         user = self.request.user
+    #         context['annonceFrom'] = annonceFrom(self.request.POST, instance=self.object)
+    #         context['ImageForm'] = ImageForm(self.request.POST, self.request.FILES)
+    #         return super(annonceUpdateView, self).post(request, *args, **kwargs)
+
+    #     def form_valid(self, form):
+    #         context = self.get_context_data(form=annonceFrom)
+    #         user = self.request.user
+
+    #         annonce = context['annonceFrom'].save(commit=False)
+    #         image = context['ImageForm']
+    #         annonce = context['annonceFrom']
+    #         annonce.owner = user
+    #         annonce.save()
+    #         return super(annonceUpdateView, self).form_valid(form)
+
+def updateAnnonce(request, pk=None):
+    print(pk)
+    obj_annonce = get_object_or_404(Annonce, pk=pk)
+    print(obj_annonce.title)
+    print(obj_annonce.description)
+    print(obj_annonce.categories)
+    if request.POST:
+        form = editAnnonceForm(request.POST, instance=obj_annonce)
+        form_image = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('is valid')
+            form.save()
+            return redirect('profile')
+        else:
+            print('is not valid')
+            form = editAnnonceForm()
+            return render(request, 'annonce/update.html', {'form': form})
+    form = editAnnonceForm(instance=obj_annonce)
+    print('is no thing')
+    return render(request, 'annonce/update.html', {'form': form}) 

@@ -4,177 +4,136 @@
 
 {% block title %}{% trans "Profile" %}{% endblock title %}
 {% block content %}
-<div class="profile">
-    <div class="container emp-profile">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="{{ user.picture.url }}" alt="" />
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file" />
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        {{ user.username }}
-                    </h5>
-                    <h6>
-                        {{ user.discriptions }}
-                    </h6>
-                    <h6>
-                        <h5 >Password <a href="{% url 'account_change_password' %}"> Change</a>
-                    </h6>
-
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>User Id</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{ user.username }}</p>
-                            </div>
-                        </div>
-                        <div class="row">title
-                            <div class="col-md-6">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{ user.first_name }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.email }}<a class="btn btn-sm" href="{% url 'account_email' %}"> Change</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Phone</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{ user.phone}} <a class="btn btn-sm" href='{% url 'edit'%}'> Change</a> </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Adresse </label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.adress1}} <a class="btn btn-sm" href='#'> Edit</a></p>
-                                <p>{{user.adress2}}</p>
-                                <p>{{user.codezip}}</p>
-                                <p>{{user.ville}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="container">
-                                <div class="table-wrapper">			
-                                    <div class="table-title">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="show-entries">
-                                                    <span>Show</span>
-                                                    <select>
-                                                        <option>5</option>
-                                                        <option>10</option>
-                                                        <option>15</option>
-                                                        <option>20</option>
-                                                    </select>
-                                                    <span>entries</span>
-                                                </div>						
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h2 class="text-center">Customer <b>Details</b></h2>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="search-box">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-                                                        <input type="text" class="form-control" placeholder="Search&hellip;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title <i class="fa fa-sort"></i></th>
-                                                <th>Type annonce</th>
-                                                <th>Categories <i class="fa fa-sort"></i></th>
-                                                <th>Price </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for annonce in annonces %}
-                                            <tr>
-                                                <td>1</td>
-                                                <td>{{annonce.title}}</td>
-                                                <td>{{annonce.type_annonce}}</td>
-                                                <td>{{annonce.categories}}</td>
-                                                <td>{{annonce.price}}</td>
-                                                <td>
-                                                    <a href="{{annonce.get_absolute_url}}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                                    <a href="{% url 'annonce_update' pk=annonce.pk   %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                            
-                                            
-                                                   
-                                        </tbody>
-                                    </table>
-                                    <div class="clearfix">
-                                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a href="#">Previous</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>     
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+<hr>
+<div class="container bootstrap snippet" style="padding-top: 40px;">
+    <div class="row">
+  		<div class="col-sm-10"><h1 style="color: rgb(92, 25, 155);"><strong>{{user.username|upper}}</strong></h1></div>
+    	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
     </div>
-</div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+              
+
+      <div class="text-center">
+        <img src="{{user.picture.url}}" class="avatar img-circle img-thumbnail" alt="avatar">
+        
+      </div></hr><br>
+    
+    <button class="btn btn-sm btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+</form>
+               
+          
+          
+          
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Change profile details <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong><a href="{% url 'account_email' %}">Email change</a></strong></span></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong><a href="{% url 'account_change_password'%}">Password rest</a></strong></span></li>
+          </ul> 
+               
+          <div class="panel panel-default">
+            <div class="panel-heading">Social Media</div>
+            <div class="panel-body">
+            	<i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+            </div>
+          </div>
+          
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Edit Profile</a></li>
+              </ul>
+
+              
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                  <form class="form" enctype="multipart/form-data" action="{% url 'profile' %}" method="post" id="registrationForm">
+                    {% csrf_token %}  
+                    <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="title"><h4>First name</h4></label>
+
+                              <div>{{  form.first_name }}</div>
+                              
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="last_name"><h4>Last name</h4></label>
+                            <div>{{  form.last_name }}</div>                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="phone"><h4>Phone</h4></label>
+                              <div>{{  form.phone }}</div> 
+                          </div>
+                      </div>
+          
+                      
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Location</h4></label>
+                              <div>{{  form.adress1 }}</div>                           </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Location</h4></label>
+                              <div>{{  form.adress2 }}</div>                           </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="password"><h4>Ville</h4></label>
+                              <div>{{  form.ville }}</div>                           </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="password"><h4>Zip</h4></label>
+                            <div>{{  form.codezip }}</div>                           </div>
+                        </div>
+
+                      <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="password"><h4>Country</h4></label>
+                            <div>{{  form.contry }}</div>                          
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    {{ form.picture.label_tag}}
+                    {{ form.picture}}
+                </div>
+      
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            </div>
+                      </div>
+              	</form>
+              
+              <hr>
+              
+             </div>
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+
+
+
+
+
 
 {% endblock content %}
