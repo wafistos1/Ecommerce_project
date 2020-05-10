@@ -15,4 +15,4 @@ class Profile(AbstractUser):
     discriptions = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user.username
+        return self.username

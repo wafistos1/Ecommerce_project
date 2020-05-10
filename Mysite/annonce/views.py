@@ -37,16 +37,14 @@ def home(request):
 @login_required(login_url='account_login')
 def add_annonce(request):
 
-    ImageFormSet = modelformset_factory(Image,
-                                        form=ImageForm, extra=4)
+    ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4)
 
     # 'extra' means the number of photos that you can upload   ^
 
     print(request.POST)
     if request.method == "POST":
         a_form = annonceFrom(request.POST)
-        formset = ImageFormSet(request.POST, request.FILES,
-                               queryset=Image.objects.none())
+        formset = ImageFormSet(request.POST, request.FILES, queryset=Image.objects.none())
         print(request.POST)
         if a_form.is_valid() and formset.is_valid():
             print('Is valid')
@@ -146,22 +144,31 @@ class AnnonceDeletelView(DeleteView):
     #         return super(annonceUpdateView, self).form_valid(form)
 
 def updateAnnonce(request, pk=None):
-    print(pk)
+    ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4, max_num=4)
     obj_annonce = get_object_or_404(Annonce, pk=pk)
-    print(obj_annonce.title)
-    print(obj_annonce.description)
-    print(obj_annonce.categories)
     if request.POST:
-        form = editAnnonceForm(request.POST, instance=obj_annonce)
-        form_image = ImageForm(request.POST, request.FILES)
-        if form.is_valid():
+        form = annonceFrom(request.POST or None, instance=obj_annonce)
+        formset = ImageFormSet(request.POST or None, request.FILES or None)     
+        if form.is_valid() and formset.is_valid():
             print('is valid')
             form.save()
+            for form in formset.cleaned_data:
+                # this helps to not crash if the user
+                # do not upload all the photos
+                try:    
+                    image = form['image']
+                    photo = Image(annonce_images=obj_annonce, image=image)
+                    photo.save()
+                except:
+                    print('Forme image non valide')
+                    
             return redirect('profile')
         else:
             print('is not valid')
+            print(form.errors)
             form = editAnnonceForm()
             return render(request, 'annonce/update.html', {'form': form})
     form = editAnnonceForm(instance=obj_annonce)
+    formset = ImageFormSet(queryset=Image.objects.filter(annonce_images=obj_annonce))
     print('is no thing')
-    return render(request, 'annonce/update.html', {'form': form}) 
+    return render(request, 'annonce/update.html', {'form': form, 'formset': formset}) 

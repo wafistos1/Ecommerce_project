@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import sys
-from cons import EMAIL_BACKEND, EMAIL_HOST, EMAIL_HOST_PASSWORD, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_PORT, EMAIL_USE_SSL, EMAIL_USE_TLS
+from cons import EMAIL_BACKEND, EMAIL_HOST, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_PORT, EMAIL_USE_SSL, EMAIL_USE_TLS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -180,27 +179,30 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+print(MEDIA_ROOT)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-LOGIN_REDIRECT_URL ='home'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'account_login'
 
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
 AUTH_USER_MODEL = 'accounts.Profile'
 # email console for test
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # email backend for google
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# email backend for google
-
-# EMAIL_BACKEND = EMAIL_BACKEND
-# EMAIL_HOST = EMAIL_HOST
-# EMAIL_PORT =  EMAIL_PORT
-# EMAIL_USE_TLS = EMAIL_USE_TLS
-# EMAIL_USE_SSL = EMAIL_USE_SSL
-# EMAIL_HOST_USER = EMAIL_HOST_USER
-# EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+    EMAIL_BACKEND = EMAIL_BACKEND
+    EMAIL_HOST = EMAIL_HOST
+    EMAIL_PORT = EMAIL_PORT
+    EMAIL_USE_TLS = EMAIL_USE_TLS
+    EMAIL_USE_SSL = EMAIL_USE_SSL
+    EMAIL_HOST_USER = EMAIL_HOST_USER
+    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 

@@ -71,7 +71,7 @@ class Image(models.Model):
         pass
 
     def __str__(self):
-        return self.name
+        return self.annonce_images.title
     
     def get_absolute_url(self):
         return reverse("annonce_update_image", kwargs={"pk": self.pk})
