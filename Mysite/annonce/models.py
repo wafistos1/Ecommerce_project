@@ -80,13 +80,18 @@ class Image(models.Model):
         return reverse("annonce_image", kwargs={"pk": self.pk})
     
 
+class Comment(models.Model):
+    commented_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    for_post = models.ForeignKey(Annonce, on_delete=models.CASCADE)
+    content = models.TextField(max_length=255)
+    create_content = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return self.commented_by.username
+    
 """
 # A ajouter plus tard 
 
-class Comment(models.Model):
-    commented_by = models.ForeignKey(User)
-    for_post = models.ForeignKey(Post)
 
 class Like(models.Model):
     liked_by = models.ForeignKey(User)

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -6,10 +6,10 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import annonceFrom, ImageForm, editAnnonceForm
+from .forms import annonceFrom, ImageForm, editAnnonceForm, commentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from .models import Annonce, Categorie, Image
+from .models import Annonce, Categorie, Image, Comment
 
 # Create your views here.
 
@@ -95,6 +95,29 @@ class AnnonceDetailView(DetailView):
     template_name = 'annonce/detail.html'
 
 
+def annonceDetaiView(request, pk):
+    details = get_object_or_404(Annonce, pk=pk, owner=request.user)
+    comment = Comment.objects.filter(for_post=details).order_by('-create_content')
+
+    if request.method == "POST":
+        c_form = commentForm(request.POST or None)
+        if c_form.is_valid():
+            content = request.POST.get('content')
+            comment_use = Comment(commented_by=request.user,  for_post=details,  content=content)
+            comment_use.save()
+            return HttpResponseRedirect(details.get_absolute_url())
+    else:
+        c_form = commentForm() 
+
+    context = {
+        'details': details,
+        'comment': comment,
+        'commentform': c_form,
+        }
+
+    return render(request, 'annonce/detail.html', context)
+
+
 class AnnonceDeletelView(DeleteView):
     model = Annonce
     context_object_name = 'obj_delte'
@@ -172,3 +195,5 @@ def updateAnnonce(request, pk=None):
     formset = ImageFormSet(queryset=Image.objects.filter(annonce_images=obj_annonce))
     print('is no thing')
     return render(request, 'annonce/update.html', {'form': form, 'formset': formset}) 
+
+

@@ -61,6 +61,35 @@ border-color: rgb(177, 103, 167);
       <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
     </div>
   </div>
+<div class="main-comment-section">
+  {{ comment.count}} Comment{{ comment|pluralize }}
+ {% for com in comment %}
+ <blockquote class="blockquote">
+  <p class="mb-0">{{ com.content }}</p>
+  <footer class="blockquote-footer">By <cite title="Source Title">{{com.commented_by|capfirst}}</cite></footer>
+</blockquote>
+ {% endfor %}
 
 </div>
+
+<div>
+
+  <form method="post">
+
+    {% csrf_token %}
+    {{ commentform|crispy}}
+    {% if user.is_authenticated %}
+
+    <input type="submit" value="Send" class="btn btn-success btn-sm">
+    {% else %}
+    <input type="submit" value="Send" class="btn btn-success btn-sm" disabled>
+    <p>Need to log to make comment</p>
+    {% endif %}
+      
+    
+  </form>
+</div>
+</div>
+
+
 {% endblock annonce %}

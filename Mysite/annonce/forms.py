@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Categorie, Annonce, Image
+from .models import Categorie, Annonce, Image, Comment
 
 
 class categorieFrom(forms.ModelForm):
@@ -47,4 +47,10 @@ class editAnnonceForm(forms.ModelForm):
             'title' : forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+
+class commentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ("content",)
 
