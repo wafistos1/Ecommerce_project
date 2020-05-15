@@ -55,6 +55,15 @@
       <h5><strong>Email </strong>{{details.owner.email}}</h5>
       <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
     </div>
+    <div class="col-sm-4">
+      <h3>
+        {% if user.username == details.owner.username %}<td>
+          <a href="{{details.get_update_url}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+          <a href="{{details.get_delete_url}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+      </td>
+
+        {% endif %}
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-4">
