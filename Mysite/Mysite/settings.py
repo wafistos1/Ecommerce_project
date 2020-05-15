@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # local app
     'accounts',
     'annonce',
+    'search_app',
     'crispy_forms',
 
 ]
