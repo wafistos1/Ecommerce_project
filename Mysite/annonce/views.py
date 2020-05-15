@@ -96,14 +96,14 @@ class AnnonceDetailView(DetailView):
 
 
 def annonceDetaiView(request, pk):
-    details = get_object_or_404(Annonce, pk=pk, owner=request.user)
+    details = get_object_or_404(Annonce, pk=pk)
     comment = Comment.objects.filter(for_post=details).order_by('-create_content')
 
     if request.method == "POST":
         c_form = commentForm(request.POST or None)
         if c_form.is_valid():
             content = request.POST.get('content')
-            comment_use = Comment(commented_by=request.user,  for_post=details,  content=content)
+            comment_use = Comment(commented_by=request.user,  for_post=details, content=content)
             comment_use.save()
             return HttpResponseRedirect(details.get_absolute_url())
     else:

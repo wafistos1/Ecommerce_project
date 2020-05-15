@@ -10,12 +10,7 @@
 {% block categories %}{% endblock categories %}
 
 {% block annonce %}
-<div class="container" style=" border-style: groove;
-border-width: 1px;
-border-left-width: 1px;
-border-right-width: 1px;
-border-color: rgb(177, 103, 167);
-">
+<div class="container">
 
   <div class="row">
     <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px; text-align: center; color:rgb(79, 19, 134);">
@@ -24,7 +19,7 @@ border-color: rgb(177, 103, 167);
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-4" style="height: 480px;">
+    <div class="col-sm-4" >
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           {% for document in details.image.all %}
@@ -61,16 +56,24 @@ border-color: rgb(177, 103, 167);
       <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
     </div>
   </div>
-<div class="main-comment-section">
-  {{ comment.count}} Comment{{ comment|pluralize }}
- {% for com in comment %}
- <blockquote class="blockquote">
-  <p class="mb-0">{{ com.content }}</p>
-  <footer class="blockquote-footer">By <cite title="Source Title">{{com.commented_by|capfirst}}</cite></footer>
-</blockquote>
- {% endfor %}
+  <div class="row">
+    <div class="col-sm-4">
 
-</div>
+      <div class="main-comment-section">
+        {{ comment.count}} Comment{{ comment|pluralize }}
+       {% for com in comment %}
+       <blockquote class="blockquote">
+        <h4  class="mb-0">{{ com.content }}</h4>
+        <footer class="blockquote-footer">By <cite title="Source Title">{{com.commented_by|capfirst}}</cite></footer>
+      </blockquote>
+       {% endfor %}
+      
+      </div>
+
+    
+  
+
+
 
 <div>
 
@@ -83,12 +86,13 @@ border-color: rgb(177, 103, 167);
     <input type="submit" value="Send" class="btn btn-success btn-sm">
     {% else %}
     <input type="submit" value="Send" class="btn btn-success btn-sm" disabled>
-    <p>Need to log to make comment</p>
+    <h6>Need to log to make comment</h6>
     {% endif %}
       
     
   </form>
 </div>
+</div></div>
 </div>
 
 
