@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% load humanize %}
 
@@ -10,7 +11,7 @@
 {% block categories %}{% endblock categories %}
 
 {% block annonce %}
-<div class="container">
+<div class="container form-group">
 
   <div class="row">
     <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px; text-align: center; color:rgb(79, 19, 134);">
@@ -18,18 +19,20 @@
       <h4><strong>Categorie: {{details.categories.name}}</strong></h4>
     </div>
     <div class="col-sm-4">
-      
+
       {% if user.username == details.owner.username %}
       <td>
-        <a href="{{details.get_update_url}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-        <a href="{{details.get_delete_url}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-    </td>
+        <a href="{{details.get_update_url}}" class="edit" title="Edit" data-toggle="tooltip"><i
+            class="material-icons">&#xE254;</i></a>
+        <a href="{{details.get_delete_url}}" class="delete" title="Delete" data-toggle="tooltip"><i
+            class="material-icons">&#xE872;</i></a>
+      </td>
 
       {% endif %}
-  </div>
+    </div>
   </div>
   <div class="row">
-    <div class="col-sm-4" >
+    <div class="col-sm-4">
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           {% for document in details.image.all %}
@@ -65,49 +68,88 @@
       <h5><strong>Email </strong>{{details.owner.email}}</h5>
       <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
     </div>
-    
+
   </div>
+  <!-- Comment -->
   <div class="row">
     <div class="col-sm-4">
 
       <div class="main-comment-section">
         {{ comment.count}} Comment{{ comment|pluralize }}
-       {% for com in comment %}
-       <blockquote class="blockquote">
-        <h4  class="mb-0">{{ com.content }}</h4>
-        <footer class="blockquote-footer">By <cite title="Source Title">{{com.commented_by|capfirst}}</cite></footer>
-      </blockquote>
-       {% endfor %}
-      
+        {% for com in comment %}
+        <blockquote class="blockquote">
+          <h4 class="mb-0">{{ com.content }}</h4>
+          <footer class="blockquote-footer">By <cite title="Source Title">{{com.commented_by|capfirst}}</cite></footer>
+          <footer class="blockquote-footer">At <cite title="Source Title">{{com.create_content}}</cite>
+          <button type="button" id="reply-but" name="reply" class="reply-btn btn btn-outline-dark btn-sm ml-2">Reply</button>
+          </footer>
+        </blockquote>
+
+
+        <!--Bolck reply-->
+        <div class="replies-comments container mt-2" style="display: none;">
+          {% for reply in com.replies.all %}
+          <blockquote class="blockquote">
+            <h4 class="mb-0">{{ reply.content }}</h4>
+            <footer class="blockquote-footer">By <cite title="Source Title">{{reply.commented_by|capfirst}}</cite></footer>
+            <footer class="blockquote-footer">At <cite title="Source Title">{{reply.create_content}}</cite></footer>
+          </blockquote>
+          {% endfor%}
+          <div class="form-group row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <form method="post">
+
+                {% csrf_token %}
+                <input type="hidden" name="comment-id" value="{{com.id}}">
+                <div class="form-group">
+                  {{ commentform.content}}
+                </div>
+                {% if user.is_authenticated %}
+
+                <input type="submit" value="Reply" class="btn btn-success btn-sm">
+                {% else %}
+                <input type="submit" value="Reply" class="btn btn-success btn-sm" disabled>
+                <h6>Need to log to make comment</h6>
+                {% endif %}
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+        <!--end Bolck reply-->
+        {% endfor %}
+        
+
+
       </div>
 
-    
-  
 
+      <div>
+        <!--form commentaire-->
+        <form method="post">
 
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="commentaire">
+              <h4>Ajouter commentaire</h4>
+            </label>
+            {{ commentform.content}}
+          </div>
+          {% if user.is_authenticated %}
 
-<div>
-
-  <form method="post">
-
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="commentaire"><h4>Ajouter commentaire</h4></label>
-      {{ commentform.content}}
+          <input type="submit" value="Send" class="btn btn-success btn-sm">
+          {% else %}
+          <input type="submit" value="Send" class="btn btn-success btn-sm" disabled>
+          <h6>Need to log to make comment</h6>
+          {% endif %}
+        </form>
+        <!--end form commentaire-->
+      </div>
+    </div>
   </div>
-    {% if user.is_authenticated %}
-
-    <input type="submit" value="Send" class="btn btn-success btn-sm">
-    {% else %}
-    <input type="submit" value="Send" class="btn btn-success btn-sm" disabled>
-    <h6>Need to log to make comment</h6>
-    {% endif %}
-      
-    
-  </form>
+  <!--End comment -->
 </div>
-</div></div>
-</div>
-
 
 {% endblock annonce %}

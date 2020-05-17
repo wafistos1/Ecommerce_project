@@ -85,10 +85,10 @@ class Comment(models.Model):
     for_post = models.ForeignKey(Annonce, on_delete=models.CASCADE)
     content = models.TextField(max_length=255)
     create_content = models.DateField(auto_now_add=True)
+    reply = models.ForeignKey("Comment", related_name='replies', null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.commented_by.username
-    
 """
 # A ajouter plus tard 
 

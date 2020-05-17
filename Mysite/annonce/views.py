@@ -105,13 +105,18 @@ def annonceDetaiView(request, pk):
         Class to display all annonces 
     """
     details = get_object_or_404(Annonce, pk=pk)
-    comment = Comment.objects.filter(for_post=details).order_by('-create_content')
+    comment = Comment.objects.filter(for_post=details, reply=None).order_by('-create_content')
 
     if request.method == "POST":
         c_form = commentForm(request.POST or None)
         if c_form.is_valid():
             content = request.POST.get('content')
-            comment_use = Comment(commented_by=request.user,  for_post=details, content=content)
+            reply_id = request.POST.get('comment-id')
+            comment_qs = None  # reply is null
+            if reply_id:
+                comment_qs = Comment.objects.get(id=reply_id)  # set reply as reply_id
+
+            comment_use = Comment(commented_by=request.user,  for_post=details, content=content, reply=comment_qs)
             comment_use.save()
             return HttpResponseRedirect(details.get_absolute_url())
     else:
