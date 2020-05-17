@@ -82,6 +82,7 @@ def edit(request):
 @login_required(login_url='login')
 def compte(request):
     annonce = Annonce.objects.filter(owner=request.user)
+    num_annonce = annonce.count()
     page = request.GET.get('page', 1)
     paginator = Paginator(annonce, 9)
     try:
@@ -100,5 +101,9 @@ def compte(request):
             form = editform(request.POST, request.FILES, instance=request.user)
             return render(request, 'accounts/compte.html', {'form': form})
     form = editform(instance=request.user)
-    context = {'annonces': annonce, 'form': form}
+    context = {
+        'annonces': annonce,
+        'form': form,
+        'num_annonce': num_annonce
+        }
     return render(request, 'accounts/compte.html', context)

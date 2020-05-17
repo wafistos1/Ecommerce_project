@@ -99,7 +99,7 @@
 	color: #969fa4;
 }
 .form-control:focus{
-	border-color: #5cb85c;
+	border-color: #791879;
 }
 .form-control, .btn{        
 	border-radius: 3px;
@@ -229,7 +229,7 @@
 }
 .search-box input:focus {		
 	background: #fff;
-	box-shadow: none;
+	box-shadow: #fff;
 }
 .search-box .input-group-addon {
 	min-width: 35px;
@@ -698,3 +698,7 @@ table.table td i {
 	margin-top: 10px;
 	font-size: 13px;
 }
+
+.form-control:focus {
+	border-color: rgb(100, 15, 75);
+  }

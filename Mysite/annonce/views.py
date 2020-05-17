@@ -3,19 +3,18 @@ from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.edit import DeleteView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import annonceFrom, ImageForm, editAnnonceForm, commentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Annonce, Categorie, Image, Comment
-
-# Create your views here.
 
 
 def home(request):
-    """
+    """View of my home page whith list  all annonces of all user
+    return: all annonces , all categories, all images
     """
     categorie = Categorie.objects.all()
     annonce = Annonce.objects.all().order_by('-created')
@@ -36,7 +35,9 @@ def home(request):
 
 @login_required(login_url='account_login')
 def add_annonce(request):
-
+    """
+    View to add annonces 
+    """
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4)
 
     # 'extra' means the number of photos that you can upload   ^
@@ -66,13 +67,11 @@ def add_annonce(request):
             )
             return redirect('home')
         else:
-            print('Is not valid')
-        
+            print('Is not valid')    
     else:
         print('Is not valid')
         a_form = annonceFrom()
         formset = ImageFormSet(queryset=Image.objects.none())
-    
     a_form = annonceFrom()
     formset = ImageFormSet(queryset=Image.objects.none())
 
@@ -83,6 +82,9 @@ def add_annonce(request):
 
 
 class annonceListView(ListView):
+    """
+        Class to display all annonces 
+    """
     model = Annonce
     context_object_name = 'lists'
     paginate_by = 12
@@ -90,12 +92,18 @@ class annonceListView(ListView):
 
 
 class AnnonceDetailView(DetailView):
+    """
+        Class to display a details of annonces 
+    """
     model = Annonce
     context_object_name = 'details'
     template_name = 'annonce/detail.html'
 
 
 def annonceDetaiView(request, pk):
+    """
+        Class to display all annonces 
+    """
     details = get_object_or_404(Annonce, pk=pk)
     comment = Comment.objects.filter(for_post=details).order_by('-create_content')
 
@@ -107,7 +115,7 @@ def annonceDetaiView(request, pk):
             comment_use.save()
             return HttpResponseRedirect(details.get_absolute_url())
     else:
-        c_form = commentForm() 
+        c_form = commentForm()
 
     context = {
         'details': details,
@@ -118,53 +126,12 @@ def annonceDetaiView(request, pk):
     return render(request, 'annonce/detail.html', context)
 
 
-class AnnonceDeletelView(DeleteView):
+class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
     model = Annonce
     context_object_name = 'obj_delte'
     template_name = 'annonce/delete.html'
     success_url = reverse_lazy('profile')
 
-
-# class annonceUpdateView(UpdateView):
-    # """Simple UpdateView to update a Annonce"""
-    # model = Annonce
-    
-    # fields = ['title', 'price', 'description']
-    # template_name = 'annonce/update.html'   # ame template
-
-    # def get_object(self):
-    #     obj = get_object_or_404(Annonce, pk=self.kwargs.get('pk'))
-    #     return obj
-
-    # def get_success_url(self):
-    #     return reverse_lazy('profile')
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super(annonceUpdateView, self).get_context_data(**kwargs)
-    #     owner = self.request.user
-
-    #     if not self.request.POST:
-    #         context['annonceFrom'] = annonceFrom()
-    #         context['ImageForm'] = ImageForm()
-    #         return context
-
-    #     def post(self, request, *args, **kwargs):
-    #         self.object = self.get_object()
-    #         user = self.request.user
-    #         context['annonceFrom'] = annonceFrom(self.request.POST, instance=self.object)
-    #         context['ImageForm'] = ImageForm(self.request.POST, self.request.FILES)
-    #         return super(annonceUpdateView, self).post(request, *args, **kwargs)
-
-    #     def form_valid(self, form):
-    #         context = self.get_context_data(form=annonceFrom)
-    #         user = self.request.user
-
-    #         annonce = context['annonceFrom'].save(commit=False)
-    #         image = context['ImageForm']
-    #         annonce = context['annonceFrom']
-    #         annonce.owner = user
-    #         annonce.save()
-    #         return super(annonceUpdateView, self).form_valid(form)
 
 def updateAnnonce(request, pk=None):
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4, max_num=4)
@@ -195,5 +162,3 @@ def updateAnnonce(request, pk=None):
     formset = ImageFormSet(queryset=Image.objects.filter(annonce_images=obj_annonce))
     print('is no thing')
     return render(request, 'annonce/update.html', {'form': form, 'formset': formset}) 
-
-
