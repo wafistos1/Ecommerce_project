@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   {% block link %}
+  <script src="https://kit.fontawesome.com/971c1632df.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -49,10 +50,11 @@
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right ml-auto">
-          <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link"><i
-                class="fa fa-home"></i><span>Home</span></a></li>
+          
           <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-envelope"><span
                   class="badge">42</span></i><span>Messages</span></a></li>
+          <li class="nav-item"><a href="{%url 'favorite_list'%}" class="nav-link"><i class="fa fa-envelope"><span
+                    class="badge"></span></i><span>Favoris</span></a></li>
           <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-bell"><span
                   class="badge">42</span></i><span>Notifications</span></a>
           </li>

@@ -61,6 +61,26 @@
 
       <p>{{details.description }}</p>
     </div>
+    <div id="favorite-section">
+{% if is_favorite %}
+      <h3>Supprimer des favoris </h3>
+      <a href="{% url 'favorite_annonce' pk=details.pk %}">
+      <span style="font-size: 3em; color: rgb(87, 27, 95);">
+        <i class="fas fa-heart"></i>
+      </span>
+    </a>
+{% else %}
+  <h3>Ajouter aux favoris </h3>
+  <a href="{% url 'favorite_annonce' pk=details.pk %}" >
+  <span style="font-size: 3em; color: rgb(87, 27, 95);">
+    <i class="far fa-heart"></i>
+  </span>
+</a>
+
+{% endif%}
+</div>
+
+
   </div>
   <div class="row">
     <div class="col-sm-4" style="color:rgb(79, 19, 134);">

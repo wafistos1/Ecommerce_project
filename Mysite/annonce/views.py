@@ -108,6 +108,12 @@ def annonceDetaiView(request, pk):
     """
     details = get_object_or_404(Annonce, pk=pk)
     comment = Comment.objects.filter(for_post=details, reply=None).order_by('-create_content')
+    is_favorite = False
+    if details.favorite.filter(id=request.user.id).exists():
+        is_favorite = True
+        print('favorite is now true')
+    else:
+        print('favorite is now False')
 
     if request.method == "POST":
         print(request.POST)
@@ -124,8 +130,9 @@ def annonceDetaiView(request, pk):
             # return HttpResponseRedirect(details.get_absolute_url())
     else:
         c_form = commentForm()
-
+    print(f'send {is_favorite}')
     context = {
+        'is_favorite': is_favorite,
         'details': details,
         'comment': comment,
         'commentform': c_form,
@@ -136,6 +143,15 @@ def annonceDetaiView(request, pk):
         return JsonResponse({'form': html})
     return render(request, 'annonce/detail.html', context)
 
+
+def annonce_favorite_list(request):
+    user = request.user
+    favorite_list = user.favorite.all()
+
+    context = {
+        'favorite_list': favorite_list
+    }
+    return render(request, 'annonce/favorite.html', context)
 
 class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
     model = Annonce
@@ -173,3 +189,17 @@ def updateAnnonce(request, pk=None):
     formset = ImageFormSet(queryset=Image.objects.filter(annonce_images=obj_annonce))
     print('is no thing')
     return render(request, 'annonce/update.html', {'form': form, 'formset': formset}) 
+
+
+def favorite(request, pk):
+    favorite_annonce = get_object_or_404(Annonce, pk=pk)
+    # Verifier si l'object existe dans la BD 
+    print('je suis dans favorite views')
+    if favorite_annonce.favorite.filter(pk=request.user.id).exists():
+        print('je suis dans favorite qui vaux True')
+        favorite_annonce.favorite.remove(request.user)
+    else:
+        print('je suis dans favorite qui vaux False')
+        favorite_annonce.favorite.add(request.user)
+
+    return HttpResponseRedirect(favorite_annonce.get_absolute_url())

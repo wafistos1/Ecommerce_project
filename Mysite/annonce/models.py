@@ -46,6 +46,7 @@ class Annonce(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
+    favorite = models.ManyToManyField(Profile, related_name='favorite', blank=True)
 
     class Meta:
         pass
