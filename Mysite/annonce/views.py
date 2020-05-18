@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.template.loader import render_to_string
+from django.http import HttpResponse, JsonResponse
 from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -108,6 +110,7 @@ def annonceDetaiView(request, pk):
     comment = Comment.objects.filter(for_post=details, reply=None).order_by('-create_content')
 
     if request.method == "POST":
+        print(request.POST)
         c_form = commentForm(request.POST or None)
         if c_form.is_valid():
             content = request.POST.get('content')
@@ -118,7 +121,7 @@ def annonceDetaiView(request, pk):
 
             comment_use = Comment(commented_by=request.user,  for_post=details, content=content, reply=comment_qs)
             comment_use.save()
-            return HttpResponseRedirect(details.get_absolute_url())
+            # return HttpResponseRedirect(details.get_absolute_url())
     else:
         c_form = commentForm()
 
@@ -127,7 +130,10 @@ def annonceDetaiView(request, pk):
         'comment': comment,
         'commentform': c_form,
         }
-
+    if request.is_ajax():
+        print('Ajax is true')
+        html = render_to_string('annonce/comment.html', context, request=request)
+        return JsonResponse({'form': html})
     return render(request, 'annonce/detail.html', context)
 
 
