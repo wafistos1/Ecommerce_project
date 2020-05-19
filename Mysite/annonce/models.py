@@ -96,6 +96,7 @@ class MpUser(models.Model):
     """Model definition for Mpuser."""
     sender = models.ForeignKey(Profile, related_name='sender', on_delete=models.CASCADE)
     reciever = models.ForeignKey(Profile, related_name='reciever', on_delete=models.CASCADE)
+    subject = models.CharField(max_length=50, default='Nothing')
     message = models.TextField("")
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     is_reader = models.BooleanField(default=False)

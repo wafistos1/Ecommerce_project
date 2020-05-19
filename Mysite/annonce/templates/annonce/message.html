@@ -1,9 +1,10 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
 {% load static %}
-<html lang="en">
-<head>
-	<title>Contact V1</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block link %}
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{% static 'img/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
@@ -18,9 +19,36 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static 'css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-<!--===============================================================================================-->
-</head>
-<body>
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+{% endblock link %}
+{% block head_title %}
+
+  <title>Send Message</title>
+  {% endblock head_title %}
+{% block content%}
+
+
+
+<div class="jumbotron  " id="header-section">
+	
+	
+
+	<h1>HEADER</h1>
+	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
+	  Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  </div>
+
+
+
+
+
+
     <div class="container "">  
         <div class="row">
 <div class="col-2"></div>
@@ -28,20 +56,20 @@
 <div class="col-8">
 	<div class="contact1">
 		<div class="container-contact1">
-			<div class="contact1-pic js-tilt" data-tilt>
-				<img src="{% static 'img/img-01.png'%}" alt="IMG">
-			</div>
 
 			<form class="contact1-form validate-form" method="POST" >
                 {% csrf_token %}
 				<span class="contact1-form-title">
-					Send Mp 
+					<h1 style="color: darkmagenta;"> Send Mp </h1>
 				</span>
 
 				
 
 				
-
+				<div class="wrap-input1 validate-input" data-validate = "Name is required">
+					{{ mp_form.subject }}
+					<span class="shadow-input1"></span>
+				</div>
 				
 
 				<div class="wrap-input1 validate-input" >
@@ -64,10 +92,12 @@
     <div class="col-2"></div>
 </div>
 </div>
-
-
+{% endblock content%}
+{% block categorie %}
+{% endblock categorie %}
+{% block script %}
 <!--===============================================================================================-->
-	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js'% }"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
 	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -80,7 +110,6 @@
 			scale: 1.1
 		})
 	</script>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
@@ -93,6 +122,6 @@
 
 <!--===============================================================================================-->
 	<script src="{% static 'js/main.js'%}"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-</body>
-</html>
+	{% endblock script %}

@@ -5,30 +5,6 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
-@font-face {
-  font-family: Montserrat-Regular;
-  src: url('../fonts/montserrat/Montserrat-Regular.ttf'); 
-}
-
-@font-face {
-  font-family: Montserrat-Bold;
-  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
-}
-
-@font-face {
-  font-family: Montserrat-ExtraBold;
-  src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
-}
-
-@font-face {
-  font-family: Montserrat-Medium;
-  src: url('../fonts/montserrat/Montserrat-Medium.ttf'); 
-}
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
 
 * {
 	margin: 0px; 
@@ -38,7 +14,7 @@
 
 body, html {
 	height: 100%;
-	font-family: Montserrat-Regular, sans-serif;
+	font-family:  Lato, Montserrat-Regular, sans-serif;
 }
 
 /*---------------------------------------------*/
@@ -60,7 +36,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-	color: #57b846;
+	color: #a33e96;
 }
 
 /*---------------------------------------------*/
@@ -133,11 +109,7 @@ iframe {
   min-height: 100%;
   padding: 15px;
 
-  background: #009bff;
-  background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
-  background: -o-linear-gradient(left, #0072ff, #00c6ff);
-  background: -moz-linear-gradient(left, #0072ff, #00c6ff);
-  background: linear-gradient(left, #0072ff, #00c6ff);
+  background:whitesmoke;
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -150,7 +122,7 @@ iframe {
 }
 
 .container-contact1 {
-  width: 1163px;
+  width: 600px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -164,13 +136,17 @@ iframe {
   justify-content: space-between;
   align-items: center;
 
-  padding: 90px 130px 88px 148px;
+  padding: 30px 80px 38px 98px;
 }
 
+background: -webkit-linear-gradient(left, #915389, #cf8ecc);
+background: -o-linear-gradient(left, #915389, #cf8ecc);
+background: -moz-linear-gradient(left, #915389, #cf8ecc);
+background: linear-gradient(left, #915389, #cf8ecc);
 /*------------------------------------------------------------------
 [  ]*/
 .contact1-pic {
-  width: 296px;
+  width: 120px;
 }
 
 .contact1-pic img {
@@ -240,7 +216,7 @@ textarea.input1 + .shadow-input1 {
   width: 100%;
   height: 100%;
   box-shadow: 0px 0px 0px 0px;
-  color: rgba(87,184,70, 0.5);
+  color: #915389;
 }
 
 .input1:focus + .shadow-input1 {
@@ -274,10 +250,10 @@ textarea.input1 + .shadow-input1 {
 }
 
 .contact1-form-btn {
-  min-width: 193px;
+  min-width: 150px;
   height: 50px;
   border-radius: 25px;
-  background: #57b846;
+  background: #915389;
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
@@ -394,7 +370,7 @@ textarea.input1 + .shadow-input1 {
   pointer-events: none;
 
   font-family: Montserrat-Medium;
-  color: #c80000;
+  color: #915389;
   font-size: 13px;
   line-height: 1.4;
   text-align: left;
@@ -413,7 +389,7 @@ textarea.input1 + .shadow-input1 {
   font-family: FontAwesome;
   display: block;
   position: absolute;
-  color: #c80000;
+  color: #915389;
   font-size: 15px;
   top: 50%;
   -webkit-transform: translateY(-50%);

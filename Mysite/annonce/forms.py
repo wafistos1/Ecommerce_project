@@ -57,8 +57,9 @@ class commentForm(forms.ModelForm):
 
 
 class MpUserForm(forms.ModelForm):
+    subject = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'input1', 'placeholder': 'Subject', }))    
     message = forms.CharField(label="", widget=forms.Textarea(attrs={'class': 'input1', 'placeholder': 'Message', 'name': 'message', 'rows': '5', 'cols':'40'}))    
     
     class Meta:
         model = MpUser
-        fields = ("message",)
+        fields = ("subject","message",)

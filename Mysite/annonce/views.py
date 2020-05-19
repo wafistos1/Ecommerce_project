@@ -264,7 +264,7 @@ def message_list(request):
     messages = MpUser.objects.filter(reciever=request.user.pk).order_by('-created_at')
 
     context = {
-        'messages': messages,
+        'message_list': messages,
     }
 
     return render(request, 'annonce/message_list.html', context)

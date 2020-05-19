@@ -4,6 +4,8 @@
 
 {% load humanize %}
 
+{% load humanize %}
+
 {% load i18n %}
 
 
@@ -74,7 +76,7 @@
 <br>
 <br>
           <p>{{details.description }}</p>
-          <H2 style="color: rgb(74, 30, 116);"><span>{{details.price}}€</span></H2>
+          <H2 style="color: rgb(74, 30, 116);"><span>{{details.price|intcomma}}€</span></H2>
         </div>
 
 
@@ -82,7 +84,6 @@
       <div class="row">
         <div class="col-sm-4" style="color:rgb(79, 19, 134);">
           <h5><strong>Auteur </strong>{{details.owner.username}}</h5>
-          <h5><strong>Auteur </strong>{{details.owner.pk}}</h5>
           <h5><strong>Email </strong>{{details.owner.email}}</h5>
           <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
         </div>
