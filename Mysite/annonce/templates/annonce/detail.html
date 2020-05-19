@@ -14,7 +14,7 @@
 
 {% block annonce %}
 <div class="row">
-  
+
   <div class="col-3">
 
     <div class="container form-group well">
@@ -72,9 +72,9 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
           <br>
-<H1 style="align-items: center; color: rgb(74, 30, 116)">Description</H1>
-<br>
-<br>
+          <H1 style="align-items: center; color: rgb(74, 30, 116)">Description</H1>
+          <br>
+          <br>
           <p>{{details.description }}</p>
           <H2 style="color: rgb(74, 30, 116);"><span>{{details.price|intcomma}}€</span></H2>
         </div>
@@ -82,12 +82,31 @@
 
       </div>
       <div class="row">
-        <div class="col-sm-4" style="color:rgb(79, 19, 134);">
+        <div class="col-sm-3 " style="color:rgb(79, 19, 134);">
           <h5><strong>Auteur </strong>{{details.owner.username}}</h5>
           <h5><strong>Email </strong>{{details.owner.email}}</h5>
           <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
+          
         </div>
-
+        <div class="col-sm-3 " id="favourite-section" style="color: rgb(79, 19, 134);">
+          {% if is_favorite %}
+          <h3> Supprimer des favoris</h3>
+          <a href="{% url 'favorite_annonce' pk=details.id %}">
+            <span style="font-size: 30px; color: rgb(79, 19, 134);">
+              <i class="fas fa-heart " ></i>
+            </span>
+          </a>
+          {% else %}
+          <h3> Ajouter aux favoris</h3>
+          <a href="{% url 'favorite_annonce' pk=details.id %}">
+            
+            <span style="font-size: 30px; color: darkmagenta;">
+              <i class="far fa-heart " ></i>
+            </span>
+          </a>
+          {% endif %}
+        </div>
+        
       </div>
       <br>
       <br>
@@ -96,9 +115,10 @@
       <div class="row ">
         <div class="col-12">
 
-        <button  id="btn-commentaires" type="button" class="btn btn-secondary" style="background-color: rgb(120, 73, 160); font-size: 14px; color: cornsilk;"> Commentaires </button>
-      </div>
-      <br>
+          <button id="btn-commentaires" type="button" class="btn btn-secondary"
+            style="background-color: rgb(120, 73, 160); font-size: 14px; color: cornsilk;"> Commentaires </button>
+        </div>
+        <br>
         <div id="commentaires" class="col-sm-6 well" style="display:none ;">
 
           <div class="main-comment-section">
@@ -109,7 +129,9 @@
 
           </div>
           <div class="message-sender">
-            <a href="/annonce/message/{{details.owner.pk}}"><h5> Send Mp </h5></a>
+            <a href="/annonce/message/{{details.owner.pk}}">
+              <h5> Send Mp </h5>
+            </a>
 
           </div>
 

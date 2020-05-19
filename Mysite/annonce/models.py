@@ -57,6 +57,9 @@ class Annonce(models.Model):
     def get_absolute_url(self):  # new
         return reverse('annonce_detail', args=[str(self.id)])
     
+    def get_favorite_url(self):  # new
+        return reverse('favorite_annonce', args=[str(self.id)])
+    
     def get_update_url(self):  # new
         return reverse('annonce_update', args=[str(self.id)])
     
