@@ -246,12 +246,7 @@ def message_mp(request, user_pk):
         mp_form.save()
         messages.add_message(request, SUCCESS, ('Message envoyee avec succès '))
         return redirect('home')
-    else:
-        mp_form = MpUserForm()
-        messages.add_message(
-                request, ERROR,
-                (" Une erreur c'est produite ")
-                )
+    
     context = {
         'mp_form': mp_form,
         'messages': messages,

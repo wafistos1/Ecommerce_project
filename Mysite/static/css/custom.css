@@ -1,8 +1,24 @@
 
+
+#conteneur
+{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
 body {
 	font-family:Lato;
 }
-
+#header-section{
+	color:whitesmoke;
+	background-color:white;
+	background-image: url(../img/header.png);
+	background-size: cover;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	
+}
 .form-control {
 	box-shadow: none;
 	border-color: #ddd;

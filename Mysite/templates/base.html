@@ -83,26 +83,34 @@
         </ul>
       </div>
     </nav>
+    <br>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     {% endblock navbar %}
 
     <!-- block content -->
     {% block content %}
-    <div class="jumbotron  " id="header-section">
-      {% if messages %}
-       <div class="alert alert-primary" role="alert" style="background-color: rgb(74, 30, 116); color:white ;">
-        {% for message in messages %}
-      <p id="messages"> {{ message }}</p>
-      {% endfor%}
-        
+    <div class="container header">
+      <div class="row">
+        <div class="col-sm-12  "id="header-section" >
+          <h1 style="text-align: center; text-size-adjust: 10px;">  <i class="fa fa-cube"></i>Ya<b>Tach</b>, trouvez la bonne affaire, réalisez-la bonne vente </h1>
+          {% if messages %}
+           <div class="alert alert-primary" role="alert" style="background-color: rgb(74, 30, 116); color:white ;">
+            {% for message in messages %}
+          <p id="messages"> {{ message }}</p>
+          {% endfor%}
+            
+          </div>
+         {% endif %}
+    
+        </div>
       </div>
-     {% endif %}
-      
-
-      <h1>HEADER</h1>
-      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
-        Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
     </div>
+    
     <!-- block categories -->
     {% block categories %}
 
