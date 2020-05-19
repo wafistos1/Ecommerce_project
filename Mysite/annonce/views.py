@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.template.loader import render_to_string
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -38,7 +38,7 @@ def home(request):
 @login_required(login_url='account_login')
 def add_annonce(request):
     """
-    View to add annonces 
+    View to add annonces
     """
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4)
 
@@ -47,7 +47,11 @@ def add_annonce(request):
     print(request.POST)
     if request.method == "POST":
         a_form = annonceFrom(request.POST)
-        formset = ImageFormSet(request.POST, request.FILES, queryset=Image.objects.none())
+        formset = ImageFormSet(
+            request.POST,
+            request.FILES,
+            queryset=Image.objects.none()
+            )
         print(request.POST)
         if a_form.is_valid() and formset.is_valid():
             print('Is valid')
@@ -104,14 +108,16 @@ class AnnonceDetailView(DetailView):
 
 def annonceDetaiView(request, pk):
     """
-        Class to display all annonces 
+        Class to display all annonces
     """
     details = get_object_or_404(Annonce, pk=pk)
-    comment = Comment.objects.filter(for_post=details, reply=None).order_by('-create_content')
+    comment = Comment.objects.filter(
+        for_post=details,
+        reply=None).order_by('-create_content')
     is_favorite = False
     if details.favorite.filter(id=request.user.id).exists():
         is_favorite = True
-        print('favorite is now true')
+        # print('favorite is now true')
     else:
         print('favorite is now False')
 
@@ -123,9 +129,15 @@ def annonceDetaiView(request, pk):
             reply_id = request.POST.get('comment-id')
             comment_qs = None  # reply is null
             if reply_id:
-                comment_qs = Comment.objects.get(id=reply_id)  # set reply as reply_id
+                comment_qs = Comment.objects.get(id=reply_id)  
+                # set reply as reply_id
 
-            comment_use = Comment(commented_by=request.user,  for_post=details, content=content, reply=comment_qs)
+            comment_use = Comment(
+                commented_by=request.user,
+                for_post=details,
+                content=content,
+                reply=comment_qs
+                )
             comment_use.save()
             # return HttpResponseRedirect(details.get_absolute_url())
     else:
@@ -139,7 +151,10 @@ def annonceDetaiView(request, pk):
         }
     if request.is_ajax():
         print('Ajax is true')
-        html = render_to_string('annonce/comment.html', context, request=request)
+        html = render_to_string(
+            'annonce/comment.html',
+            context, request=request
+            )
         return JsonResponse({'form': html})
     return render(request, 'annonce/detail.html', context)
 
@@ -153,6 +168,7 @@ def annonce_favorite_list(request):
     }
     return render(request, 'annonce/favorite.html', context)
 
+
 class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
     model = Annonce
     context_object_name = 'obj_delte'
@@ -161,7 +177,12 @@ class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
 
 
 def updateAnnonce(request, pk=None):
-    ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4, max_num=4)
+    ImageFormSet = modelformset_factory(
+        Image,
+        form=ImageForm,
+        extra=4,
+        max_num=4
+        )
     obj_annonce = get_object_or_404(Annonce, pk=pk)
     if request.POST:
         form = annonceFrom(request.POST or None, instance=obj_annonce)
@@ -193,13 +214,13 @@ def updateAnnonce(request, pk=None):
 
 def favorite(request, pk):
     favorite_annonce = get_object_or_404(Annonce, pk=pk)
-    # Verifier si l'object existe dans la BD 
-    print('je suis dans favorite views')
+    # # Verifier si l'object existe dans la BD 
+    # print('je suis dans favorite views')
     if favorite_annonce.favorite.filter(pk=request.user.id).exists():
-        print('je suis dans favorite qui vaux True')
+        # print('je suis dans favorite qui vaux True')
         favorite_annonce.favorite.remove(request.user)
     else:
-        print('je suis dans favorite qui vaux False')
+        # print('je suis dans favorite qui vaux False')
         favorite_annonce.favorite.add(request.user)
 
     return HttpResponseRedirect(favorite_annonce.get_absolute_url())

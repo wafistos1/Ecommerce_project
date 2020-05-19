@@ -11,105 +11,110 @@
 {% block categories %}{% endblock categories %}
 
 {% block annonce %}
-<div class="container form-group">
+<div class="row">
+  
+  <div class="col-3">
 
-  <div class="row">
-    <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 10px; text-align: center; color:rgb(79, 19, 134);">
-      <h2><strong>{{details.title|upper}}</strong></h2>
-      <h4><strong>Categorie: {{details.categories.name}}</strong></h4>
-    </div>
-    <div class="col-sm-4">
+    <div class="container form-group well">
 
-      {% if user.username == details.owner.username %}
-      <td>
-        <a href="{{details.get_update_url}}" class="edit" title="Edit" data-toggle="tooltip"><i
-            class="material-icons">&#xE254;</i></a>
-        <a href="{{details.get_delete_url}}" class="delete" title="Delete" data-toggle="tooltip"><i
-            class="material-icons">&#xE872;</i></a>
-      </td>
 
-      {% endif %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-          {% for document in details.image.all %}
-          <div class="item {% if forloop.first %} active {% endif %}">
-            <div class="row">
-              <div class="col-mx-4">
-                <img src="{{ document.image.url }}" class="img-fluid rounded-circle mb-3" width="250">
-              </div>
-            </div>
-          </div>
-          {% endfor %}
+      <div class="row">
+        <div class="col-sm-12"
+          style="padding-top: 10px; padding-bottom: 10px; text-align: center; color:rgb(79, 19, 134);">
+          <h2><strong>{{details.title|upper}}</strong></h2>
+          <h4><strong>Categorie: {{details.categories.name}}</strong></h4>
         </div>
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        <div class="col-sm-4">
+
+          {% if user.username == details.owner.username %}
+          <td>
+            <a href="{{details.get_update_url}}" class="edit" title="Edit" data-toggle="tooltip"><i
+                class="material-icons">&#xE254;</i></a>
+            <a href="{{details.get_delete_url}}" class="delete" title="Delete" data-toggle="tooltip"><i
+                class="material-icons">&#xE872;</i></a>
+
+
+            {% endif %}
+
+
+          </td>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+              {% for document in details.image.all %}
+              <div class="item {% if forloop.first %} active {% endif %}">
+                <div class="row">
+                  <div class="col-mx-4">
+                    <img src="{{ document.image.url }}" class="img-fluid rounded-circle mb-3" width="250">
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
 
-    </div>
+        </div>
 
-    <div class="col-sm-8">
-
-      <p>{{details.description }}</p>
-    </div>
-    <div id="favorite-section">
-{% if is_favorite %}
-      <h3>Supprimer des favoris </h3>
-      <a href="{% url 'favorite_annonce' pk=details.pk %}">
-      <span style="font-size: 3em; color: rgb(87, 27, 95);">
-        <i class="fas fa-heart"></i>
-      </span>
-    </a>
-{% else %}
-  <h3>Ajouter aux favoris </h3>
-  <a href="{% url 'favorite_annonce' pk=details.pk %}" >
-  <span style="font-size: 3em; color: rgb(87, 27, 95);">
-    <i class="far fa-heart"></i>
-  </span>
-</a>
-
-{% endif%}
-</div>
-
-
-  </div>
-  <div class="row">
-    <div class="col-sm-4" style="color:rgb(79, 19, 134);">
-      <h5><strong>Auteur </strong>{{details.owner.username}}</h5>
-      <h5><strong>Email </strong>{{details.owner.email}}</h5>
-      <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
-    </div>
-
-  </div>
-  <!-- Comment -->
-  <div class="row">
-    <div class="col-sm-4">
-
-      <div class="main-comment-section">
-
-        {% include 'annonce/comment.html' %}
-
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <br>
+<H1 style="align-items: center; color: rgb(74, 30, 116)">Description</H1>
+<br>
+<br>
+          <p>{{details.description }}</p>
+          <H2 style="color: rgb(74, 30, 116);"><span>{{details.price}}€</span></H2>
+        </div>
 
 
       </div>
+      <div class="row">
+        <div class="col-sm-4" style="color:rgb(79, 19, 134);">
+          <h5><strong>Auteur </strong>{{details.owner.username}}</h5>
+          <h5><strong>Email </strong>{{details.owner.email}}</h5>
+          <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
+        </div>
 
+      </div>
+      <br>
+      <br>
+      <br>
+      <!-- Comment -->
+      <div class="row ">
+        <div class="col-12">
+
+        <button  id="btn-commentaires" type="button" class="btn btn-secondary" style="background-color: rgb(120, 73, 160); font-size: 14px; color: cornsilk;"> Commentaires </button>
+      </div>
+      <br>
+        <div id="commentaires" class="col-sm-6 well" style="display:none ;">
+
+          <div class="main-comment-section">
+
+            {% include 'annonce/comment.html' %}
+
+
+
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
 </div>
 
-
-
-</div>
 
 
 

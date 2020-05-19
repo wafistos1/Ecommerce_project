@@ -68,3 +68,8 @@ $('.reply-btn').on('click', function(){
 
     
         });
+
+$('#btn-commentaires').on('click', function(){
+    $('#commentaires').fadeToggle();
+    
+        });

@@ -1,5 +1,7 @@
 
-
+body {
+	font-family:Lato;
+}
 
 .form-control {
 	box-shadow: none;
@@ -81,7 +83,7 @@
 }
 .changeStyle { 
 	color: #7c795d; 
-	font-family: 'Trocchi', 
+	font-family: 'Lato', 
 	serif; font-size: 45px; 
 	font-weight: normal; 
 	line-height: 48px; 

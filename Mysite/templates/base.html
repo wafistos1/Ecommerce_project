@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   {% block link %}
-  <script src="https://kit.fontawesome.com/971c1632df.js" crossorigin="anonymous"></script>
+  <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,7 +56,7 @@
           <li class="nav-item"><a href="{%url 'favorite_list'%}" class="nav-link"><i class="fa fa-envelope"><span
                     class="badge"></span></i><span>Favoris</span></a></li>
           <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-bell"><span
-                  class="badge">42</span></i><span>Notifications</span></a>
+                  class="badge badge-pill badge-dark">42</span></i><span>Notifications</span></a>
           </li>
 
 
@@ -77,7 +77,7 @@
           {% else %}
           <li class="nav-item"><a href="{% url 'account_signup'%}" class="nav-link"><i
                 class="fa fa-sign-in"></i><span>Inscription</span></a></li>
-          <li class="nav-item"><a href="{% url 'account_login'%}" class="nav-link" data-toggle="modal"><i
+          <li class="nav-item"><a href="{% url 'account_login'%}" class="nav-link"><i
                 class="fa fa-user"></i><span>Connexion</span></a></li>
           {% endif%}
         </ul>
@@ -130,7 +130,7 @@
 
           <div class="row">
             {% for details in annonces %}
-            <div class="col-sm-4  col-12" style="margin-top: 10px; border-width: 5px; border-color: blueviolet;">
+            <div class="col-sm-4  col-12" style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
               <div class="col-item">
                 <div class="photo">
 
@@ -145,12 +145,12 @@
                         <strong>{{ details.title|upper|truncatechars:24  }}</strong></h5>
                       <div class="row">
 
-                        <div class="price col-md-6">
-                          <h5 class="price-text-color">
-                            ${{ details.price|intcomma}}</h5>
+                        <div class="price col-md-6" style="color: rgb(74, 30, 116);">
+                          <h5>
+                            {{ details.price|intcomma}}€</h5>
                         </div>
                         <div class="price col-md-6">
-                          <h6 class="price-text-color" style="color: blueviolet;">
+                          <h6 class="price-text-color" style="color: rgb(74, 30, 116);">
                             Ajouter-{{ details.created }}</h6>
                         </div>
 
@@ -163,7 +163,7 @@
                       <i class="fa fa-list"></i><a href="{{details.get_absolute_url}}" class="hidden-sm">Details</a></p>
                     <p class="btn-details">
                       <i class="fa fa-shopping-bag"></i><a class="hidden-sm"
-                        style="color: blueviolet;">{{details.type_annonce|upper}}
+                        style="color: rgb(74, 30, 116);">{{details.type_annonce|upper}}
                       </a></p>
                   </div>
                   <div class="clearfix">
@@ -254,6 +254,8 @@
 
 
   {% block extra_body %}{%endblock%}
+  <script src="https://kit.fontawesome.com/971c1632df.js" crossorigin="anonymous"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
