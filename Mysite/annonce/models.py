@@ -90,6 +90,24 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.commented_by.username
+
+
+class MpUser(models.Model):
+    """Model definition for Mpuser."""
+    sender = models.ForeignKey(Profile, related_name='sender', on_delete=models.CASCADE)
+    reciever = models.ForeignKey(Profile, related_name='reciever', on_delete=models.CASCADE)
+    message = models.TextField("")
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    is_reader = models.BooleanField(default=False)
+
+    class Meta:
+        """Meta definition for Mpuser."""
+        pass
+
+    def __str__(self):
+        """Unicode representation of Mpuser."""
+        return (f'De {self.sender} a {self.reciever}')
+
 """
 # A ajouter plus tard 
 

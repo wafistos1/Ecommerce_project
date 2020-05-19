@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "list des message" %}{% endblock %}
+
+{% block annonce %}
+<div class="row">
+<div class="col-sm-12">
+    <H1 style="text-align: center; color: rgb(74, 30, 116); ">Liste des messages reçue </H1>
+</div>
+</div>
+<br>
+<br>
+
+
+    <div class="container">
+        <div class="row">
+            {% for list in messages %}
+            <div class="col-sm-8 well" style="padding-left: 20px ;">
+                <h3 style="color: rgb(74, 30, 116);"> Sender: {{ list.sender}}</h3>
+                <h4 style="color: rgb(74, 30, 116);">Message:</h4>
+                <p>  {{ list.message }}</p>
+                <h6>{{list.created_at}}</h6>
+
+        <a href="/annonce/message/{{list.sender.id}}"><strong>Repondre</strong></a>
+            </div>
+            <div class="col-sm-2"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock annonce %}
+{%block categories %}
+{%endblock categories %}

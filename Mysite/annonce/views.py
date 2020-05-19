@@ -7,11 +7,13 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView
 from django.contrib import messages
+from django.contrib.messages import SUCCESS, ERROR
 from django.contrib.auth.decorators import login_required
-from .forms import annonceFrom, ImageForm, editAnnonceForm, commentForm
+from .forms import annonceFrom, ImageForm, editAnnonceForm, commentForm, MpUserForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Annonce, Categorie, Image, Comment
+from .models import Annonce, Categorie, Image, Comment, MpUser
+from accounts.models import Profile
 
 
 def home(request):
@@ -67,7 +69,6 @@ def add_annonce(request):
                     photo = Image(annonce_images=annonceForm, image=image)
                     photo.save()
 
-            print(annonceForm)
             messages.add_message(
                 request, messages.SUCCESS, 'Annonce ajouter avec succès'
             )
@@ -114,7 +115,9 @@ def annonceDetaiView(request, pk):
     comment = Comment.objects.filter(
         for_post=details,
         reply=None).order_by('-create_content')
+
     is_favorite = False
+
     if details.favorite.filter(id=request.user.id).exists():
         is_favorite = True
         # print('favorite is now true')
@@ -122,8 +125,11 @@ def annonceDetaiView(request, pk):
         print('favorite is now False')
 
     if request.method == "POST":
+
         print(request.POST)
+
         c_form = commentForm(request.POST or None)
+
         if c_form.is_valid():
             content = request.POST.get('content')
             reply_id = request.POST.get('comment-id')
@@ -139,6 +145,7 @@ def annonceDetaiView(request, pk):
                 reply=comment_qs
                 )
             comment_use.save()
+
             # return HttpResponseRedirect(details.get_absolute_url())
     else:
         c_form = commentForm()
@@ -224,3 +231,40 @@ def favorite(request, pk):
         favorite_annonce.favorite.add(request.user)
 
     return HttpResponseRedirect(favorite_annonce.get_absolute_url())
+
+
+def message_mp(request, user_pk):
+    mp_form = MpUserForm(request.POST)
+    print('request.is valid')
+    print(request.user.pk)
+    print(user_pk)
+    if mp_form.is_valid():
+        f = mp_form.save(commit=False)
+        f.sender = Profile.objects.get(pk=request.user.pk)
+        f.reciever = Profile.objects.get(pk=user_pk)
+        # message = MpUser(sender=mp_form.sender, receiver=mp_form.reciever, message=mp_form.message)
+        mp_form.save()
+        messages.add_message(request, SUCCESS, ('Message envoyee avec succès '))
+        return redirect('home')
+    else:
+        mp_form = MpUserForm()
+        messages.add_message(
+                request, ERROR,
+                (" Une erreur c'est produite ")
+                )
+    context = {
+        'mp_form': mp_form,
+        'messages': messages,
+    }
+    print(context)
+    return render(request, 'annonce/message.html', context)
+
+
+def message_list(request):
+    messages = MpUser.objects.filter(reciever=request.user.pk).order_by('-created_at')
+
+    context = {
+        'messages': messages,
+    }
+
+    return render(request, 'annonce/message_list.html', context)

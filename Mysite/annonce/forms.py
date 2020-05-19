@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Categorie, Annonce, Image, Comment
+from .models import Categorie, Annonce, Image, Comment, MpUser
 
 
 class categorieFrom(forms.ModelForm):
@@ -49,9 +49,16 @@ class editAnnonceForm(forms.ModelForm):
 
 
 class commentForm(forms.ModelForm):
-    content = forms.CharField(label="", widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Text here', 'rows': '3', 'cols':'40'}))
+    content = forms.CharField(label="", widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Text here', 'rows': '3', 'cols':'40'})) 
     
     class Meta:
         model = Comment
         fields = ("content",)
 
+
+class MpUserForm(forms.ModelForm):
+    message = forms.CharField(label="", widget=forms.Textarea(attrs={'class': 'input1', 'placeholder': 'Message', 'name': 'message', 'rows': '5', 'cols':'40'}))    
+    
+    class Meta:
+        model = MpUser
+        fields = ("message",)

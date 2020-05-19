@@ -51,7 +51,7 @@
         </form>
         <ul class="nav navbar-nav navbar-right ml-auto">
           
-          <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-envelope"><span
+          <li class="nav-item"><a href="{% url 'message_list' %}" class="nav-link"><i class="fa fa-envelope"><span
                   class="badge">42</span></i><span>Messages</span></a></li>
           <li class="nav-item"><a href="{%url 'favorite_list'%}" class="nav-link"><i class="fa fa-envelope"><span
                     class="badge"></span></i><span>Favoris</span></a></li>
@@ -88,9 +88,16 @@
     <!-- block content -->
     {% block content %}
     <div class="jumbotron  " id="header-section">
-      {% for message in messages %}
+      {% if messages %}
+       <div class="alert alert-primary" role="alert" style="background-color: rgb(74, 30, 116); color:white ;">
+        {% for message in messages %}
       <p id="messages"> {{ message }}</p>
       {% endfor%}
+        
+      </div>
+     {% endif %}
+      
+
       <h1>HEADER</h1>
       <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
         Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
