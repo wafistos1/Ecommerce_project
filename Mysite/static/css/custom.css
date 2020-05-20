@@ -125,7 +125,7 @@ body {
 	border-radius: 3px;
 }
 .signup-form{
-	width: 800px;
+	width: auto;
 	margin: 0 auto;
 	padding: 30px 0;
 	margin-top: 70px;
