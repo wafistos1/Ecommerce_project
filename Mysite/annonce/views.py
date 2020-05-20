@@ -235,9 +235,6 @@ def favorite(request, pk):
 
 def message_mp(request, user_pk):
     mp_form = MpUserForm(request.POST)
-    print('request.is valid')
-    print(request.user.pk)
-    print(user_pk)
     if mp_form.is_valid():
         f = mp_form.save(commit=False)
         f.sender = Profile.objects.get(pk=request.user.pk)

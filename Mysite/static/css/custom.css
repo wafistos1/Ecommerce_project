@@ -1,13 +1,15 @@
 
 
-#conteneur
-{
-	display: flex;
-    justify-content: center;
-    align-items: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&display=swap');
+
+
+
 body {
-	font-family:Lato;
+	font-family: 'Pacifico', cursive;
+}
+body h1{text-align: center; 
+		  color: rgb(204, 120, 179); text-shadow: rgb(214, 207, 207) 0.1em 0.1em 0.1em;
+		  font-family: 'Lato', sans-serif;
 }
 #header-section{
 	color:whitesmoke;

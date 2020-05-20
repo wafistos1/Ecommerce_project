@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+
+
+{% block title %}{% trans "Search" %}{% endblock title %}
+{% block content %}
+
+<br>
+<br>
+<hr>
+
+<br>
+<div class="container">
+    {% if message %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">AUCUN RESULTAT</h4>
+        <p> <strong> {{message }}</strong></p>
+        <hr>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-3 categorie">
+            {% block categories %}
+                <h1 class="my-4">Categorie</h1>
+                <div class="list-group">
+                    {% for list in categories %}
+
+                    <a href="#" class="list-group-item" style="color: rgb(74, 30, 116);">{{ list.name|upper }} </a>
+
+                    {% endfor %}
+                </div>
+            
+
+
+            {% endblock categories %}
+        </div>
+        <div class="col-sm-9 list-annonces">
+
+
+
+            <div class="row">
+                <H3> {{ count_list }} annonce{{count_list|pluralize }}</H3>
+                {% for details in search_list %}
+                <div class="col-sm-4 "
+                    style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
+                    <div class="col-item">
+                        <div class="photo">
+
+                            <img src="{{details.image.all.0.image.url }}" alt="a" style="height: 200px; width: 250px; "
+                                class="img-responsive" />
+
+                        </div>
+                        <div class="info">
+                            <div class="row">
+                                <div class="price col-md-12">
+                                    <h5>
+                                        <strong>{{ details.title|upper|truncatechars:24  }}</strong></h5>
+                                    <div class="row">
+
+                                        <div class="price col-md-6" style="color: rgb(74, 30, 116);">
+                                            <h5>
+                                                {{ details.price|intcomma}}€</h5>
+                                        </div>
+                                        <div class="price col-md-6">
+                                            <h6 class="price-text-color" style="color: rgb(74, 30, 116);">
+                                                le-{{ details.created }}</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="separator clear-left">
+                                <p class="btn-details">
+                                    <i class="fa fa-list"></i><a href="{{details.get_absolute_url}}"
+                                        class="hidden-sm">Details</a></p>
+                                <p class="btn-details">
+                                    <i class="fa fa-shopping-bag"></i><a class="hidden-sm"
+                                        style="color: rgb(74, 30, 116);">{{details.type_annonce|upper}}
+                                    </a></p>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <nav aria-label="Page navigation example" style="background-color: rgb(121, 7, 121);">
+                <ul class="pagination">
+                    {% if search_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ search_list.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for p in search_list.paginator.page_range %}
+                    {% if search_list.number == p %}
+
+                    <li class="page-item active"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+                    {% else %}
+                    <li class="page-item "><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if search_list.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ search_list.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+            {% include "pagination.html" with search_list=search_list view="search" %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
