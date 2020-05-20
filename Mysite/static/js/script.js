@@ -73,3 +73,8 @@ $('#btn-commentaires').on('click', function(){
     $('#commentaires').fadeToggle();
     
         });
+
+
+        $(function () {
+            $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+           });

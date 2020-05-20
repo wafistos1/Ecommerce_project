@@ -24,7 +24,7 @@
         <div class="col-sm-12"
           style="padding-top: 10px; padding-bottom: 10px; text-align: center; color:rgb(79, 19, 134);">
           <h2 class="title"><strong>{{details.title|upper}}</strong></h2>
-          <h4  class="title"><strong>Categorie: {{details.categories.name}}</strong></h4>
+          <h4 class="title"><strong>Categorie: {{details.categories.name}}</strong></h4>
         </div>
         <div class="col-sm-4">
 
@@ -72,7 +72,7 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
           <br>
-          <H1  class="title" >Description</H1>
+          <H1 class="title">Description</H1>
           <br>
           <br>
           <p>{{details.description }}</p>
@@ -86,27 +86,29 @@
           <h5><strong>Auteur </strong>{{details.owner.username}}</h5>
           <h5><strong>Email </strong>{{details.owner.email}}</h5>
           <h5><strong>Phone </strong>{{details.owner.phone}}</h5>
-          
+
         </div>
+        {% if user.is_authenticated %}
         <div class="col-sm-3 " id="favourite-section" style="color: rgb(79, 19, 134);">
           {% if is_favorite %}
           <h3> Supprimer des favoris</h3>
           <a href="{% url 'favorite_annonce' pk=details.id %}">
             <span style="font-size: 30px; color: rgb(79, 19, 134);">
-              <i class="fas fa-heart " ></i>
+              <i class="fas fa-heart "></i>
             </span>
           </a>
           {% else %}
           <h3> Ajouter aux favoris</h3>
           <a href="{% url 'favorite_annonce' pk=details.id %}">
-            
+
             <span style="font-size: 30px; color: darkmagenta;">
-              <i class="far fa-heart " ></i>
+              <i class="far fa-heart "></i>
             </span>
           </a>
           {% endif %}
+          {% endif %}
         </div>
-        
+
       </div>
       <br>
       <br>
@@ -144,7 +146,31 @@
   </div>
 </div>
 
+<div class="row well">
+  <div class="col-md-12">
+
+    <div id="mdb-lightbox-ui">
+
+      <div class="mdb-lightbox">
 
 
 
-{% endblock annonce %}
+
+        {% for document in details.image.all %}
+        <div class="col-sm-4">
+          <figure class="col-md-4">
+            <a href="{{document.image.url}}" data-size="1600x1067">
+              <img src="{{document.image.url}}" class="img-fluid z-depth-1" alt="placeholder"
+                style="width: 250px; height: 200px; padding-top: 10px;">
+            </a>
+          </figure>
+        </div>
+        {% endfor %}
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+  {% endblock annonce %}
