@@ -11,7 +11,7 @@
 <div class="signup-form">
     <form action="" method="post" enctype="multipart/form-data" action="{% url 'add_annonce' %}">
         {% csrf_token %}
-        <h2>Add Annonces</h2>
+        <h2 class="title">Add Annonces</h2>
         <div class="form-group">
             <label for="Title"><h4>Title</h4></label>
             {{ a_form.title}}
@@ -47,10 +47,12 @@
             <p class="help">{{ field.help_text|safe }}</p>
             {% endif %}
         </div>
-        {% endfor %}   
+        {% endfor %}
+        <br>
+        <br> 
         
-		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Add annonce</button>
+		<div class="form-group" style="padding-top: 4px;" >
+            <button type="submit" class="btn btn-success btn- btn-block">Add annonce</button>
         </div>
 
     </form>

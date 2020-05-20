@@ -10,87 +10,68 @@
 {% block categories %}{% endblock categories %}
 
 {% block annonce %}
-<!-- 
-<div class="container">
-
-    <div class="row">
-        <div class="col-xs-6">
-
-            <form method="post" action="{{annonce.get_update_url}}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|crispy }}
-            
-                <div ></div>
-                {{ formset.management_form }}
-                {% for form in formset %}
-                <div class="form-group">
-                    <div class="col-xs-6">
-                    {{ form }}
-                    </div>
-                </div>
-                {% endfor %} 
-                <input type="submit" value="Update">
-            </form>
-
-        </div>
-
-    </div>
-
-</div> -->
-
 
 <div class="container">
     <div class="signup-form">
         <form method="post" action="{{annonce.get_update_url}}" enctype="multipart/form-data"">
             {% csrf_token %}
-            <h2>Update Annonces</h2>
-            <div class="form-group">
-                <label for="Title"><h4>Title</h4></label>
-                {{ form.title}}
-            </div>
-            <div class="form-group">
-                <label for="Title"><h4>Product</h4></label>
-                {{ form.product}}
-            </div>
-            
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-xs-4"><label for="Title"><h4>Price</h4></label>{{ form.price}}</div>
-                    <div class="col-xs-4"><label for="Title"><h4>Type annonce</h4></label>{{ form.type_annonce}}</div>
-                    <div class="col-xs-4"><label for="Title"><h4>Categories</h4></label>{{ form.categories}}</div>
-                </div>    
-            </div>
-            <div class="form-group">
-                <label for="Title"><h4>Description</h4></label>
-                {{ form.description}}
-            </div>   
-            {{ formset.management_form }}
-        {% for form in formset %}
-        <div class="form-group">
-            <div class="col-xs-6">
-            {{ form }}
-            </div>
+            <h2  class="title" >Update Annonces</h2>
+            <div class=" form-group">
+            <label for="Title">
+                <h4 >Title</h4>
+            </label>
+            {{ form.title}}
+    </div>
+    <div class="form-group">
+        <label for="Title">
+            <h4>Product</h4>
+        </label>
+        {{ form.product}}
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-4"><label for="Title">
+                    <h4>Price</h4>
+                </label>{{ form.price}}</div>
+            <div class="col-xs-4"><label for="Title">
+                    <h4>Type annonce</h4>
+                </label>{{ form.type_annonce}}</div>
+            <div class="col-xs-4"><label for="Title">
+                    <h4>Categories</h4>
+                </label>{{ form.categories}}</div>
         </div>
-        {% endfor %} 
-      {% for field in form %}
-            <div class="fieldWrapper">
-                {{ field.errors }}
-                {% if field.help_text %}
-                <p class="help">{{ field.help_text|safe }}</p>
-                {% endif %}
-            </div>
-            {% endfor %}   
-            
-            <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg ">Update </button>
-            </div>
-    
-        </form>
     </div>
+    <div class="form-group">
+        <label for="Title">
+            <h4>Description</h4>
+        </label>
+        {{ form.description}}
     </div>
-    
+    {{ formset.management_form }}
+    {% for form in formset %}
+    <div class="form-group">
+        <div class="col-xs-6">
+            {{ form }}
+        </div>
+    </div>
+    {% endfor %}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success btn-lg ">Update </button>
+    </div>
+
+    </form>
+</div>
+</div>
+
 
 {% endblock annonce%}
-<!-- Boostrap  -->
-
-""

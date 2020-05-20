@@ -21,7 +21,6 @@ class annonceFrom(forms.ModelForm):
             'type_annonce': forms.Select({'class': 'form-control'}),
             'categories': forms.Select({'class': 'form-control'}),
             'description': forms.Textarea({'class': 'form-control'}),
-
         }
 
 

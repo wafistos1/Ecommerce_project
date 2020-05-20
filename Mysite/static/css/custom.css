@@ -7,8 +7,8 @@
 body {
 	font-family: 'Pacifico', cursive;
 }
-body h1{text-align: center; 
-		  color: rgb(204, 120, 179); text-shadow: rgb(214, 207, 207) 0.1em 0.1em 0.1em;
+.title { text-align: center; 
+		  color: rgb(204, 120, 179); text-shadow: rgb(194, 177, 199) 0.1em 0.1em 0.1em;
 		  font-family: 'Lato', sans-serif;
 }
 #header-section{
