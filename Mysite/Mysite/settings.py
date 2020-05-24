@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'annonce',
     'search_app',
     'crispy_forms',
+    'django_filters',
 
 ]
 

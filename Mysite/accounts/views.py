@@ -24,16 +24,15 @@ def edit(request):
 
 @login_required(login_url='login')
 def compte(request):
-    annonce = Annonce.objects.filter(owner=request.user)
-    num_annonce = annonce.count()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(annonce, 9)
-    try:
-        annonce = paginator.page(page)
-    except PageNotAnInteger:
-        annonce = paginator.page(1)
-    except EmptyPage:
-        annonce = paginator.page(paginator.num_pages)
+#     num_annonce = annonce.count()
+#     page = request.GET.get('page', 1)
+#     paginator = Paginator(annonce, 9)
+#     try:
+#         annonce = paginator.page(page)
+#     except PageNotAnInteger:
+#         annonce = paginator.page(1)
+#     except EmptyPage:
+#         annonce = paginator.page(paginator.num_pages)
 
     if request.POST:
         form = editform(request.POST, request.FILES, instance=request.user)
@@ -45,8 +44,18 @@ def compte(request):
             return render(request, 'accounts/compte.html', {'form': form})
     form = editform(instance=request.user)
     context = {
-        'annonces': annonce,
         'form': form,
-        'num_annonce': num_annonce
         }
     return render(request, 'accounts/compte.html', context)
+
+
+def annonce_list(request):
+    
+    annonces = Annonce.objects.filter(owner=request.user)
+    num_annonce = annonces.count()
+
+    context = {
+        'num_annonce': num_annonce,
+        'annonces': annonces,
+        }
+    return render(request, 'accounts/annonce_list.html', context)

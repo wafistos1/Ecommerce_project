@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .filters import AnnonceFilter
 
 # Create your views here.
 # Global variable
@@ -17,6 +18,7 @@ def search(request):
     search_list = Annonce.objects.all()
     categories =  Categorie.objects.all()
     query = request.GET.get('q')
+    f = AnnonceFilter(request.GET, queryset=Annonce.objects.all())
     print(query)
     if query:
         try:
@@ -49,5 +51,6 @@ def search(request):
         'message': message,
         'count_list': count,
         'categories': categories,
+        'filter': f,
     }
     return render(request, 'search_app/search.html', context)

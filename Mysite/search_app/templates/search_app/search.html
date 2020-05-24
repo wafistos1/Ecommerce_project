@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load humanize %}
+{% load static %}
 
 
 {% block title %}{% trans "Search" %}{% endblock title %}
@@ -19,30 +20,162 @@
     <div class="row">
         <div class="col-sm-3 categorie">
             {% block categories %}
-                <h1  class="title">Categories</h1>
-                <br>
-                <div class="list-group">
-                    {% for list in categories %}
+            <h1 class="title">Categories</h1>
+            <br>
+            <div class="list-group">
+                {% for list in categories %}
 
-                    <a href="#" class="list-group-item" style="color: rgb(74, 30, 116);">{{ list.name|upper }} </a>
+                <a href="#" class="list-group-item" style="color: rgb(74, 30, 116);">{{ list.name|upper }} </a>
 
-                    {% endfor %}
-                </div>
-            
+                {% endfor %}
+            </div>
+
 
 
             {% endblock categories %}
         </div>
         <div class="col-sm-9 list-annonces">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form action="." method="get">
+                        {{ filter.form.as_p }}
+                        <input type="submit" />
+                    </form>
+                    {% for obj in filter.qs %}
+                    {{ obj.title }} - ${{ obj.price }}<br />
+                    {% endfor %}
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" id="btn-advanced-search">
+                    <button class'btn btn-lg ml-2 @btn-default-color:'>Advanced search</button>
+                    
+                    
+                </div>
+            </div>
+            <div class="row" id="advanced-search" style='display: none;' >
+
+                <div class="col-sm-12">
+                </div>
+                <div class="s008">
+                    <form>
+                        <div class="inner-form">
+
+                            <div class="advance-search">
+                                <span class="desc">Advanced Search</span>
+                                <div class="row">
+                                    <div class="input-field">
+                                        <div class="input-select">
+                                        {{ filter.form.categories }}
+                                        </div>
+                                    </div>
+                                    <div class="input-field">
+                                        <div class="input-select">
+                                            {{ filter.form.type_annonce }}
+                                        </div>
+                                    </div>
+                                    <div class="input-field">
+                                        <div class="input">
+                                            {{ filter.form.price }}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second">
+                                    <div class="input-field">
+                                        <d<div class="input-field">
+                                            <div class="input">
+                                                {{ filter.form.date_gt }}
+
+                                            </div>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <d<div class="input-field">
+                                            <div class="input">
+                                                {{ filter.form.date_lt }}
+
+                                            </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row four ">
+                                    <div class="input-field">
+                                        <d<div class="input-field">
+                                            <div class="input">
+                                                {{ filter.form.price_gt }}
+
+                                            </div>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <d<div class="input-field">
+                                            <div class="input">
+                                                {{ filter.form.price_lt }}
+
+                                            </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row third">
+                                    <div class="input-field">
+                                        <div class="result-count">
+                                            <span>108 </span>results</div>
+                                        <div class="group-btn">
+                                            <button class="btn-search">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <script src="{% static 'js/extention/choices.js'%}"></script>
+                <script>
+                    const customSelects = document.querySelectorAll("select");
+                    const deleteBtn = document.getElementById('delete')
+                    const choices = new Choices('select',
+                        {
+                            searchEnabled: false,
+                            removeItemButton: true,
+                            itemSelectText: '',
+                        });
+                    for (let i = 0; i < customSelects.length; i++) {
+                        customSelects[i].addEventListener('addItem', function (event) {
+                            if (event.detail.value) {
+                                let parent = this.parentNode.parentNode
+                                parent.classList.add('valid')
+                                parent.classList.remove('invalid')
+                            }
+                            else {
+                                let parent = this.parentNode.parentNode
+                                parent.classList.add('invalid')
+                                parent.classList.remove('valid')
+                            }
+                        }, false);
+                    }
+                    deleteBtn.addEventListener("click", function (e) {
+                        e.preventDefault()
+                        const deleteAll = document.querySelectorAll('.choices__button')
+                        for (let i = 0; i < deleteAll.length; i++) {
+                            deleteAll[i].click();
+                        }
+                    });
+
+                </script>
+
+
+            </div>
 
 
             <div class="row">
                 <H3> {{ count_list }} annonce{{count_list|pluralize }}</H3>
                 {% for details in search_list %}
                 <br>
-                <div class="col-sm-4 "
-                    style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
+                <div class="col-sm-4 " style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
                     <div class="col-item">
                         <div class="photo">
 
@@ -125,6 +258,24 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+<!---->
+<!---->
+<!---->
+<!---->
+
+
+
+
 
 
 

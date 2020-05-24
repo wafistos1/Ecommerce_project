@@ -14,6 +14,7 @@ urlpatterns = [
     # path('accounts/login', views.loginPage, name='login'),
     path('accounts/edit_profile', views.edit, name='edit'),
     path('accounts/compte', views.compte, name='profile'),
+    path('accounts/list_annonces', views.annonce_list, name='list_annonces'),
 
 # # reset password urls
 

@@ -78,3 +78,9 @@ $('#btn-commentaires').on('click', function(){
         $(function () {
             $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
            });
+
+$('#btn-advanced-search').on('click', function(){
+$('#advanced-search').fadeToggle();
+
+    });
+
