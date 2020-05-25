@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'search_app',
     'crispy_forms',
     'django_filters',
-
+ 
 ]
 
 SITE_ID = 1

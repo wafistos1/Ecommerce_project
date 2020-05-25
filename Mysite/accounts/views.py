@@ -4,13 +4,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from accounts.forms import editform
 from annonce.models import Annonce
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+# from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # # Create your views here.
 
 
-def edit(request):  
+def edit(request):
+    """
+    """
     if request.POST:
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -19,21 +21,14 @@ def edit(request):
         else:
             form = editform(request.POST, request.FILES, instance=request.user)
             return render(request, 'edit_profile.html', {'form': form})
-    form = editform(instance=request.user) 
+    form = editform(instance=request.user)
     return render(request, 'accounts/edit_profile.html', {'form': form})
+
 
 @login_required(login_url='login')
 def compte(request):
-#     num_annonce = annonce.count()
-#     page = request.GET.get('page', 1)
-#     paginator = Paginator(annonce, 9)
-#     try:
-#         annonce = paginator.page(page)
-#     except PageNotAnInteger:
-#         annonce = paginator.page(1)
-#     except EmptyPage:
-#         annonce = paginator.page(paginator.num_pages)
-
+    """
+    """
     if request.POST:
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -50,10 +45,16 @@ def compte(request):
 
 
 def annonce_list(request):
-    
+    """fonction to dispaly list of all annonces
+
+    Arguments:
+        request {[type]} -- [description]
+
+    Returns:
+        [type] -- [object with number of annonce and list of all annonces]
+    """ 
     annonces = Annonce.objects.filter(owner=request.user)
     num_annonce = annonces.count()
-
     context = {
         'num_annonce': num_annonce,
         'annonces': annonces,
