@@ -123,5 +123,7 @@ GitHub.sublime-settings
 .history
 cons.py
 ../lvenv/
+../venv1/
+venv1/
 annonce/migrations/
 ../vscode/*
