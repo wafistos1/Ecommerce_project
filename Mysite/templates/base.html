@@ -13,7 +13,6 @@
   <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   {% endblock link %}
 
@@ -25,8 +24,8 @@
 
 <body>
   {% block navbar %}
-
-  <div class="container">
+<div class="container fluid" id="main-block">
+  <div class="container" >
     <nav id="navbarcolor" class="navbar navbar-inverse navbar-expand-xl navbar-dark navbar-fixed-top">
       <div class="navbar-header d-flex col">
         <a class="navbar-brand" href="{% url 'home' %}"><i class="fa fa-cube"></i>Ya<b>Tach</b></a>
@@ -237,9 +236,8 @@
 
   {% block extra_body %}{%endblock%}
   {% block script %}
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/971c1632df.js" crossorigin="anonymous"></script>
-
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
@@ -247,6 +245,7 @@
 
   <script src="{% static 'js/script.js'%}"></script>
   {%endblock%}
+</div>
 </body>
 
 </html>

@@ -2,6 +2,8 @@ from annonce.models import Annonce
 import django_filters
 from django_filters import DateFilter
 from django.forms.widgets import TextInput, DateTimeInput
+from django import forms
+from annonce.models import Categorie, Annonce
 
 
 class AnnonceFilter(django_filters.FilterSet):
