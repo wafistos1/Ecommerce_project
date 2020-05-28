@@ -3,11 +3,8 @@
 {% load static %}
 
 {% load humanize %}
-
 {% load humanize %}
-
 {% load i18n %}
-
 
 {% block head_title %}{% trans "detail annonce" %}{% endblock %}
 {% block categories %}{% endblock categories %}
@@ -17,7 +14,7 @@
 
   <div class="col-3">
 
-    <div class="container form-group well">
+    <div class=" detail-annonce">
 
 
       <div class="row">
@@ -48,6 +45,7 @@
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
               {% for document in details.image.all %}
+              
               <div class="item {% if forloop.first %} active {% endif %}">
                 <div class="row">
                   <div class="col-mx-4">

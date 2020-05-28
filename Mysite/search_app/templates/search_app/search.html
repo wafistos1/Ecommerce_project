@@ -20,7 +20,7 @@
     {% endif %}
 
     <div class="row">
-        <div class="col-sm-3 categorie">
+        <div class="col-sm-3 categorie cadre-annonce">
             {% block categories %}
             <h1 class="title">Categories</h1>
             <br>
@@ -172,7 +172,7 @@
                 <H3> {{ count_list }} annonce{{count_list|pluralize }}</H3>
                 {% for details in search_list %}
 
-                <div class="col-sm-4 " style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
+                <div class="col-sm-6 col-md-4 col-12 cadre-annonce" style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
                     <div class="col-item">
                         <div class="photo">
 
