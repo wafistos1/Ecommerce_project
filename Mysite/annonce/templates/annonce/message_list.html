@@ -24,7 +24,7 @@
                 <h3 style="color: rgb(74, 30, 116);"> Sender: {{ list.sender}}</h3>
                 <h4 style="color: rgb(74, 30, 116);">Sujet: {{list.subject }} </h4>
                 <p>  {{ list.message }}</p>
-                <h6>{{list.created_at}}</h6>
+                <h6>{{ list.created_at }}</h6>
 
         <a href="/annonce/message/{{list.sender.id}}"><strong>Repondre</strong></a>
             </div>
@@ -34,5 +34,5 @@
     </div>
 
 {% endblock annonce %}
-{%block categories %}
-{%endblock categories %}
+{% block categories %}
+{% endblock categories %}

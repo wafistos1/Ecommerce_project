@@ -40,13 +40,10 @@ def home(request):
 @login_required(login_url='account_login')
 def add_annonce(request):
     """
-    View to add annonces
+    Add annonces by users
     """
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4)
-
     # 'extra' means the number of photos that you can upload   ^
-
-    print(request.POST)
     if request.method == "POST":
         a_form = annonceFrom(request.POST)
         formset = ImageFormSet(
@@ -54,9 +51,7 @@ def add_annonce(request):
             request.FILES,
             queryset=Image.objects.none()
             )
-        print(request.POST)
         if a_form.is_valid() and formset.is_valid():
-            print('Is valid')
             user = request.user
             annonceForm = a_form.save(commit=False)
             annonceForm.owner = user
@@ -76,7 +71,6 @@ def add_annonce(request):
         else:
             print('Is not valid')    
     else:
-        print('Is not valid')
         a_form = annonceFrom()
         formset = ImageFormSet(queryset=Image.objects.none())
     a_form = annonceFrom()
@@ -96,15 +90,6 @@ class annonceListView(ListView):
     context_object_name = 'lists'
     paginate_by = 12
     template_name = 'annonce/home.html'
-
-
-class AnnonceDetailView(DetailView):
-    """
-        Class to display a details of annonces 
-    """
-    model = Annonce
-    context_object_name = 'details'
-    template_name = 'annonce/detail.html'
 
 
 def annonceDetaiView(request, pk):

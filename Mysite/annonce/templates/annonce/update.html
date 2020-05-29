@@ -20,33 +20,33 @@
             <label for="Title">
                 <h4 >Title</h4>
             </label>
-            {{ form.title}}
+            {{ form.title }}
     </div>
     <div class="form-group">
         <label for="Title">
             <h4>Product</h4>
         </label>
-        {{ form.product}}
+        {{ form.product }}
     </div>
 
     <div class="form-group">
         <div class="row">
             <div class="col-xs-4"><label for="Title">
                     <h4>Price</h4>
-                </label>{{ form.price}}</div>
+                </label>{{ form.price }}</div>
             <div class="col-xs-4"><label for="Title">
                     <h4>Type annonce</h4>
-                </label>{{ form.type_annonce}}</div>
+                </label>{{ form.type_annonce }}</div>
             <div class="col-xs-4"><label for="Title">
                     <h4>Categories</h4>
-                </label>{{ form.categories}}</div>
+                </label>{{ form.categories }}</div>
         </div>
     </div>
     <div class="form-group">
         <label for="Title">
             <h4>Description</h4>
         </label>
-        {{ form.description}}
+        {{ form.description }}
     </div>
     {{ formset.management_form }}
     {% for form in formset %}
@@ -74,4 +74,4 @@
 </div>
 
 
-{% endblock annonce%}
+{% endblock annonce %}
