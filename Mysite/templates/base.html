@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   {% block link %}
+  
   <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -100,7 +101,7 @@
 
         
     </div>
-    {% endblock header%}
+    {% endblock header %}
 
     <br>
     <hr>
@@ -187,7 +188,7 @@
                       </p>
                       <p class="btn-details">
                         <i class="fa fa-shopping-bag"></i><a class="hidden-sm"
-                          style="color: rgb(74, 30, 116);">{{details.type_annonce|upper}}
+                          style="color: rgb(74, 30, 116);">{{ details.type_annonce|upper }}
                         </a></p>
                     </div>
                     <div class="clearfix">
@@ -243,7 +244,7 @@
     crossorigin="anonymous"></script>
 
   <script src="{% static 'js/script.js'%}"></script>
-  {%endblock%}
+  {% endblock %}
 </div>
 </body>
 

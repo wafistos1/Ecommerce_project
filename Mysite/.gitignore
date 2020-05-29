@@ -130,3 +130,4 @@ annonce/migrations/
 ../vscode/*
 ./*
 venv1/
+.coveragerc
