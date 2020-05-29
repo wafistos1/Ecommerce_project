@@ -1,0 +1,37 @@
+<!-- Pagination bootstrap -->
+<nav aria-label="Page navigation example" style="background-color: rgb(121, 7, 121);">
+    <ul class="pagination">
+      {% if annonces.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ annonces.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% for p in annonces.paginator.page_range %}
+      {% if annonces.number == p %}
+
+      <li class="page-item active"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+      {% else %}
+      <li class="page-item "><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+
+      {% endif %}
+      {% endfor %}
+
+      {% if annonces.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ annonces.next_page_number }}"  aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+      {% endif %}
+      
+    </ul>
+  </nav>
+
+
+  <!-- Pagination-->
+

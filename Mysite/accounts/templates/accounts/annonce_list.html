@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+
+
+{% block title %}{% trans "List annonces" %}{% endblock title %}
+{% block content %}
+
+<div class="row">
+    <div class="container">
+        
+
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="show-entries" style="color: rgb(121, 7, 121);">
+                           Vous avez <strong>{{num_annonce}}</strong> annonces
+                        
+                        </div>						
+                    </div>
+                    <div class="col-sm-4">
+                        <h1 class="title" >Mes Annonces </h1>
+            
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="search-box">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-responsive table-bordered">
+                <thead>
+                    <tr style="color: rgb(121, 7, 121);">
+                        <th scope='col'>#</th>
+                        <th scope='col'>Title <i class="fa fa-sort"></i></th>
+                        <th scope='col'>Type annonce</th>
+                        <th scope='col'>Categories <i class="fa fa-sort"></i></th>
+                        <th scope='col'>Price </th>
+                        <th scope='col'>Created </th>
+                        <th scope='col'>Edite </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for annonce in annonces %}
+                    <tr>
+                        <td scope='row'>{{forloop.counter}}</td>
+                        <td>{{annonce.title}}</td>
+                        <td>{{annonce.type_annonce}}</td>
+                        <td>{{annonce.categories}}</td>
+                        <td>{{annonce.price|intcomma }}</td>
+                        <td>{{annonce.created}}</td>
+                        <td>
+                            <a href="{{annonce.get_absolute_url}}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                            <a href="{{annonce.get_update_url}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="{{annonce.get_delete_url}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    
+                           
+                </tbody>
+            </table>
+            
+            <!--Pagitation -->
+
+
+
+            {% include "pagination.html" with liste=annonces view="compte" %}
+
+     
+
+        </div>
+    </div>     
+</div>
+{% endblock content %}
+{% block categories %}
+{% endblock categories %}

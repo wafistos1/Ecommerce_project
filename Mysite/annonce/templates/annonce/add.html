@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "add annonce" %}{% endblock %}
+
+{% block annonce %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+        <div class="signup-form">
+            <form action="" method="post" enctype="multipart/form-data" action="{% url 'add_annonce' %}">
+                {% csrf_token %}
+                <h2 class="title">{% trans "Add annonce" %}</h2>
+                <div class="form-group">
+                    <label for="Title">
+                        <h4>Title</h4>
+                    </label>
+                    {{ a_form.title}}
+                </div>
+                <div class="form-group">
+                    <label for="Title">
+                        <h4>Product</h4>
+                    </label>
+                    {{ a_form.product}}
+                </div>
+ 
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4"><label for="Title">
+                                <h4>Price</h4>
+                            </label>{{ a_form.price}}</div>
+                        <div class="col-xs-4"><label for="Title">
+                                <h4>Type annonce</h4>
+                            </label>{{ a_form.type_annonce}}</div>
+                        <div class="col-xs-4"><label for="Title">
+                                <h4>Categories</h4>
+                            </label>{{ a_form.categories}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Title">
+                        <h4>Description</h4>
+                    </label>
+                    {{ a_form.description}}
+                </div>
+                {{ formset.management_form }}
+                {% for form in formset %}
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        {{ form }}
+                    </div>
+                </div>
+                {% endfor %}
+                {% for field in a_form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <br>
+                <br>
+
+                <div class="form-group" style="padding-top: 4px;">
+                    <button type="submit" class="btn btn-success btn- btn-block">Add annonce</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-sm-2"></div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock annonce %}
+
+{% block categories%} {% endblock categories%}

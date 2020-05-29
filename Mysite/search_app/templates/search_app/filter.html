@@ -1,0 +1,53 @@
+
+{% load humanize %}
+
+
+<H3> {{ count}} annonce{{count|pluralize }}</H3>
+<div class="row">
+    {% for details in resultat %}
+    <div class="col-sm-6  col-12 col-md-4 cadre-annonce" style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
+      <div class="col-item">
+        <div class="photo">
+          <a href="{{details.get_absolute_url}}"><img src="{{details.image.all.0.image.url }}" alt="thumbnail" class="img-thumbnail z-depth-1" alt="zoom"
+          style="width: 250px; height: 200px;"></a>
+          <!-- <img src="{{details.image.all.0.image.url }}" alt="a" style="height: 200px; width: 250px; "
+            class="img-responsive" /> -->
+
+        </div>
+        <div class="info">
+          <div class="row">
+            <div class="price col-md-12">
+              <h5>
+                <strong>{{ details.title|upper|truncatechars:24  }}</strong></h5>
+              <div class="row">
+
+                <div class="price col-md-6" style="color: rgb(74, 30, 116);">
+                  <h5>
+                    {{ details.price|intcomma}}€</h5>
+                </div>
+                <div class="price col-md-6">
+                  <h6 class="price-text-color" style="color: rgb(74, 30, 116);">
+                    le-{{ details.created }}</h6>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="separator clear-left">
+            <p class="btn-details">
+              <i class="fa fa-list"></i><a href="{{details.get_absolute_url}}" class="hidden-sm">Details</a>
+            </p>
+            <p class="btn-details">
+              <i class="fa fa-shopping-bag"></i><a class="hidden-sm"
+                style="color: rgb(74, 30, 116);">{{details.type_annonce|upper}}
+              </a></p>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div
