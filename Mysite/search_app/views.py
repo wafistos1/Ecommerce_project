@@ -63,6 +63,7 @@ def search(request):
     }
     return render(request, 'search_app/search.html', context)
 
+
 def filter_search(request):
     """ Display the search resultat with advanced filter """
     categories_obj =  Categorie.objects.all()
@@ -75,7 +76,6 @@ def filter_search(request):
     price_lt = request.GET.get('price_lt')
     conditions = {}
     print(f'request: {request}')
-    
     if categories or type_annonce or date_gt or date_lt or price or price_gt or price_lt:
         
         for filter_key, form_key in (

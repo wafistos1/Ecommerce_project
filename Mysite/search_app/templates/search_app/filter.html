@@ -2,7 +2,7 @@
 {% load humanize %}
 
 
-<H3> {{ count}} annonce{{count|pluralize }}</H3>
+<h3 style="text-align: center;"> {{ count}} annonce{{count|pluralize }} trouvé{{count|pluralize}}</h3>
 <div class="row">
     {% for details in resultat %}
     <div class="col-sm-6  col-12 col-md-4 cadre-annonce" style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">

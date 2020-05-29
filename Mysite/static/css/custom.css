@@ -1689,6 +1689,7 @@ table.table td i {
   
   .s008 form .inner-form .advance-search .row.third {
 	margin-bottom: 0;
+	padding-top: 10;
   }
   .s008 form .inner-form .advance-search .row.four {
 	margin-bottom: 0;
@@ -1945,7 +1946,7 @@ table.table td i {
    * 2. Correct the odd `em` font sizing in all browsers.
    */
   pre {
-	font-family: monospace, monospace;
+	font-family: 'Lato', monospace;
 	/* 1 */
 	font-size: 1em;
 	/* 2 */
@@ -2091,14 +2092,13 @@ table.table td i {
   optgroup,
   select,
   textarea {
-	font-family: sans-serif;
+	font-family: Lato;
 	/* 1 */
 	font-size: 100%;
 	/* 1 */
 	line-height: 1.15;
 	/* 1 */
 	margin: 0;
-	/* 2 */
   }
   
   /**
@@ -2681,16 +2681,14 @@ table.table td i {
   }
   
   .s009 {
-	min-height: 30vh;
+	min-height: 20vh;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-pack: start;
 		justify-content: start;
 	-ms-flex-align: start;
 		align-items: start;
-	background: whitesmoke;
-	padding: 25px;
-	margin-top: 35px;
+	padding: 15px;
 	font-family: 'Lato', sans-serif;
   }
   
@@ -2751,7 +2749,7 @@ table.table td i {
 	min-width: 100px;
 	height: 40px;
 	padding: 0 15px;
-	background: #a35ea3;
+	background: #bb83bb;
 	white-space: nowrap;
 	border-radius: 0;
 	font-size: 14px;
@@ -2815,14 +2813,15 @@ table.table td i {
   
   .s009 form .inner-form .basic-search .input-field .icon-wrap svg {
 	width: 34px;
-	height: 34px;
+	height: 24px;
 	fill: #ccc;
   }
   
   .s009 form .inner-form .advance-search {
-	background: #fff;
+	background: f1eeee;
 	padding: 40px;
-	box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	
+	box-shadow: 8px 8px 10px 0px rgba(0, 0, 0, 0.15);
   }
   
   .s009 form .inner-form .advance-search .desc {
@@ -2849,10 +2848,11 @@ table.table td i {
   
   .s009 form .inner-form .advance-search .row.third {
 	margin-bottom: 0;
+	margin-top: 10px;
   }
   
   .s009 form .inner-form .advance-search .row.third .input-field {
-	width: 100%;
+	width: 80%;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-pack: justify;
@@ -2868,7 +2868,7 @@ table.table td i {
 		justify-content: flex-start;
 	-ms-flex-align: center;
 		align-items: center;
-	width: 110px;
+	width: 80px;
 	color: #666;
 	font-size: 14px;
   }
@@ -2879,11 +2879,12 @@ table.table td i {
   }
   
   .s009 form .inner-form .advance-search .input-field {
-	width: calc((100% - 40px) / 3);
+	width: calc((90% - 40px) / 3);
+	padding-bottom: 20px;
   }
   
   .s009 form .inner-form .advance-search .input-select {
-	height: 40px;
+	height: 10px;
   }
   
   .s009 form .inner-form .advance-search .choices__inner {
