@@ -14,7 +14,8 @@ import os
 # from cons import EMAIL_BACKEND, EMAIL_HOST, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_PORT, EMAIL_USE_SSL, EMAIL_USE_TLS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,8 +26,7 @@ SECRET_KEY = 'd(%-&+xi1ui=%#jn&dv4vw15!ga&@h%l$ahk98n9b32020by#a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -182,7 +182,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-print(MEDIA_ROOT)
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -210,4 +210,4 @@ else:
     # EMAIL_USE_SSL = EMAIL_USE_SSL
     # EMAIL_HOST_USER = EMAIL_HOST_USER
     # EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-
+INTERNAL_IPS = ['127.0.0.1']
