@@ -56,33 +56,24 @@ class TestModels(TestCase):
             'message': 'Hi',  
         }
         # reverse urls 
-        self.add_edit_url = reverse('edit' )
-        self.add_profile_url = reverse('profile' )
-        self.add_list_annonces_url = reverse('list_annonces' )
+        self.add_search_url = reverse('search' )
+        self.add_filter_url = reverse('filter' )
+        
         self.client = Client()
         
      
-    # def test_edit_ok_get(self):
-    #     self.client.login(username='wafistos', password='djamel2013')   
-    #     response = self.client.post(self.add_edit_url, data=self.data)
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed( 'accounts/edit_profile.html')
+    def test_search_ok_get(self):
+            response = self.client.get(self.add_search_url)
+            self.assertEquals(response.status_code, 200)
+            self.assertTemplateUsed( 'search_app/search.html')
     
     
-    # def test_compte_ok_get(self):
-    #     self.client.login(username='wafistos', password='djamel2013')   
-    #     response = self.client.post(self.add_profile_url)
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed( 'accounts/compte.html')
-    
-    def test_annonce_list_ok_get(self):
-        self.client.login(username='wafistos', password='djamel2013')   
-        response = self.client.post(self.add_list_annonces_url)
-        annonces = Annonce.objects.filter(owner=self.client)
+    def test_filter_ok_get(self):
+        response = self.client.post(
+            reverse('filter'),
+            data={'categoriese': 'VÉHICULES '},
+            content_type='application/json',
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+            )     
+        self.assertEqual(200, response.status_code)
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed( 'accounts/annonce_list.html')
-    
-    
-
-    
-    

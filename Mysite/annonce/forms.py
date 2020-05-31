@@ -62,3 +62,4 @@ class MpUserForm(forms.ModelForm):
     class Meta:
         model = MpUser
         fields = ("subject","message",)
+    

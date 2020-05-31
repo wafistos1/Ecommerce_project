@@ -20,7 +20,7 @@
             {% for reply in com.replies.all %}
             <blockquote class="blockquote">
                 <h4 class="mb-0">{{ reply.content }}</h4>
-                <footer class="blockquote-footer">By <cite title="Source Title">{{r eply.commented_by|capfirst }}</cite>
+                <footer class="blockquote-footer">By <cite title="Source Title">{{ reply.commented_by|capfirst }}</cite>
                 </footer>
                 <footer class="blockquote-footer">At <cite title="Source Title">{{ reply.create_content }}</cite></footer>
             </blockquote>

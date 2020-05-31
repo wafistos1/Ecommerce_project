@@ -9,7 +9,7 @@ from annonce.models import Annonce
 # from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # # Create your views here.
 
-
+@login_required(login_url='login')
 def edit(request):
     """
     """
@@ -17,9 +17,8 @@ def edit(request):
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('list_annonces')
         else:
-            form = editform(request.POST, request.FILES, instance=request.user)
             return render(request, 'edit_profile.html', {'form': form})
     form = editform(instance=request.user)
     return render(request, 'accounts/edit_profile.html', {'form': form})
@@ -43,7 +42,7 @@ def compte(request):
         }
     return render(request, 'accounts/compte.html', context)
 
-
+@login_required(login_url='login')
 def annonce_list(request):
     """fonction to dispaly list of all annonces
 

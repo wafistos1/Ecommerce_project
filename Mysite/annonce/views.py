@@ -150,7 +150,7 @@ def annonceDetaiView(request, pk):
         return JsonResponse({'form': html})
     return render(request, 'annonce/detail.html', context)
 
-
+@login_required(login_url='account_login')
 def annonce_favorite_list(request):
     user = request.user
     favorite_list = user.favorite.all()
@@ -167,7 +167,7 @@ class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
     template_name = 'annonce/delete.html'
     success_url = reverse_lazy('profile')
 
-
+@login_required(login_url='account_login')
 def updateAnnonce(request, pk=None):
     ImageFormSet = modelformset_factory(
         Image,
