@@ -131,3 +131,5 @@ annonce/migrations/
 ./*
 venv1/
 .coveragerc
+__pycache__
+Mysite/settings/production.py
