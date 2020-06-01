@@ -200,7 +200,7 @@ AUTH_USER_MODEL = 'accounts.Profile'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-    
+
     # email backend for google
 
 
