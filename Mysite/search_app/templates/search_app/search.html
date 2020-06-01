@@ -158,26 +158,29 @@
         <!---->
         <!---->
         <!---->
-        <div class="col-sm-9 list-annonces" >
+        <div class="col-sm-8 list-annonces" >
             
             <br>
             <br>
-
+            <br>
+            <br>
             
 
-
+            <div class="row">
             <h1 class="title"> Resultat de la recherche </h1>
-
+          </div>
+          <br>
+          <br><br>
             <div class="row add-filter">
                 <h3 style="text-align: center;"> {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize}}</h3>
                 {% for details in search_list %}
 
-                <div class="col-sm-6 col-md-4 col-12 cadre-annonce" style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
-                    <div class="col-item">
+                <div class="col-sm-6 col-md-4 col-12 " style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
+                    <div class="col-item cadre-annonce">
                         <div class="photo">
 
                             <img src="{{details.image.all.0.image.url }}" alt="a" style="height: 200px; width: 250px; "
-                                class="img-responsive" />
+                                class="img-thumbnail z-depth-1"alt="thumbnail" />
 
                         </div>
                         <div class="info">

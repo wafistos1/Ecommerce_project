@@ -1,12 +1,11 @@
 
 {% load humanize %}
-
-
+<div class="col-12">
 <h3 style="text-align: center;"> {{ count}} annonce{{count|pluralize }} trouvé{{count|pluralize}}</h3>
 <div class="row">
     {% for details in resultat %}
-    <div class="col-sm-6  col-12 col-md-4 cadre-annonce" style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
-      <div class="col-item">
+    <div class="col-sm-6  col-12 col-md-4 " style="margin-top: 10px; border-width: 5px; border-color:rgb(74, 30, 116);">
+      <div class="col-item cadre-annonce">
         <div class="photo">
           <a href="{{details.get_absolute_url}}"><img src="{{details.image.all.0.image.url }}" alt="thumbnail" class="img-thumbnail z-depth-1" alt="zoom"
           style="width: 250px; height: 200px;"></a>
@@ -49,5 +48,5 @@
       </div>
     </div>
     {% endfor %}
-
+  </div>
   </div
