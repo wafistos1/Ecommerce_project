@@ -197,8 +197,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
 AUTH_USER_MODEL = 'accounts.Profile'
 # email console for test
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 
     # email backend for google
