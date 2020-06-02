@@ -16,4 +16,4 @@ script:
 # safelist
 branches:
   only:
-    - staging 
+    - master
