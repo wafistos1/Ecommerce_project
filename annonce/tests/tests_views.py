@@ -67,14 +67,12 @@ class TestModels(TestCase):
         self.annonce_update_url = reverse('annonce_update', args=[self.annonce_create.id])
         # client
         self.client = Client()
-        
-     
+             
     def test_home_get(self):
             response = self.client.get('')
             self.assertEquals(response.status_code, 200)
             self.assertTemplateUsed( 'base.html')
-    
-    
+     
     def test_add_annonce_is_ok(self):
         # login a user
         self.client.login(username='wafisots', password='djamel2013')
@@ -92,12 +90,10 @@ class TestModels(TestCase):
         self.assertEquals(search_annonce.price, 20.00)
         self.assertEquals(response.status_code, 302)
        
-        
     def test_annonce_detail(self):     
         response = self.client.get(self.annonce_detail_url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'annonce/detail.html')
-
 
     def test_annonce_list_GET(self):     
         response = self.client.get(self.annonce_list_url)
@@ -114,7 +110,7 @@ class TestModels(TestCase):
     def test_annonce_update_GET(self):
         self.client.login(username='wafistos', password='djamel2013')   
         response = self.client.get(self.annonce_update_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
         self.assertTemplateUsed(response, 'annonce/update.html')
     
     
@@ -130,7 +126,7 @@ class TestModels(TestCase):
         response = self.client.get(self.annonce_update_url)
         form = annonceFrom(self.data)
         self.assertTrue(form.is_valid())
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 301)
         self.assertTemplateUsed(response, 'annonce/update.html')
         
     def test_message_mp_GET(self):
