@@ -134,3 +134,4 @@ venv1/
 __pycache__
 Mysite/settings/production.py
 Mysite/staticfiles/
+venvW
