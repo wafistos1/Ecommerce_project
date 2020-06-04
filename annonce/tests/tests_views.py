@@ -111,6 +111,7 @@ class TestModels(TestCase):
         self.client.login(username='wafistos', password='djamel2013')   
         response = self.client.get(self.annonce_update_url)
         self.assertEquals(response.status_code, 302)
+        self.assertTemplateUsed(response, 'annonce/update.html')
     
     
     def test_message_GET(self):
@@ -126,7 +127,6 @@ class TestModels(TestCase):
         form = annonceFrom(self.data)
         self.assertTrue(form.is_valid())
         self.assertEquals(response.status_code, 302)
-        self.assertTemplateUsed(response, 'annonce/update.html')
         
     def test_message_mp_GET(self):
         self.client.login(username='wafistos', password='djamel2013')   
