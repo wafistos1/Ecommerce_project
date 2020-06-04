@@ -17,7 +17,7 @@ before_script:
   - pip install -r requirements.txt
   - psql -c 'CREATE DATABASE p1;' -U postgres
   - psql -c "ALTER USER postgres WITH PASSWORD '123';" -U postgres
-  - python manage.py makemigrations store register
+  - python manage.py makemigrations 
   - python manage.py migrate
   
 
