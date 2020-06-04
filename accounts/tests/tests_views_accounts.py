@@ -75,12 +75,12 @@ class TestModels(TestCase):
     #     self.assertEquals(response.status_code, 200)
     #     self.assertTemplateUsed( 'accounts/compte.html')
     
-    def test_annonce_list_ok_get(self):
-        self.client.login(username='wafistos', password='djamel2013')   
-        response = self.client.post(self.add_list_annonces_url)
-        annonces = Annonce.objects.filter(owner=self.client)
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed( 'accounts/annonce_list.html')
+    # def test_annonce_list_ok_get(self):
+    #     self.client.login(username='wafistos', password='djamel2013')   
+    #     response = self.client.post(self.add_list_annonces_url)
+    #     annonces = Annonce.objects.filter(owner=self.client)
+    #     self.assertEquals(response.status_code, 200)
+    #     self.assertTemplateUsed( 'accounts/annonce_list.html')
     
     
 
