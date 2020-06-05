@@ -2,7 +2,7 @@
 
     <div class="form-group row">
 
-         <h5 style="color: rgb(74, 30, 116);"> {{ comment.count }} Comment{{ comment|pluralize }} </h3>
+         <h5 "> {{ comment.count }} Comment{{ comment|pluralize }} </h3>
         {% for com in comment %}
         <blockquote class="blockquote">
             <h4 class="mb-0">{{ com.content }}</h4>
@@ -10,13 +10,13 @@
             </footer>
             <footer class="blockquote-footer">At <cite title="Source Title">{{ com.create_content }}</cite>
                 <button type="button" id="reply-but" name="reply"
-                    class="reply-btn btn btn-outline-dark btn-sm ml-2" style="background-color: rgb(155, 97, 209); color:white">Reply</button>
+                    class="reply-btn btn btn-outline-dark btn-sm ml-2" >Reply</button>
             </footer>
         </blockquote>
 
 
         <!--Bolck reply-->
-        <div class="replies-comments container mt-2" style="display: none;">
+        <div class="replies-comments container " style="display: none;">
             {% for reply in com.replies.all %}
             <blockquote class="blockquote">
                 <h4 class="mb-0">{{ reply.content }}</h4>
@@ -29,7 +29,7 @@
 
             <div class="form-group row">
                 <div class="col-md-1"></div>
-                <div class="col-md-3">
+                <div class="col-md-11">
                     <form method="post" class="reply-form" action="{{details.get_absolute_url}}">
 
                         {% csrf_token %}
@@ -39,9 +39,9 @@
                         </div>
                         {% if user.is_authenticated %}
 
-                        <input type="submit" value="Reply" style="background-color: rgb(102, 53, 148);" class="btn btn-success btn-sm">
+                        <input type="submit" value="Reply" >
                         {% else %}
-                        <input type="submit" value="Reply" style="background-color: rgb(102, 53, 148);" class="btn btn-success btn-sm" disabled>
+                        <input type="submit" value="Reply"  class="btn btn-success btn-sm" disabled>
                         <h6>Need to log to make comment</h6>
                         {% endif %}
                     </form>
@@ -73,9 +73,9 @@
             </div>
             {% if user.is_authenticated %}
 
-            <input type="submit" value="Send" id="btn-submit-comment" style="background-color: rgb(102, 53, 148);"class="btn btn-success btn-sm">
+            <input type="submit" value="Send" id="btn-submit-comment" class="primary-btn">
             {% else %}
-            <input type="submit" value="Send" id="btn-submit-comment" style="background-color:  rgb(74, 30, 116);" class="btn btn-success btn-sm" disabled>
+            <input type="submit" value="Send" id="btn-submit-comment"  class="primary-btn" disabled>
             <h6>Need to log to make comment</h6>
             {% endif %}
         </form>
