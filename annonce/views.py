@@ -72,6 +72,7 @@ def add_annonce(request):
             )
             return redirect('home')
         else:
+            print(a_form.errors)
             print('Is not valid')    
     else:
         a_form = annonceFrom()

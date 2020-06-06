@@ -15,12 +15,12 @@ class annonceFrom(forms.ModelForm):
         fields = '__all__'
         exclude = ['owner']
         widgets = {
-            'title': forms.TextInput({'class': 'form-control'}),
-            'product': forms.TextInput({'class': 'form-control'}),
-            'price': forms.TextInput({'class': 'form-control'}),
-            'type_annonce': forms.Select({'class': 'form-control'}),
-            'categories': forms.Select({'class': 'form-control'}),
-            'description': forms.Textarea({'class': 'form-control'}),
+            'title': forms.TextInput({'class': 'checkout__input'}),
+            'product': forms.TextInput({'class': 'checkout__input'}),
+            'price': forms.TextInput({'class': 'checkout__input'}),
+            'type_annonce': forms.Select({'class': 'checkout__inputl'}),
+            'categories': forms.Select({'class': 'checkout__input'}),
+            'description': forms.Textarea({'class': 'checkout__input'}),
         }
 
 
