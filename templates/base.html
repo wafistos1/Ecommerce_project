@@ -51,10 +51,10 @@
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
             </ul>
-            
+
         </div>
         <div class="humberger__menu__widget">
-            
+
             <div class="header__top__right__auth">
             </div>
         </div>
@@ -77,7 +77,7 @@
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-linkedin"></i></a>
         </div>
-        
+
     </div>
     <!-- Humberger End -->
 
@@ -104,8 +104,8 @@
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li> -->
-                            
-                                
+
+
                         </ul>
                     </nav>
                 </div>
@@ -114,18 +114,19 @@
                         <ul>
                             {% if user.is_authenticated %}
 
-                            <li><a href="{% url 'message_list' %}"><i
-                                        class="fa fa-envelope"> Message</i><span></span></a></li>
-                            <li><a href="{%url 'favorite_list'%}"><i class="fa fa-envelope"> Favoris</i><span></span></a>
+                            <li><a href="{% url 'message_list' %}"><i class="fa fa-envelope">
+                                        Message</i><span></span></a></li>
+                            <li><a href="{%url 'favorite_list'%}"><i class="fa fa-envelope">
+                                        Favoris</i><span></span></a>
                             </li>
 
-                            <li > <a href="#"  class=" profile ">{{user.username}} <img
-                                src="{{user.picture.url}}" alt="Avatar">  <b class="caret"></b></a>
+                            <li> <a href="#" class=" profile ">{{user.username}} <img src="{{user.picture.url}}"
+                                        alt="Avatar"> <b class="caret"></b></a>
                                 <nav class="header__menu">
                                     <ul class=" header__menu__dropdown">
-                                        <li><a  href="{% url 'profile'%}">Profile</a></li>
-                                        <li><a  href="{% url 'list_annonces'%}">Mes annonces</a></li>
-                                        <li><a  href="{% url 'account_logout'%}">Sortir</a></li>
+                                        <li><a href="{% url 'profile'%}">Profile</a></li>
+                                        <li><a href="{% url 'list_annonces'%}">Mes annonces</a></li>
+                                        <li><a href="{% url 'account_logout'%}">Sortir</a></li>
                                     </ul>
                                 </nav>
                             </li>
@@ -172,15 +173,15 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                
-                                <input type="text"  id="search"  placeholder="Recherche Annonce" aria-label="Search"
-                                name='q'>
+
+                                <input type="text" id="search" placeholder="Recherche Annonce" aria-label="Search"
+                                    name='q'>
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
-                        
+
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{% static 'img/header.png' %}" >
+                    <div class="hero__item set-bg" data-setbg="{% static 'img/header.png' %}">
                         <div class="hero__text">
                             <span>FRUIT FRESH</span>
                             <h2>Vegetable <br />100% Organic</h2>
@@ -229,70 +230,162 @@
         </div>
     </section> -->
     <!-- Categories Section End -->
-{% block context %}
+    {% block context %}
     <!-- Featured Section Begin -->
-    <section class="featured spad">
+     <!-- <section class="featured spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
                         <h2>Annonces</h2>
                     </div>
-                    <!-- <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div> -->
+                   
+    </div>
+    </div>
+    <div class="row featured__filter">
+        {% for details in annonces %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+            <div class="featured__item">
+                <div class="featured__item__pic set-bg" data-setbg="{{details.image.all.0.image.url }}">
+                    <ul class="featured__item__pic__hover">
+                        <li><a href="{{details.get_absolute_url}}"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="{{details.get_absolute_url}}"><i class="fa fa-info"></i></a></li>
+                    </ul>
                 </div>
-            </div>
-            <div class="row featured__filter">
-
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                {% for details in annonces %}
-
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{details.image.all.0.image.url }}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="{{details.get_absolute_url}}"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="{{details.get_absolute_url}}"><i class="fa fa-info"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="{{details.get_absolute_url}}">{{ details.title|upper|truncatechars:24  }}</a></h6>
-                            <h5>{{ details.price|intcomma}}€</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                <!--  -->
-                
-                
-            
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    {% include "pagination.html" with liste=annonces view="home" %}
+                <div class="featured__item__text">
+                    <h6><a href="{{details.get_absolute_url}}">{{ details.title|upper|truncatechars:24  }}</a></h6>
+                    <h5>{{ details.price|intcomma}}€</h5>
                 </div>
             </div>
         </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {% include "pagination.html" with liste=annonces view="home" %}
+        </div>
+    </div>
+    </div>
+    </section>  -->
+
+
+
+
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="#">All</a></li>
+                                <li><a href="#">Beauty (20)</a></li>
+                                <li><a href="#">Food (5)</a></li>
+                                <li><a href="#">Life Style (9)</a></li>
+                                <li><a href="#">Travel (10)</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Recent News</h4>
+                            <div class="blog__sidebar__recent">
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Search By</h4>
+                            <div class="blog__sidebar__item__tags">
+                                <a href="#">Apple</a>
+                                <a href="#">Beauty</a>
+                                <a href="#">Vegetables</a>
+                                <a href="#">Fruit</a>
+                                <a href="#">Healthy Food</a>
+                                <a href="#">Lifestyle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7">
+                    <div class="row">
+                        {% for details in annonces %}
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="{{details.image.all.0.image.url }}" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> {{ details.created }}</li>
+                                        <li><i class="fa fa-comment-o"></i> {{ details.comment.all.count  }}</li>
+                                    </ul>
+                                    <h5><a href="#">{{ details.title|upper|truncatechars:24  }}</a></h5>
+                                    <h5>{{ details.price|intcomma}}€</h5>
+                                    <p>{{ details.description|truncatechars:120  }}. </p>
+                                    
+                                    <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+
+
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include "pagination.html" with liste=annonces view="home" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
-    <!-- Featured Section End -->
-{% endblock context %}
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+
+    {% endblock context %}
     <!-- Banner Begin -->
     <div class="banner">
         <div class="container">
@@ -313,7 +406,7 @@
     <!-- Banner End -->
 
     <!-- Latest Product Section Begin -->
-    <section class="latest-product spad">
+    <!-- <section class="latest-product spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -513,11 +606,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Latest Product Section End -->
 
     <!-- Blog Section Begin -->
-    <section class="from-blog spad">
+    <!-- <section class="from-blog spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -574,9 +667,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Blog Section End -->
-
+    {% block footer%}
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
@@ -623,10 +716,9 @@
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="https://github.com/wafistos1/Projet13"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -638,9 +730,7 @@
                             <p>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This
-                                template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
-                                    href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <script>document.write(new Date().getFullYear());</script> All left reserved
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
@@ -651,7 +741,7 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
+    {% endblock footer%}
     <!-- Js Plugins -->
     <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

@@ -24,16 +24,19 @@ def home(request):
     annonce = Annonce.objects.all().order_by('-created')
     images = Image.objects.all()
     # todo: ajouter la paginations
-
     page = request.GET.get('page', 1)
-    paginator = Paginator(annonce, 9)
+    paginator = Paginator(annonce, 24)
     try:
         annonce = paginator.page(page)
     except PageNotAnInteger:
         annonce = paginator.page(1)
     except EmptyPage:
         annonce = paginator.page(paginator.num_pages)
-    context = {'categories': categorie, 'annonces': annonce, 'image': images}
+    context = {
+        'categories': categorie,
+        'annonces': annonce,
+        'image': images
+        }
     return render(request, 'base.html', context)
 
 
@@ -88,7 +91,7 @@ class annonceListView(ListView):
     """
     model = Annonce
     context_object_name = 'lists'
-    paginate_by = 12
+    paginate_by = 24
     template_name = 'annonce/home.html'
 
 
@@ -100,9 +103,7 @@ def annonceDetaiView(request, pk):
     comment = Comment.objects.filter(
         for_post=details,
         reply=None).order_by('-create_content')
-
     is_favorite = False
-
     if details.favorite.filter(id=request.user.id).exists():
         is_favorite = True
         # print('favorite is now true')
@@ -130,8 +131,6 @@ def annonceDetaiView(request, pk):
                 reply=comment_qs
                 )
             comment_use.save()
-
-            # return HttpResponseRedirect(details.get_absolute_url())
     else:
         c_form = commentForm()
     print(f'send {is_favorite}')
@@ -150,8 +149,11 @@ def annonceDetaiView(request, pk):
         return JsonResponse({'form': html})
     return render(request, 'annonce/detail.html', context)
 
+
 @login_required(login_url='account_login')
 def annonce_favorite_list(request):
+    """
+    """
     user = request.user
     favorite_list = user.favorite.all()
 
@@ -162,13 +164,18 @@ def annonce_favorite_list(request):
 
 
 class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
+    """
+    """
     model = Annonce
     context_object_name = 'obj_delte'
     template_name = 'annonce/delete.html'
     success_url = reverse_lazy('profile')
 
+
 @login_required(login_url='account_login')
 def updateAnnonce(request, pk=None):
+    """
+    """
     ImageFormSet = modelformset_factory(
         Image,
         form=ImageForm,
@@ -190,8 +197,7 @@ def updateAnnonce(request, pk=None):
                     photo = Image(annonce_images=obj_annonce, image=image)
                     photo.save()
                 except:
-                    print('Forme image non valide')
-                    
+                    print('Forme image non valide')                  
             return redirect('profile')
         else:
             print('is not valid')
@@ -205,6 +211,8 @@ def updateAnnonce(request, pk=None):
 
 
 def favorite(request, pk):
+    """
+    """
     favorite_annonce = get_object_or_404(Annonce, pk=pk)
     # # Verifier si l'object existe dans la BD 
     # print('je suis dans favorite views')
@@ -219,6 +227,8 @@ def favorite(request, pk):
 
 
 def message_mp(request, user_pk):
+    """
+    """
     mp_form = MpUserForm(request.POST)
     if mp_form.is_valid():
         f = mp_form.save(commit=False)
@@ -228,7 +238,6 @@ def message_mp(request, user_pk):
         mp_form.save()
         messages.add_message(request, SUCCESS, ('Message envoyee avec succès '))
         return redirect('home')
-    
     context = {
         'mp_form': mp_form,
         'messages': messages,
@@ -238,10 +247,11 @@ def message_mp(request, user_pk):
 
 
 def message_list(request):
+    """
+    """
     messages = MpUser.objects.filter(reciever=request.user.pk).order_by('-created_at')
 
     context = {
         'message_list': messages,
     }
-
     return render(request, 'annonce/message_list.html', context)

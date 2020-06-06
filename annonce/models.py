@@ -86,7 +86,7 @@ class Image(models.Model):
 
 class Comment(models.Model):
     commented_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    for_post = models.ForeignKey(Annonce, on_delete=models.CASCADE)
+    for_post = models.ForeignKey(Annonce, on_delete=models.CASCADE, related_name='comment')
     content = models.TextField(max_length=255)
     create_content = models.DateField(auto_now_add=True)
     reply = models.ForeignKey("Comment", related_name='replies', null=True, on_delete=models.CASCADE)
