@@ -3,9 +3,10 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}<title>{% trans "Sign In" %}</title>{% endblock %}
 
-{% block content %}
+{% block first-section %}{% endblock first-section %}
+{% block context %}
 <div class="login-form ">
 
   <h1 class='title'>{% trans "Sign In" %}</h1>

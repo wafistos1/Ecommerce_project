@@ -7,55 +7,49 @@
 {% load i18n %}
 
 
-{% block head_title %}{% trans "favourite list" %}{% endblock %}
+{% block head_title %} <title>{% trans "favourite list" %}</title>{% endblock %}
 {% block categories %}{% endblock categories %}
+{% block first-section %}{% endblock first-section %}
 
-{% block annonce %}
+{% block context %}
 
-{% for details in favorite_list%}
 
-<div class="col-sm-4  col-12" style="margin-top: 10px; border-width: 5px; border-color: blueviolet;">
-    <div class="col-item">
-      <div class="photo">
-
-        <img src="{{details.image.all.0.image.url }}" alt="a" style="height: 200px; width: 250px; "
-          class="img-responsive" />
+<section class="featured spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title">
+          <h2>Favorite</h2>
+        </div>
 
       </div>
-      <div class="info">
-        <div class="row">
-          <div class="price col-md-12">
-            <h5  class="title">
-              <strong>{{ details.title|upper|truncatechars:24 }}</strong></h5>
-            <div class="row">
-
-              <div class="price col-md-6">
-                <h5  class="title">
-                  ${{ details.price|intcomma }}</h5>
-              </div>
-              <div  class="title">
-                <h6 class="price-text-color" style="color: blueviolet;">
-                  Ajouter-{{ details.created }}</h6>
-              </div>
-
-            </div>
+    </div>
+    <div class="row featured__filter">
+      {% for details in favorite_list  %}
+      <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+        <div class="featured__item">
+          <div class="featured__item__pic set-bg" data-setbg="{{details.image.all.0.image.url }}">
+            <ul class="featured__item__pic__hover">
+              <li><a href="{{details.get_absolute_url}}"><i class="fa fa-heart"></i></a></li>
+              <li><a href="{{details.get_absolute_url}}"><i class="fa fa-info"></i></a></li>
+            </ul>
           </div>
-
+          <div class="featured__item__text">
+            <h6><a href="{{details.get_absolute_url}}">{{ details.title|upper|truncatechars:24  }}</a></h6>
+            <h5>{{ details.price|intcomma}}€</h5>
+          </div>
         </div>
-        <div class="separator clear-left">
-          <p class="btn-details">
-            <i class="fa fa-list"></i><a href="{{details.get_absolute_url}}" class="hidden-sm">Details</a></p>
-          <p class="btn-details">
-            <i class="fa fa-shopping-bag"></i><a class="hidden-sm"
-              style="color: blueviolet;">{{ details.type_annonce|upper }}
-            </a></p>
-        </div>
-        <div class="clearfix">
-        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-12">
+        {% include "pagination.html" with liste=annonces view="home" %}
       </div>
     </div>
   </div>
-{% endfor %}
+</section>
 
 
-{% endblock annonce %}
+
+{% endblock context %}

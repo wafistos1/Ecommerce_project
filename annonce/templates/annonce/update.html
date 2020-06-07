@@ -6,72 +6,95 @@
 {% load i18n %}
 
 
-{% block head_title %}{% trans "detail annonce" %}{% endblock %}
+{% block head_title %}<title>{% trans "Update Annonce" %}</title>{% endblock %}
 {% block categories %}{% endblock categories %}
 
-{% block annonce %}
+{% block context %}
+{% block first-section %}{% endblock first-section %}
+<section class="checkout spad">
+    <div class="container">
+        
+        <div class="checkout__form">
+            <h4>Update annonces</h4>
+            <form action="" method="post" enctype="multipart/form-data" action="{% url 'add_annonce' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Title<span>*</span></p>
+                                    {{ form.title }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Product<span>*</span></p>
+                                    {{ form.product }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Price<span>*</span></p>
+                                    {{ form.price }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="checkout__input">
+                                    <p>Type annonce<span>*</span></p>
+                                    {{ form.type_annonce }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="checkout__input">
+                                    <p>Categories<span>*</span></p>
+                                    {{ form.categories }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Description<span>*</span></p>
+                            {{ form.description }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ formset.management_form }}
+                                {% for form in formset %}
+                                <div class="checkout__input">
+                                    <div class="col-xs-6">
+                                        {{ form }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% for field in form %}
+                                <div class="fieldWrapper">
+                                    {{ field.errors }}
+                                    {% if field.help_text %}
+                                    <p class="help">{{ field.help_text|safe }}</p>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                
 
-<div class="container">
-    <div class="signup-form">
-        <form method="post" action="{{annonce.get_update_url}}" enctype="multipart/form-data"">
-            {% csrf_token %}
-            <h2  class="title" >Update Annonces</h2>
-            <div class=" form-group">
-            <label for="Title">
-                <h4 >Title</h4>
-            </label>
-            {{ form.title }}
-    </div>
-    <div class="form-group">
-        <label for="Title">
-            <h4>Product</h4>
-        </label>
-        {{ form.product }}
-    </div>
+                            </div>
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-xs-4"><label for="Title">
-                    <h4>Price</h4>
-                </label>{{ form.price }}</div>
-            <div class="col-xs-4"><label for="Title">
-                    <h4>Type annonce</h4>
-                </label>{{ form.type_annonce }}</div>
-            <div class="col-xs-4"><label for="Title">
-                    <h4>Categories</h4>
-                </label>{{ form.categories }}</div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <button type="submit" class="site-btn">ADD ANNONCE</button>
+                        
+                    </div>
+                    
+                </div>
+            </form>
         </div>
     </div>
-    <div class="form-group">
-        <label for="Title">
-            <h4>Description</h4>
-        </label>
-        {{ form.description }}
-    </div>
-    {{ formset.management_form }}
-    {% for form in formset %}
-    <div class="form-group">
-        <div class="col-xs-6">
-            {{ form }}
-        </div>
-    </div>
-    {% endfor %}
-    {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-    </div>
-    {% endfor %}
+</section>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-success btn-lg ">Update </button>
-    </div>
-
-    </form>
-</div>
-</div>
-
-
-{% endblock annonce %}
+{% endblock context %}

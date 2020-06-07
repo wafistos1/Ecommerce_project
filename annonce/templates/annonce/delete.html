@@ -3,9 +3,9 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "add annonce" %}{% endblock %}
-
-{% block annonce %}
+{% block head_title %}<title>{% trans "add annonce" %}</title>{% endblock %}
+{% block first-section %}{% endblock first-section %}
+{% block context %}
 
 <div class="container">
     <div class="signup-form">
@@ -19,6 +19,6 @@
 </div>
 
 
-{% endblock annonce %}
-obj_delte
+{% endblock context %}
+
 {% block categories%} {% endblock categories %}

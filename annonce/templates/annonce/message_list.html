@@ -4,8 +4,8 @@
 {% load i18n %}
 
 {% block head_title %}{% trans "list des message" %}{% endblock %}
-
-{% block annonce %}
+{% block first-section %}{% endblock first-section %}
+{% block context %}
 <div class="row">
 <div class="col-sm-12">
     <H1  class="title">Liste des messages reçue </H1>
@@ -33,6 +33,6 @@
             {% endfor %}
     </div>
 
-{% endblock annonce %}
+{% endblock context %}
 {% block categories %}
 {% endblock categories %}

@@ -3,10 +3,10 @@
 {% load i18n %}
 {% load account %}
 
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+{% block head_title %}<title>{% trans "Confirm E-mail Address" %}</title>{% endblock %}
 
-
-{% block content %}
+{% block first-section %}{% endblock first-section %}
+{% block context %}
 <h1 class="title">{% trans "Confirm E-mail Address" %}</h1>
 
 {% if confirmation %}

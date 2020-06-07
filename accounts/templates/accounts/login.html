@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block content %}
+{% block context %}
 	<div class="login-form" >    
 		<form action="{% url 'login' %}" method="post">
 			{% csrf_token %}
@@ -25,7 +25,7 @@
 				
 		<div class="text-center small">Don't have an account? <a href="{% url 'register' %}">Sign up</a></div>
 	</div>
-{% endblock content %}
+{% endblock context %}
 {% block footer %} 
 
 {% endblock footer %} 
