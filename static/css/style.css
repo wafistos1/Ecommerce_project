@@ -3554,3 +3554,8 @@ background-position: center center;
 	position: absolute;
 	top: 0px;
 }
+
+#nav-header {
+    display: flex;
+    justify-content: flex-end;
+}

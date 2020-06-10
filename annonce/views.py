@@ -25,7 +25,7 @@ def home(request):
     images = Image.objects.all()
     # todo: ajouter la paginations
     page = request.GET.get('page', 1)
-    paginator = Paginator(annonce, 24)
+    paginator = Paginator(annonce, 12)
     try:
         annonce = paginator.page(page)
     except PageNotAnInteger:
@@ -92,7 +92,7 @@ class annonceListView(ListView):
     """
     model = Annonce
     context_object_name = 'lists'
-    paginate_by = 24
+    paginate_by = 12
     template_name = 'annonce/home.html'
 
 
@@ -107,24 +107,17 @@ def annonceDetaiView(request, pk):
     is_favorite = False
     if details.favorite.filter(id=request.user.id).exists():
         is_favorite = True
-        # print('favorite is now true')
     else:
         print('favorite is now False')
-
     if request.method == "POST":
-
         print(request.POST)
-
         c_form = commentForm(request.POST or None)
-
         if c_form.is_valid():
             content = request.POST.get('content')
             reply_id = request.POST.get('comment-id')
             comment_qs = None  # reply is null
             if reply_id:
                 comment_qs = Comment.objects.get(id=reply_id)  
-                # set reply as reply_id
-
             comment_use = Comment(
                 commented_by=request.user,
                 for_post=details,
@@ -170,7 +163,7 @@ class AnnonceDeletelView(LoginRequiredMixin, DeleteView):
     model = Annonce
     context_object_name = 'obj_delte'
     template_name = 'annonce/delete.html'
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('list_annonces')
 
 
 @login_required(login_url='account_login')
@@ -199,7 +192,7 @@ def updateAnnonce(request, pk=None):
                     photo.save()
                 except:
                     print('Forme image non valide')                  
-            return redirect('profile')
+            return redirect('list_annonces')
         else:
             print('is not valid')
             print(form.errors)

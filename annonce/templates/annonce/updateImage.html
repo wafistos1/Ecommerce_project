@@ -6,7 +6,7 @@
 {% load i18n %}
 
 
-{% block head_title %}{% trans "detail annonce" %}{% endblock %}
+{% block head_title %}<title>{% trans "detail annonce" %}</title>{% endblock %}
 {% block categories %}{% endblock categories %}
 
 {% block annonce %}
@@ -15,7 +15,7 @@
 <form method="post" action="{% url 'annonce_image' pk=annonce.pk %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update">
+    <input class="site-btn" type="submit" value="Update">
 </form>
 </div>
 {% endblock annonce %}

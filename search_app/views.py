@@ -35,7 +35,6 @@ def search(request):
                 Q(product__icontains=query) |
                 Q(description__icontains=query)
                 )
-
         except:
             message = ("Essayez un autre produit.")
             produit = query
@@ -66,17 +65,17 @@ def search(request):
 
 def filter_search(request):
     """ Display the search resultat with advanced filter """
-    categories_obj =  Categorie.objects.all()
     categories = request.GET.get('categories')
     type_annonce = request.GET.get('type_annonce')
     date_gt = request.GET.get('date_gt') 
+    date = request.GET.get('date') 
     date_lt = request.GET.get('date_lt') 
     price = request.GET.get('price')
     price_gt = request.GET.get('price_gt') 
     price_lt = request.GET.get('price_lt')
     conditions = {}
     print(f'request: {request}')
-    if categories or type_annonce or date_gt or date_lt or price or price_gt or price_lt:
+    if categories or type_annonce or date_gt or date_lt or price or price_gt or price_lt or date:
         
         for filter_key, form_key in (
             ('categories', 'categories'), 
@@ -84,7 +83,7 @@ def filter_search(request):
             ('price', 'price'),  
             ('price__gt', 'price_gt'),  
             ('price__lt', 'price_lt'),  
-            ('date', 'date'),  
+            ('created', 'date'),  
             ('created__lt', 'date_lt'),  
             ('created__gt', 'date_gt'),  
             ):
@@ -92,13 +91,11 @@ def filter_search(request):
             if value:
                 conditions[filter_key] = value
                 print(conditions)
-    
-    resultat_filter = Annonce.objects.filter(**conditions)
+    resultat_filter = Annonce.objects.filter(**conditions).order_by('-created')
     print(resultat_filter.count())
     context = {
         'resultat': resultat_filter,
         'count': resultat_filter.count(),
-        
     }
     if request.is_ajax():
         print('Ajax is true')

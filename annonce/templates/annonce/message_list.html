@@ -3,26 +3,29 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "list des message" %}{% endblock %}
+{% block head_title %}<title>{% trans "list des message" %}</title>{% endblock %}
 {% block first-section %}{% endblock first-section %}
 {% block context %}
 <div class="row">
 <div class="col-sm-12">
-    <H1  class="title">Liste des messages reçue </H1>
+    <div class="section-title">
+    <h2  class="title">Liste des messages reçue </h2>
+</div>
 </div>
 </div>
 <br>
 <br>
 
-
+<hr>
     <div class="container">
+        
         {% for list in message_list %}
             <div class="row">
             <div class="col-sm-2 "></div>
 
             <div class="col-sm-6 well" style="padding-left: 20px ;">
-                <h3 style="color: rgb(74, 30, 116);"> Sender: {{ list.sender}}</h3>
-                <h4 style="color: rgb(74, 30, 116);">Sujet: {{list.subject }} </h4>
+                <h3 > Sender: {{ list.sender}}</h3>
+                <h4 >Sujet: {{list.subject }} </h4>
                 <p>  {{ list.message }}</p>
                 <h6>{{ list.created_at }}</h6>
 
@@ -30,7 +33,9 @@
             </div>
             <div class="col-sm-4 "></div>
         </div>
+        <hr>
             {% endfor %}
+
     </div>
 
 {% endblock context %}

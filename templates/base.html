@@ -30,7 +30,7 @@
     <title>Yatach Home</title>
 
     {% endblock head_title %}
-    
+
 </head>
 
 <body>
@@ -86,12 +86,12 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{% url 'home' %}">Home</a></li>
@@ -109,7 +109,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6" id="nav-header">
                     <div class="header__menu">
                         <ul>
                             {% if user.is_authenticated %}
@@ -171,7 +171,7 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form method="GET" action="/search/">
 
                                 <input type="text" id="search" placeholder="Recherche Annonce" aria-label="Search"
                                     name='q'>
@@ -180,7 +180,7 @@
                         </div>
 
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{% static 'img/header.png' %}">
+                    <div class="hero__item set-bg" data-setbg="{% static 'img/banner.jpg' %}">
                         <div class="hero__text">
                             <span>FRUIT FRESH</span>
                             <h2>Vegetable <br />100% Organic</h2>
@@ -228,10 +228,23 @@
             </div>
         </div>
     </section> -->
-    <!-- Categories Section End -->
     {% block context %}
+    <div class="section-title" >
+        <h2> Les dernières annonces</h2>
+          </div>
+          <div class="section-title">
+            <!-- Categories Section End -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                <p id="messages"> {{ message }}</p>
+                {% endfor%}
+            </div>
+            {% endif %}
+        </div>
+    
     <!-- Featured Section Begin -->
-     <!-- <section class="featured spad">
+    <!-- <section class="featured spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -293,38 +306,7 @@
                                 <li><a href="#">Travel (10)</a></li>
                             </ul>
                         </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
-                            <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        
                         <div class="blog__sidebar__item">
                             <h4>Search By</h4>
                             <div class="blog__sidebar__item__tags">
@@ -354,8 +336,9 @@
                                     <h5><a href="#">{{ details.title|upper|truncatechars:24  }}</a></h5>
                                     <h5>{{ details.price|intcomma}}€</h5>
                                     <p>{{ details.description|truncatechars:120  }}. </p>
-                                    
-                                    <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+
+                                    <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span
+                                            class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
@@ -377,26 +360,11 @@
         </div>
 
     </section>
-   
+
 
     {% endblock context %}
     <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Banner End -->
 
     <!-- Latest Product Section Begin -->
@@ -674,9 +642,9 @@
                             <a href="./index.html"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Address: 12 Rue Dr Bentami BabELDjdid</li>
+                            <li>Phone: +213 11.188.888</li>
+                            <li>Email: yatach@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -685,26 +653,22 @@
                         <h6>Useful Links</h6>
                         <ul>
                             <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">About</a></li>
                             <li><a href="#">Delivery infomation</a></li>
                             <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
                         </ul>
                         <ul>
                             <li><a href="#">Who We Are</a></li>
                             <li><a href="#">Our Services</a></li>
                             <li><a href="#">Projects</a></li>
                             <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <p>Get E-mail updates about our latest annonce</p>
                         <form action="#">
                             <input type="text" placeholder="Enter your mail">
                             <button type="submit" class="site-btn">Subscribe</button>
@@ -712,7 +676,7 @@
                         <div class="footer__widget__social">
                             <a href="https://github.com/wafistos1/Projet13"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-github"></i></a>
+                            <a href="https://github.com/wafistos1/Projet13"><i class="fa fa-github"></i></a>
                         </div>
                     </div>
                 </div>

@@ -11,9 +11,11 @@
     <div class="signup-form">
         <form method="post">
             {% csrf_token %}
-            <H3 class="title">DELETE</H3>
+            <div class="section-title">
+            <h2 >DELETE</h2>
+            </div>
             <p>Are you sure you want to delete "{{ obj_delte.title }}"?</p>
-            <input type="submit" value="Confirm">
+            <input class="site-btn" type="submit" value="Confirm">
         </form>
     </div>
 </div>

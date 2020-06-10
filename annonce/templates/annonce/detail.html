@@ -8,101 +8,106 @@
 
 {% block head_title %}<title>{% trans "detail annonce" %}</title>{% endblock %}
 {% block categories %}{% endblock categories %}
-
+{% block first-section %}{% endblock first-section %}
 {% block context %}
 
 
 
 <section class="product-details spad">
   <div class="container">
-      <div class="row">
-          <div class="col-lg-6 col-md-6">
-              <div class="product__details__pic">
-                  <div class="product__details__pic__item">
-                      <img class="product__details__pic__item--large"
-                          src="{{details.image.all.0.image.url }}" alt="">
-                  </div>
-                  <div class="product__details__pic__slider owl-carousel">
-                    {% for document in details.image.all %}
-                      <img data-imgbigurl="{{ document.image.url }}" 
-                          src="{{ document.image.url }}" alt="">
-                    {% endfor%}
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-6 col-md-6">
-              <div class="product__details__text">
-                  <h3>{{ details.title|upper }}</h3>
-                  <h4 class="title"><strong>Categorie: {{ details.categories.name }}</strong></h4>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title">
+          <h2>Detail</h2>
+        </div>
 
-                  <div class="product__details__rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <span>(18 reviews)</span>
-                  </div>
-                  <div class="product__details__price">{{ details.price|intcomma }}€</div>
-                  <p>{{ details.description }}</p>
-                  
-                  <a href="#" class="primary-btn">ADD TO CARD</a>
-                  {% if user.is_authenticated %}
-                  
-    
-                  <a href="{{ details.get_delete_url }}" class="heart-icon" title="delete" ><i class="fa fa-trash-o"></i></a>
-                  <a href="{{ details.get_update_url }}" class="heart-icon" title="edit"><i class="fa fa-pencil-square-o"></i></i></a>
-
-                    {% if is_favorite %}
-                    <a href="{% url 'favorite_annonce' pk=details.id %}" class="heart-icon" title="add favorite"><i class="fa fa-heart"></i></span></a>
-                    {% else %}
-                    <a href="{% url 'favorite_annonce' pk=details.id %}" class="heart-icon" title="add favorite"><span class="icon_heart_alt"></span></a>
-                    {% endif %}
-                  {% endif%}
-                  <ul>
-                    
-                      <li><b>Auteur(e)</b> <span>{{ details.owner.username }}</span></li>
-                      <li><b>Email</b> <span>{{ details.owner.email }}</span></li>
-                      <li><b>Phone</b> <span>{{ details.owner.phone }}</span></li>
-                      <li><b>Creer</b> <span>{{ details.created }}</span></li>
-                      <li>
-                        
-                          
-                      </li>
-                  </ul>
-                  <br>
-                  <br>
-
-                  <div class="row">
-                    <div class="col-12">
-            
-                      <button id="btn-commentaires" type="button" class="btn btn-secondary"> Commentaires </button>
-                    </div>
-                    <br>
-                    <div id="commentaires" class="col-sm-6 well" style="display:none ;">
-            
-                      <div class="main-comment-section">
-            
-                        {% include 'annonce/comment.html' %}
-            
-            
-            
-                      </div>
-                      <div class="message-sender">
-                        <a href="/annonce/message/{{details.owner.pk}}">
-                          <h5 class="primary-btn"> Send Mp </h5>
-                        </a>
-            
-                      </div>
-            
-            
-                    </div>
-            
-                  </div>
-              </div>
-          </div>
-          
       </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__pic">
+          <div class="product__details__pic__item">
+            <img class="product__details__pic__item--large" src="{{details.image.all.0.image.url }}" alt="">
+          </div>
+          <div class="product__details__pic__slider owl-carousel">
+            {% for document in details.image.all %}
+            <img data-imgbigurl="{{ document.image.url }}" src="{{ document.image.url }}" alt="">
+            {% endfor%}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text" style="text-align: left;">
+          <h3>{{ details.title|upper }}</h3>
+          <h5 class="title"><strong>Categorie: {{ details.categories.name }}</strong></h5>
+
+          <div class="product__details__rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+            <span>(18 reviews)</span>
+          </div>
+          <div class="product__details__price">{{ details.price|intcomma }}€</div>
+          <p>{{ details.description }}</p>
+
+          
+          {% if user.is_authenticated %}
+          {% if user.username == details.owner.username %}
+
+          <a href="{{ details.get_delete_url }}" class="heart-icon" title="delete"><i class="fa fa-trash-o"></i></a>
+          <a href="{{ details.get_update_url }}" class="heart-icon" title="edit"><i
+              class="fa fa-pencil-square-o"></i></i></a>
+          {% endif %}
+          {% if is_favorite %}
+          <a href="{% url 'favorite_annonce' pk=details.id %}" class="heart-icon" title="add favorite"><i class="fa fa-heart"></i></span></a>
+          {% else %}
+          <a href="{% url 'favorite_annonce' pk=details.id %}" class="heart-icon" title="add favorite"><span class="icon_heart_alt"></span></a>
+          {% endif %}
+          {% endif%}
+          <ul>
+
+            <li><b>Auteur(e)</b> <span>{{ details.owner.username }}</span></li>
+            <li><b>Email</b> <span>{{ details.owner.email }}</span></li>
+            <li><b>Phone</b> <span>{{ details.owner.phone }}</span></li>
+            <li><b>Creer</b> <span>{{ details.created }}</span></li>
+            
+            
+          </ul>
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-12">
+
+              <button id="btn-commentaires" type="button" class="btn btn-secondary"> Commentaires </button>
+            </div>
+            <br>
+            <div id="commentaires" class="col-sm-6 well" style="display:none ;">
+
+              <div class="main-comment-section">
+
+                {% include 'annonce/comment.html' %}
+
+
+
+              </div>
+              <div class="message-sender">
+                <a href="/annonce/message/{{details.owner.pk}}">
+                  <h5 class="primary-btn"> Send Mp </h5>
+                </a>
+
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -123,10 +128,4 @@
 
 
 <!--  -->
-  {% endblock context %}
-
-
-
-  
-
-  
+{% endblock context %}
