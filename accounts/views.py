@@ -1,3 +1,4 @@
+from sentry_sdk import capture_message
 from django.shortcuts import render, redirect
 # from django.core.mail import send_mail
 # from django.contrib import messages
@@ -17,6 +18,8 @@ def edit(request):
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
+            
+            capture_message(f"{request.user.username} a change son profile", level="error")
             return redirect('list_annonces')
         else:
             return render(request, 'edit_profile.html', {'form': form})
