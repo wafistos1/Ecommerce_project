@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 import os
 # from cons import EMAIL_BACKEND, EMAIL_HOST, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_PORT, EMAIL_USE_SSL, EMAIL_USE_TLS
@@ -26,6 +28,15 @@ SECRET_KEY = 'd(%-&+xi1ui=%#jn&dv4vw15!ga&@h%l$ahk98n9b32020by#a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 ALLOWED_HOSTS = []
+
+sentry_sdk.init(
+    dsn="https://719ea76105d044f28b089465d317e11d@o353316.ingest.sentry.io/5273462",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 
 
 # Application definition
