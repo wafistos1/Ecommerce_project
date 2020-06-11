@@ -1,3 +1,4 @@
+from sentry_sdk import capture_message
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -66,6 +67,7 @@ def add_annonce(request):
                     image = form['image']
                     photo = Image(annonce_images=annonceForm, image=image)
                     photo.save()
+                    capture_message("add annonce format valide", level="error")  
 
             messages.add_message(
                 request, messages.SUCCESS, 'Annonce ajouter avec succès'
@@ -73,13 +75,14 @@ def add_annonce(request):
             return redirect('home')
         else:
             print(a_form.errors)
-            print('Is not valid')    
+            print('Is not valid')
+            capture_message("add annonce format non valide", level="error")   
     else:
         a_form = annonceFrom()
         formset = ImageFormSet(queryset=Image.objects.none())
     a_form = annonceFrom()
     formset = ImageFormSet(queryset=Image.objects.none())
-
+    capture_message(f"add annonce par {request.user.username}", level="error")
     return render(request, 'annonce/add.html', {
         "a_form": a_form,
         "formset": formset,
