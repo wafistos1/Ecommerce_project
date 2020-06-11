@@ -129,7 +129,15 @@
                 </div>
               
             </div>
+            {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
             
+        
+        {% endfor %}
           <br>
           <p class="hint-text">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">signin</a>.{% endblocktrans %}</p> 
           <br>

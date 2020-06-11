@@ -40,13 +40,17 @@
             {{ profile_form.avatar.label_tag}}
             {{ profile_form.avatar}}
         </div>
+        <div>
+            {{user_form.non_field_errors}}
+        </div>
         {% for field in user_form %}
         <div class="fieldWrapper">
             {{ field.errors }}
             {% if field.help_text %}
             <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-        </div>
+            {% endif %}>
+            
+        
         {% endfor %}
         <div class="form-group">
             <label_tag class="checkbox-inline"><input type="checkbox" required="required"> J'accepte les <a
