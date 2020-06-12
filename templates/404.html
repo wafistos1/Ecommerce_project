@@ -3,16 +3,21 @@
 {% load humanize %}
 
 
-{% block title %}{% trans "List annonces" %}{% endblock title %}
+
+{% block head_title %}<title>{% trans "Error 400" %}</title>{% endblock %}
+
+{% block first-section %}{% endblock first-section %}
 {% block content %}
+
+
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <div class="section-title">
-                <h2> Error 404</h2>
-                <h1>Oops! Error 404 </h1>
+                <h2> Error 400</h2>
+                <h1>Oops! Error 400 </h1>
             </div>
         </div>
     </div>
-
-    {% endblock content %}
+</div>
+{% endblock content %}
