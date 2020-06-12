@@ -168,7 +168,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -207,7 +207,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
 AUTH_USER_MODEL = 'accounts.Profile'
 # email console for test
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG == True:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 
