@@ -36,7 +36,7 @@ def search(request):
                 Q(description__icontains=query)
                 )
         except:
-            message = ("Essayez un autre produit.")
+            message = ("Erreur de recherche")
             produit = query
             return render(request, 'search_app/search.html', {'message': message, })
     paginator = Paginator(search_list, 9)
@@ -52,7 +52,7 @@ def search(request):
             search_list = paginator.page(paginator.num_pages)
     else:
         query = query.upper() 
-        message = (f"Désole mais votre recherche '' {query} '' à générer aucune correspondance, essayez un autre produit.")
+        message = (f"Désole mais votre recherche '' {query} '' à générer aucune correspondance, essayez une autre recherche.")
     context = {
         'search_list': search_list,
         'message': message,
