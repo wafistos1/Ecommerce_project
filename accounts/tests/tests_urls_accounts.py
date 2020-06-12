@@ -2,6 +2,7 @@ from django.test import TestCase
 from annonce.models import Categorie, Annonce, Comment, MpUser
 from accounts.models import Profile
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 
@@ -12,6 +13,7 @@ class TestModels(TestCase):
         self.categorie = Categorie.objects.create(name='Jeux')
         # self.user = User.objects.create_user('wafi', 'wafi@gmail.com', 'wafipass')
         self.profile=Profile.objects.create(
+            username='wafis',
             first_name='wafi',
             last_name='mameri',
             email='wafi@gmail.com',
@@ -23,7 +25,7 @@ class TestModels(TestCase):
             codezip='16000',
             contry='Algerie',
             phone='2131234',
-            discriptions='Bonjour',  
+            discriptions='Bonjour', 
         )
         
      
@@ -59,3 +61,47 @@ class TestModels(TestCase):
     
     def test_profile_discriptions(self):
         self.assertEquals(self.profile.discriptions, 'Bonjour')
+        
+class SignupTests(TestCase): # new
+   
+    
+    def setUp(self):
+        self.response = self.client.get('/accounts/signup')
+        self.username = 'nabil'
+        self.first_name='nabil'
+        self.last_name='mameri'
+        self.email='nabil@gmail.com'
+        self.password='djamel2013'
+        self.picture='static/img/223.jpg'
+        self.adress1='12 rue',
+        self.adress2='Alger centre'
+        self.ville='Alger centre'
+        self.codezip='16000'
+        self.contry='Algerie'
+        self.phone='2131234'
+        self.discriptions='Bonjour'
+        
+    def test_signup_template(self):
+        self.assertEqual(self.response.status_code, 301)
+        
+    def test_signup_form(self):
+        new_user = Profile.objects.create(
+            username=self.username,
+            email=self.email,
+            first_name=self.first_name,
+            last_name=self.last_name,
+            password=self.password,
+            picture=self.picture,
+            adress1=self.adress1,
+            adress2=self.adress2,
+            ville=self.ville,
+            codezip=self.codezip,
+            contry=self.contry,
+            phone=self.phone,
+            discriptions=self.discriptions,
+            )
+        self.assertEqual(Profile.objects.all().count(), 1)
+        self.assertEqual(Profile.objects.all()
+        [0].username, self.username)
+        self.assertEqual(Profile.objects.all()
+        [0].email, self.email)

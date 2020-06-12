@@ -1,12 +1,12 @@
+
 from django.test import TestCase, Client
-from annonce.models import Categorie, Annonce, Comment, MpUser
+from annonce.models import Categorie, Annonce, Comment, MpUser, Image
 from accounts.models import Profile
-from annonce.forms import annonceFrom, categorieFrom, MpUserForm
+from annonce.forms import annonceFrom, categorieFrom, MpUserForm, ImageForm
 from django.contrib.auth.models import User
 from django.urls import reverse, resolve
 from django.shortcuts import get_object_or_404 
-
-
+from django.forms import modelformset_factory
 
 class TestModels(TestCase):
 
@@ -28,6 +28,7 @@ class TestModels(TestCase):
             phone='2131234',
             discriptions='Bonjour',  
         )
+        
         self.annonce_create = Annonce.objects.create(
             title='Jeux avendre',
             product='Loisirs',
@@ -37,6 +38,10 @@ class TestModels(TestCase):
             description='super jeux',
             owner=self.profile,
             )
+        self.images_annonce = Image.objects.create(
+            annonce_images=self.annonce_create,
+            image='static/img/123.jpg',
+        )
         self.comment = Comment.objects.create(
             commented_by=self.profile,
             for_post=self.annonce_create,
@@ -67,29 +72,28 @@ class TestModels(TestCase):
         self.annonce_update_url = reverse('annonce_update', args=[self.annonce_create.id])
         # client
         self.client = Client()
-             
+
     def test_home_get(self):
-            response = self.client.get('')
-            self.assertEquals(response.status_code, 200)
-            self.assertTemplateUsed( 'base.html')
-     
+        response = self.client.get('')
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed('base.html')
+
     def test_add_annonce_is_ok(self):
         # login a user
         self.client.login(username='wafisots', password='djamel2013')
-        # 
         response = self.client.post(self.add_annonce_url, {
             'title': 'Jeux avendre',
-            'product':' Loisirs',
+            'product': 'Loisirs',
             'type_annonce': 'Vente',
             'price': 20.00,
             'categories': self.categorie,
             'description': 'super jeux',
-            'owner':self.profile,
+            'owner': self.profile,
         })
         search_annonce = Annonce.objects.filter(title= 'Jeux avendre').first()
         self.assertEquals(search_annonce.price, 20.00)
         self.assertEquals(response.status_code, 302)
-       
+
     def test_annonce_detail(self):     
         response = self.client.get(self.annonce_detail_url)
         self.assertEquals(response.status_code, 200)
@@ -99,34 +103,18 @@ class TestModels(TestCase):
         response = self.client.get(self.annonce_list_url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'annonce/home.html')
-        
-        
+
     def test_annonce_delete_GET(self):
         self.client.login(username='wafistos', password='djamel2013')   
         response = self.client.get(self.annonce_delet_url)
         self.assertEquals(response.status_code, 302)
-        
-        
-    def test_annonce_update_GET(self):
-        self.client.login(username='wafistos', password='djamel2013')   
-        response = self.client.get(self.annonce_update_url)
-        self.assertEquals(response.status_code, 302)
-    
-    
+
     def test_message_GET(self):
         self.client.login(username='wafistos', password='djamel2013')   
         response = self.client.get(self.message_url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'annonce/message_list.html')
-    
-        
-    def test_annonce_update_is_ok_GET(self):
-        self.client.login(username='wafistos', password='djamel2013')   
-        response = self.client.get(self.annonce_update_url)
-        form = annonceFrom(self.data)
-        self.assertTrue(form.is_valid())
-        self.assertEquals(response.status_code, 302)
-        
+
     def test_message_mp_GET(self):
         self.client.login(username='wafistos', password='djamel2013')   
         response = self.client.get(self.message_mp_url)
@@ -138,5 +126,29 @@ class TestModels(TestCase):
         self.assertTrue(mp_form.is_valid())
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'annonce/message.html')
+
+    def test_updateAnnonce_is_Ok(self):
+        data = {
+            'title': 'Jeux avendre',
+            'product':' Loisirs',
+            'type_annonce': 'Vente',
+            'price': 20.00,
+            'categories': 'Vente',
+            'description': 'super jeux',
+            'owner': self.profile,
+        }
+        self.client.login(username='wafistos', password='djamel2013')
         
-    
+        form = annonceFrom(data=data)
+        form_image = ImageForm(self.images_annonce)
+        for field in form_image:
+            print(field)
+        
+        self.assertFalse(form_image.is_valid())
+
+
+    def test_formset(self):
+        ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4, max_num=4, validate_max=True) 
+        formset = ImageFormSet()
+        self.assertEqual(formset.max_num, 4)
+        self.assertTrue(formset.validate_max)

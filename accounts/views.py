@@ -17,8 +17,7 @@ def edit(request):
     if request.POST:
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            form.save()
-            
+            form.save()   
             capture_message(f"{request.user.username} a change son profile", level="error")
             return redirect('list_annonces')
         else:
@@ -45,6 +44,7 @@ def compte(request):
         }
     return render(request, 'accounts/compte.html', context)
 
+
 @login_required(login_url='login')
 def annonce_list(request):
     """fonction to dispaly list of all annonces
@@ -54,7 +54,7 @@ def annonce_list(request):
 
     Returns:
         [type] -- [object with number of annonce and list of all annonces]
-    """ 
+    """
     annonces = Annonce.objects.filter(owner=request.user)
     num_annonce = annonces.count()
     context = {

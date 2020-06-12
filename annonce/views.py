@@ -46,7 +46,7 @@ def add_annonce(request):
     """
     Add annonces by users
     """
-    ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4)
+    ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4, max_num=4, validate_max=True)
     # 'extra' means the number of photos that you can upload   ^
     if request.method == "POST":
         a_form = annonceFrom(request.POST)
@@ -153,7 +153,6 @@ def annonce_favorite_list(request):
     """
     user = request.user
     favorite_list = user.favorite.all()
-
     context = {
         'favorite_list': favorite_list
     }

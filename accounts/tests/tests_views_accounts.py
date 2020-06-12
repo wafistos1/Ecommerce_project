@@ -81,8 +81,5 @@ class TestModels(TestCase):
     #     annonces = Annonce.objects.filter(owner=self.client)
     #     self.assertEquals(response.status_code, 200)
     #     self.assertTemplateUsed( 'accounts/annonce_list.html')
-    
-    
 
-    
-    
+    pass
