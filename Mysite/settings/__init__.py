@@ -203,7 +203,7 @@ LOGIN_URL = 'account_login'
 
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
 AUTH_USER_MODEL = 'accounts.Profile'

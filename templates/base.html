@@ -37,7 +37,7 @@
 
     {% block navbar %}
     <!-- Page Preloder -->
-    
+
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -150,24 +150,24 @@
     {% endblock navbar %}
     <!-- Hero Section Begin -->
     {% block first-section %}
-    
+
     {% endblock first-section %}
 
-    
+
     {% block context %}
-    <div class="section-title" >
+    <div class="section-title">
         <h2> Les dernières annonces</h2>
-          </div>
-          <div class="section-title">
-            <!-- Categories Section End -->
-            {% if messages %}
-            <div class="alert alert-primary" role="alert">
-                {% for message in messages %}
-                <p id="messages"> {{ message }}</p>
-                {% endfor%}
-            </div>
-            {% endif %}
+    </div>
+    <div class="section-title">
+        <!-- Categories Section End -->
+        {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            <p id="messages"> {{ message }}</p>
+            {% endfor%}
         </div>
+        {% endif %}
+    </div>
 
 
 
@@ -192,24 +192,24 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
-                
+
                         <div class="col-lg-12 col-md-12">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="hero__search__form">
                                         <form action="/search/" method="GET">
-                                            
+
                                             <input id='search' type="text" placeholder="Recherche" name='q'>
-                                            <button type="submit" class="site-btn">RECHERCHE</button>
+                                            <button id="searchBtn" type="submit" class="site-btn">RECHERCHE</button>
                                         </form>
                                     </div>
                                 </div>
-                                    
-                                    
+
+
                             </div>
                             <br>
-                                    <br>
-                            <div class="row" >
+                            <br>
+                            <div class="row">
                                 {% for details in annonces %}
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="blog__item">
@@ -219,22 +219,23 @@
                                         <div class="blog__item__text">
                                             <ul>
                                                 <li><i class="fa fa-calendar-o"></i> {{ details.created }}</li>
-                                                <li><i class="fa fa-comment-o"></i> {{ details.comment.all.count  }}</li>
+                                                <li><i class="fa fa-comment-o"></i> {{ details.comment.all.count  }}
+                                                </li>
                                             </ul>
                                             <h5><a href="#">{{ details.title|upper|truncatechars:24  }}</a></h5>
                                             <h5>{{ details.price|intcomma}}€</h5>
                                             <p>{{ details.description|truncatechars:120  }}. </p>
-        
+
                                             <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span
                                                     class="arrow_right"></span></a>
                                         </div>
                                     </div>
                                 </div>
                                 {% endfor %}
-        
-        
-        
-        
+
+
+
+
                                 <div class="col-lg-12">
                                     <div class="row">
                                         <div class="col-12">
@@ -248,7 +249,7 @@
                 </div>
             </div>
         </div>
-            
+
         </div>
 
     </section>
@@ -314,7 +315,8 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
-                        <div class="footer__copyright__payment"><img src="{% static 'img/payment-item.png' %}" alt=""></div>
+                        <div class="footer__copyright__payment"><img src="{% static 'img/payment-item.png' %}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>

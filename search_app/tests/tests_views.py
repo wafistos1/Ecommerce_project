@@ -7,7 +7,6 @@ from django.urls import reverse, resolve
 from django.shortcuts import get_object_or_404 
 
 
-
 class TestModels(TestCase):
 
     def setUp(self):
@@ -57,23 +56,35 @@ class TestModels(TestCase):
         }
         # reverse urls 
         self.add_search_url = reverse('search' )
-        self.add_filter_url = reverse('filter' )
-        
+        self.add_filter_url = reverse('filter' )  
         self.client = Client()
-        
-     
+
     def test_search_ok_get(self):
             response = self.client.get(self.add_search_url)
             self.assertEquals(response.status_code, 200)
-            self.assertTemplateUsed( 'search_app/search.html')
-    
-    
+            self.assertTemplateUsed('search_app/search.html')
+
     def test_filter_ok_get(self):
         response = self.client.post(
             reverse('filter'),
             data={'categoriese': 'VÉHICULES '},
             content_type='application/json',
             HTTP_X_REQUESTED_WITH='XMLHttpRequest'
-            )     
+            )
         self.assertEqual(200, response.status_code)
+        self.assertEquals(response.status_code, 200)
+
+    def test_resultats_get_best_product(self):
+        response = self.client.get('/search/?q=Jeux')
+        search_product = Annonce.objects.filter(categories=self.categorie).first()
+        self.assertEquals(search_product.title, 'Jeux avendre')
+        self.assertEquals(search_product.price, 20.00)
+        self.assertEquals(search_product.categories, self.categorie)
+        self.assertEquals(response.status_code, 200)
+
+    def test_resultats_get_no_product_find(self):
+        response = self.client.get('/search/?&q=balablato')
+        search_product = Annonce.objects.filter(categories__name__icontains='balablato')
+        number_of_search_product = search_product.count()
+        self.assertEquals(number_of_search_product, 0)
         self.assertEquals(response.status_code, 200)
