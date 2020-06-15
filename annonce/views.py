@@ -67,7 +67,7 @@ def add_annonce(request):
                     image = form['image']
                     photo = Image(annonce_images=annonceForm, image=image)
                     photo.save()
-                    capture_message("add annonce format valide", level="error")  
+                    capture_message("add annonce format valide", level="info")  
 
             messages.add_message(
                 request, messages.SUCCESS, 'Annonce ajouter avec succès'
@@ -82,6 +82,7 @@ def add_annonce(request):
         formset = ImageFormSet(queryset=Image.objects.none())
     a_form = annonceFrom()
     formset = ImageFormSet(queryset=Image.objects.none())
+    capture_message(f"add annonce par {request.user.username}", level="info")
     return render(request, 'annonce/add.html', {
         "a_form": a_form,
         "formset": formset,

@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 class TestModels(TestCase):
 
     def setUp(self):
+        self.client = Client()
         self.categorie = Categorie.objects.create(name='Jeux')
         # self.user = User.objects.create_user('wafi', 'wafi@gmail.com', 'wafipass')
         self.profile=Profile.objects.create(
@@ -56,30 +57,42 @@ class TestModels(TestCase):
             'message': 'Hi',  
         }
         # reverse urls 
-        self.add_edit_url = reverse('edit' )
+        self.add_edit_url = reverse('edit')
         self.add_profile_url = reverse('profile' )
         self.add_list_annonces_url = reverse('list_annonces' )
-        self.client = Client()
+        
         
      
-    # def test_edit_ok_get(self):
-    #     self.client.login(username='wafistos', password='djamel2013')   
-    #     response = self.client.post(self.add_edit_url, data=self.data)
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed( 'accounts/edit_profile.html')
+    def test_home_template(self):
+        self.client.force_login(self.profile)   
+        response = self.client.get(self.add_edit_url)
+        print(response)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base.html')
     
+    def test_edit_ok_get(self):
+        self.client.force_login(self.profile)   
+        response = self.client.get('/accounts/compte')
+        print(response)
+        self.assertEquals(response.status_code, 200)
     
-    # def test_compte_ok_get(self):
-    #     self.client.login(username='wafistos', password='djamel2013')   
-    #     response = self.client.post(self.add_profile_url)
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed( 'accounts/compte.html')
-    
-    # def test_annonce_list_ok_get(self):
-    #     self.client.login(username='wafistos', password='djamel2013')   
-    #     response = self.client.post(self.add_list_annonces_url)
-    #     annonces = Annonce.objects.filter(owner=self.client)
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed( 'accounts/annonce_list.html')
+    def test_list_annonces_ok_get(self):
+        self.client.force_login(self.profile)   
+        response = self.client.get('/accounts/list_annonces')
+        print(response)
+        self.assertEquals(response.status_code, 200)
 
-    pass
+    def test_list_annonces_down_get(self):
+        self.client.force_login(self.profile)   
+        response = self.client.get('/accounts/toto')
+        print(response)
+        self.assertEquals(response.status_code, 404)
+
+    def test_form_edit_ok_get(self):
+        self.client.force_login(self.profile) 
+        response = self.client.post('/accounts/compte', data=self.data)
+        print(response)
+        self.assertEquals(response.status_code, 200)
+
+   
+

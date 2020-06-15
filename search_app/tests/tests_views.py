@@ -1,10 +1,7 @@
 from django.test import TestCase, Client
 from annonce.models import Categorie, Annonce, Comment, MpUser
 from accounts.models import Profile
-from annonce.forms import annonceFrom, categorieFrom, MpUserForm
-from django.contrib.auth.models import User
-from django.urls import reverse, resolve
-from django.shortcuts import get_object_or_404 
+from django.urls import reverse
 
 
 class TestModels(TestCase):
@@ -84,6 +81,7 @@ class TestModels(TestCase):
 
     def test_resultats_get_no_product_find(self):
         response = self.client.get('/search/?&q=balablato')
+        print(response)
         search_product = Annonce.objects.filter(categories__name__icontains='balablato')
         number_of_search_product = search_product.count()
         self.assertEquals(number_of_search_product, 0)
