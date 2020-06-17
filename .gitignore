@@ -137,3 +137,4 @@ venvW/
 venv2/
 venv3/
 geckodriver/
+.vscode/

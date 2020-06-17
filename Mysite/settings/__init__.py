@@ -59,8 +59,7 @@ INSTALLED_APPS = [
 
 
     # include the providers you want to enable:
-    'allauth.socialaccount.providers.google',
-    
+    # 'allauth.socialaccount.providers.google',
     # local app
     'accounts',
     'annonce',
@@ -73,18 +72,18 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         'APP': {
+#             'client_id': '123',
+#             'secret': '456',
+#             'key': ''
+#         }
+#     }
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -209,7 +208,7 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
 AUTH_USER_MODEL = 'accounts.Profile'
 # email console for test
 
-#  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 

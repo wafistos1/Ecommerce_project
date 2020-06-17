@@ -1,8 +1,6 @@
 {% extends "account/base.html" %}
 {% load crispy_forms_tags %}
-
 {% load i18n %}
-
 {% block head_title %}<title>{% trans "Signup" %}</title>{% endblock %}
 {% block first-section %}{% endblock first-section %}
 {% block context %}
@@ -42,7 +40,7 @@
               </div>
               <div class="col-lg-3">
                 <div class="checkout__input">
-                  <p>Last Name<span>*</span></p>
+                  <p>Last Name<span></span></p>
                   {{ form.last_name }}
                 </div>
               </div>
@@ -72,19 +70,19 @@
 
               <div class="col-lg-6">
                 <div class="checkout__input">
-                  <p>Adresse<span>*</span></p>
+                  <p>Adresse<span></span></p>
                   {{ form.adress1 }}
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="checkout__input">
-                  <p>Adresse(plus)<span>*</span></p>
+                  <p>Adresse(plus)<span></span></p>
                   {{ form.adress2 }}
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="checkout__input">
-                  <p>Phone<span>*</span></p>
+                  <p>Phone<span></span></p>
                   {{ form.phone }}
                 </div>
               </div>
@@ -93,19 +91,19 @@
 
               <div class="col-lg-6">
                 <div class="checkout__input">
-                  <p>Ville<span>*</span></p>
+                  <p>Ville<span></span></p>
                   {{ form.ville }}
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="checkout__input">
-                  <p>Country<span>*</span></p>
+                  <p>Country<span></span></p>
                   {{ form.contry }}
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="checkout__input">
-                  <p>Code Zip<span>*</span></p>
+                  <p>Code Zip<span></span></p>
                   {{ form.codezip }}
                 </div>
               </div>
@@ -115,20 +113,21 @@
 
               <div class="col-lg-12">
                 <div class="checkout__input">
-                  <p>Discriptions<span>*</span></p>
+                  <p>Discriptions<span></span></p>
                   {{ form.discriptions }}
                 </div>
               </div>
               <div class="row">
 
-                <div class="col-lg-12 col-md-12">
+                <div class="col-lg-12 ">
                   <div class="checkout__input">
-                    <p>Photo<span>*</span></p>
+                    <p>Photo<span></span></p>
                     {{ form.picture }}
                   </div>
                 </div>
 
               </div>
+            </div>
               <div class="row">
 
                 <div class="col-lg-12 col-md-12">
@@ -145,10 +144,10 @@
 
                 </div>
 
-
+                </div>
                 <br>
-                <p class="hint-text">{% blocktrans %}Already have an account? Then please <a
-                    href="{{ login_url }}">signin</a>.{% endblocktrans %}</p>
+                <p class="hint-text">{% trans 'Already have an account? Then please' %} <a
+                    href="{{ login_url }}">{% trans 'Signin' %}</a></p>
                 <br>
                 <div>
                   <button type="submit" class="site-btn">{% trans "Sign Up" %}</button>
