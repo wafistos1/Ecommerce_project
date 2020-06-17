@@ -33,9 +33,6 @@ Ce qu'il est requis pour commencer:
 
 - Le programme affiche les résultats de la recherche en plusieurs pages, l'utilisateur trouve le produit substitut qui veut et click sur le bouton sauvegarde du produit.
 
-### Les sauvegarde produit.
-
-- Le programme sauvegarde le produit dans les favoris ont appuyant sur le bouton, on peut à tout moment consulter les favoris avec le lien en haut de la page Aliment
 
 ### Fabriqué avec
 
