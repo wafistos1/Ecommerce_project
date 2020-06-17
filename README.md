@@ -1,6 +1,6 @@
 #
 # Projet final : prêt pour le feu d’artifices ?
-## Ce programme est un site web qui va aide l'utilisateur a vendre ou acheter un produit d'occasion .
+- Ce programme est un site web qui va aide l'utilisateur a vendre ou acheter un produit d'occasion .
 
 
 ## Pour commencer
@@ -11,31 +11,31 @@
 
 Ce qu'il est requis pour commencer:
 
-    - Installer Python3.
-    - Forker le repo.
-    - Installer les dependances avec la commande pip install -r requirements.txt.
+- Installer Python3.
+- Forker le repo.
+- Installer les dependances avec la commande pip install -r requirements.txt.
 
 ## Démarrage
 
 ### Pour lancer le programme pour la premier fois:
 
-    - Taper dans un terminal python3 manage.py migrate
-    - Taper dans un terminal python3 manage.py load db.json pour implementer la BD.
-    - Taper dans un terminal python3 manage.py runserver
-    - Il faut que l'utilisateur s'enregistre pour qu'il puisse utiliser le programme.
+- Taper dans un terminal python3 manage.py migrate
+- Taper dans un terminal python3 manage.py load db.json pour implementer la BD.
+- Taper dans un terminal python3 manage.py runserver
+- Il faut que l'utilisateur s'enregistre pour qu'il puisse utiliser le programme.
 
 ### Partie Interface(interaction avec l'utilisateur)
 
-    - Le programme aide l'utilisateur a trouvé un produit d'occasion, on lance la recherche d'un produit et le programme nous affiche le produit.
-    - Le programme aide l'utilisateur aussi si il veut vendre un produit dont il ne sert pas.
+- Le programme aide l'utilisateur a trouvé un produit d'occasion, on lance la recherche d'un produit et le programme nous affiche le produit.
+- Le programme aide l'utilisateur aussi si il veut vendre un produit dont il ne sert pas.
 
 ### Partie recherchent de produit.
 
-    - Le programme affiche les résultats de la recherche en plusieurs pages, l'utilisateur trouve le produit substitut qui veut et click sur le bouton sauvegarde du produit.
+- Le programme affiche les résultats de la recherche en plusieurs pages, l'utilisateur trouve le produit substitut qui veut et click sur le bouton sauvegarde du produit.
 
 ### Les sauvegarde produit.
 
-    - Le programme sauvegarde le produit dans les favoris ont appuyant sur le bouton, on peut à tout moment consulter les favoris avec le lien en haut de la page Aliment
+- Le programme sauvegarde le produit dans les favoris ont appuyant sur le bouton, on peut à tout moment consulter les favoris avec le lien en haut de la page Aliment
 
 ### Fabriqué avec
 
