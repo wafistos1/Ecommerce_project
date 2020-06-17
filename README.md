@@ -29,7 +29,7 @@ Ce qu'il est requis pour commencer:
 - Le programme aide l'utilisateur a trouvé un produit d'occasion, on lance la recherche d'un produit et le programme nous affiche le produit.
 - Le programme aide l'utilisateur aussi si il veut vendre un produit dont il ne sert pas.
 
-### Partie recherchent de produit.
+### Partie recherche de produit.
 
 - Le programme affiche les résultats de la recherche en plusieurs pages, l'utilisateur trouve le produit substitut qui veut et click sur le bouton sauvegarde du produit.
 
