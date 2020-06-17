@@ -5,7 +5,7 @@
 
 ## Pour commencer
 
-    ## Ce programme se compose des éléments suivants
+- Ce programme se compose des éléments suivants
 
 ## Pré-requis
 
