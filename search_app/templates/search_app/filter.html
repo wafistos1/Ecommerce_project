@@ -12,6 +12,13 @@
 <section class="blog spad">
   <div class="container">
       <div class="row">
+        <div class="col-12">
+
+            <h2 class="section-title" style="
+            color: #252525;
+            line-height: 52px;
+            font-weight: 700;" > {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize}}</h6>
+          </div>
           
           <div class="col-lg-12 col-md-12" >
               <div class="row">
@@ -30,7 +37,7 @@
                               <h5>{{ details.price|intcomma}}€</h5>
                               <p>{{ details.description|truncatechars:120  }}. </p>
                               
-                              <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                              <a href="{{details.get_absolute_url}}" class="blog__btn">Détail <span class="arrow_right"></span></a>
                           </div>
                       </div>
                   </div>

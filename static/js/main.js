@@ -356,6 +356,7 @@ $('.btn-search').on('click', function (e) {
 	var price = $('#price').val();
 	var price_gt = $('#price_gt').val();
     var price_lt = $('#price_lt').val();
+    $('.add-categorie').children().remove();
     $('.add-filter').children().remove();
     $('.pagination').children().remove();
 	// alert( 'rating: ' + rating + ' grade: ' + grade+ ' categorie: ' + categorie );

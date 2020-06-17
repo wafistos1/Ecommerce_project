@@ -156,7 +156,7 @@
             <h2> Résultat de la recherche </h2>
               </div>
           </div>
-          <h6 > {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize}}</h6>
+          
           <br>
           <br><br>
             <div class="row add-filter">
@@ -164,8 +164,45 @@
 
               </div>
                 {% for details in search_list %}
+                <h6 > {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize }}</h6>
 
                 <div class="col-lg-6 col-md-6 col-sm-6" >
+                  <div class="blog__item">
+                      <div class="blog__item__pic">
+                          <img src="{{details.image.all.0.image.url }}" alt="">
+                      </div>
+                      <div class="blog__item__text">
+                          <ul>
+                              <li><i class="fa fa-calendar-o"></i> {{ details.created }}</li>
+                              <li><i class="fa fa-comment-o"></i> {{ details.comment.all.count }}</li>
+                          </ul>
+                          <h5><a href="#">{{ details.title|upper|truncatechars:24  }}</a></h5>
+                          <h5>{{ details.price|intcomma}}€</h5>
+                          <p>{{ details.description|truncatechars:120  }}. </p>
+                          
+                          <a href="{{details.get_absolute_url}}" class="blog__btn"> <span class="arrow_right"></span></a>
+                      </div>
+                  </div>
+              </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="row add-categorie">
+              <div class="col-12">
+
+                <h2 class="section-title" style="
+                color: #252525;
+                line-height: 52px;
+                font-weight: 700;" > {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize}}</h6>
+              </div>
+              
+                <div class="col-12">
+                  <div class="row">
+                {% for details in categories %}
+              
+                
+                <div class="col-lg-4 col-md-4 col-sm-4" >
                   <div class="blog__item">
                       <div class="blog__item__pic">
                           <img src="{{details.image.all.0.image.url }}" alt="">
@@ -179,11 +216,13 @@
                           <h5>{{ details.price|intcomma}}€</h5>
                           <p>{{ details.description|truncatechars:120  }}. </p>
                           
-                          <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                          <a href="{{details.get_absolute_url}}" class="blog__btn">Détail<span class="arrow_right"></span></a>
                       </div>
                   </div>
               </div>
-                {% endfor %}
+              {% endfor %}
+            </div>
+            </div>
 
             </div>
 
@@ -244,7 +283,7 @@
                                       <h5>{{ details.price|intcomma}}€</h5>
                                       <p>{{ details.description|truncatechars:120  }}. </p>
                                       
-                                      <a href="{{details.get_absolute_url}}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                      <a href="{{details.get_absolute_url}}" class="blog__btn">Détail <span class="arrow_right"></span></a>
                                   </div>
                               </div>
                           </div>

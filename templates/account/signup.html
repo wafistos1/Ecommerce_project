@@ -23,7 +23,7 @@
 
     <div class="checkout__form">
       <h4>{% trans "Signup" %}</h4>
-      <form action="" method="post" enctype="multipart/form-data" >
+      <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
           <div class="col-lg-12 col-md-12">
@@ -110,13 +110,13 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="row">
 
               <div class="col-lg-12">
                 <div class="checkout__input">
                   <p>Discriptions<span>*</span></p>
-                {{ form.discriptions }}
+                  {{ form.discriptions }}
                 </div>
               </div>
               <div class="row">
@@ -124,45 +124,44 @@
                 <div class="col-lg-12 col-md-12">
                   <div class="checkout__input">
                     <p>Photo<span>*</span></p>
-                  {{ form.picture }}
+                    {{ form.picture }}
                   </div>
                 </div>
-              
-            </div>
-            <div class="row">
 
-              <div class="col-lg-12 col-md-12">
-                <div class="checkout__input">
-                  {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-            
-        
-        {% endfor %}
-                </div>
               </div>
-            
-          </div>
+              <div class="row">
 
-            
-          <br>
-          <p class="hint-text">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">signin</a>.{% endblocktrans %}</p> 
-          <br>
-          <div>
-            <button type="submit" class="site-btn">{% trans "Sign Up" %}</button>
-          </div>
+                <div class="col-lg-12 col-md-12">
+                  <div class="checkout__input">
+                    <div class="list-group-item list-group-item-danger">
+                      {% for field in form %}
+                      {{ field.errors }}
+                      {% if field.help_text %}
+                      <p>{{ field.help_text|safe }}</p>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                </div>
 
 
-          
+                <br>
+                <p class="hint-text">{% blocktrans %}Already have an account? Then please <a
+                    href="{{ login_url }}">signin</a>.{% endblocktrans %}</p>
+                <br>
+                <div>
+                  <button type="submit" class="site-btn">{% trans "Sign Up" %}</button>
+                </div>
 
-        </div>
 
+
+
+              </div>
+
+            </div>
+      </form>
     </div>
-    </form>
-  </div>
   </div>
 </section>
 

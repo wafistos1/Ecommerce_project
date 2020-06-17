@@ -1,16 +1,14 @@
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase, LiveServerTestCase
+from django.contrib.staticfiles.testing import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
-from django.urls import reverse
 from accounts.models import Profile
-from annonce.models import Annonce, Image, Comment, Categorie, MpUser
-from selenium.webdriver.common.keys import Keys
-import time 
-import requests
-from selenium import webdriver
+from annonce.models import Annonce, Image, Categorie
+
 
 class MySeleniumTests(LiveServerTestCase):
     def setUp(self):
-        self.selenium = WebDriver()
+        """
+        """
+        self.selenium = WebDriver(executable_path='C:/geckodriver.exe')
         self.selenium.implicitly_wait(10)
         self.profile = Profile.objects.create(
             username='wafistos6',
@@ -41,26 +39,27 @@ class MySeleniumTests(LiveServerTestCase):
             annonce_images=self.annonce_create,
             image='static/img/123.jpg',
         )
+
     def tearDown(self):
         self.selenium.quit()
 
-       
     def test_login(self):
+        """ Test login form
+        """
         self.selenium.get('%s%s' % (self.live_server_url, '/accounts/login/'))
         self.selenium.find_element_by_id("id_login").send_keys('wafistos6')
         self.selenium.find_element_by_id("id_password").send_keys('djamel2013')
         self.selenium.find_element_by_id('submitBtn').click()
         self.assertEquals(self.selenium.title, 'Connexion')
 
-
     def test_search(self):
+        """ Test search form
+        """
         self.selenium.get('%s%s' % (self.live_server_url, '/'))
         query = self.selenium.find_element_by_name("q")
         query.send_keys('console')
         self.selenium.find_element_by_id('searchBtn').click()
         self.assertEquals(self.selenium.title, 'Yatach Home')
-
-        
 
     # def test_rating(self):
     #     url_rating = f"/detail_favori/{self.favorite.id}"

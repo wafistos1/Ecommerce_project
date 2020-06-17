@@ -64,6 +64,12 @@ def annonce_list(request):
     return render(request, 'accounts/annonce_list.html', context)
 
 
+def mention(request):
+    """Mentions legales
+    """
+    return render(request, 'mentions.html')
+
+
 def my_custom_bad_request_view(request, exception):
     capture_message("Page not found! error404", level="error")
     return render(request, 'accounts/404.html')

@@ -95,7 +95,7 @@ def filter_search(request):
     print(resultat_filter.count())
     context = {
         'resultat': resultat_filter,
-        'count': resultat_filter.count(),
+        'count_list': resultat_filter.count(),
     }
     if request.is_ajax():
         print('Ajax is true')
@@ -106,3 +106,24 @@ def filter_search(request):
         return JsonResponse({'form': html})
     # return render(request, 'search_app/search.html', context)
     return JsonResponse(context, safe=False)
+
+
+def search_categorie(request, search):
+    # search = search.lower()
+    print(search)
+    categorie = None
+    try:
+        categorie = Annonce.objects.filter(categories__name=search)
+        count = categorie.count()
+    except :
+        print('toto')
+        message = 'Aucun corespendances'
+        categorie = {}
+    print(categorie)
+    
+    context = {
+        'categories': categorie,
+        'count_list': count,
+
+    }
+    return render(request, 'search_app/search.html', context)

@@ -251,3 +251,4 @@ def message_list(request):
         'message_list': messages,
     }
     return render(request, 'annonce/message_list.html', context)
+
