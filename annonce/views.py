@@ -82,7 +82,7 @@ def add_annonce(request):
         formset = ImageFormSet(queryset=Image.objects.none())
     a_form = annonceFrom()
     formset = ImageFormSet(queryset=Image.objects.none())
-    capture_message(f"add annonce par {request.user.username}", level="info")
+    capture_message(f"Annonce update par {request.user.username}", level="info")
     return render(request, 'annonce/add.html', {
         "a_form": a_form,
         "formset": formset,

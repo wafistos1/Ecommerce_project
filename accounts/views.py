@@ -18,7 +18,7 @@ def edit(request):
         form = editform(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()   
-            capture_message(f"{request.user.username} a change son profile", level="error")
+            capture_message(f"{request.user.username} a update son profile", level="error")
             return redirect('list_annonces')
         else:
             return render(request, 'edit_profile.html', {'form': form})
