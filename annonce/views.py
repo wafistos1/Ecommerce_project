@@ -47,7 +47,6 @@ def add_annonce(request):
     Add annonces by users
     """
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=4, max_num=4, validate_max=True)
-    # 'extra' means the number of photos that you can upload   ^
     if request.method == "POST":
         a_form = annonceFrom(request.POST)
         formset = ImageFormSet(
@@ -61,14 +60,11 @@ def add_annonce(request):
             annonceForm.owner = user
             annonceForm.save()
             for form in formset.cleaned_data:
-                # this helps to not crash if the user
-                # do not upload all the photos
                 if form:
                     image = form['image']
                     photo = Image(annonce_images=annonceForm, image=image)
                     photo.save()
-                    capture_message("add annonce format valide", level="info")  
-
+                    capture_message(f"add annonce format valide utiliser par {request.user.username}", level="info")  
             messages.add_message(
                 request, messages.SUCCESS, 'Annonce ajouter avec succès'
             )
@@ -76,7 +72,7 @@ def add_annonce(request):
         else:
             print(a_form.errors)
             print('Is not valid')
-            capture_message("add annonce format non valide", level="error")   
+            capture_message(f"Annonce format non valide utiliser par {request.user.username}", level="error")   
     else:
         a_form = annonceFrom()
         formset = ImageFormSet(queryset=Image.objects.none())
@@ -186,9 +182,7 @@ def updateAnnonce(request, pk=None):
             print('is valid')
             form.save()
             for form in formset.cleaned_data:
-                # this helps to not crash if the user
-                # do not upload all the photos
-                try:    
+                try:
                     image = form['image']
                     photo = Image(annonce_images=obj_annonce, image=image)
                     photo.save()
@@ -218,7 +212,6 @@ def favorite(request, pk):
     else:
         # print('je suis dans favorite qui vaux False')
         favorite_annonce.favorite.add(request.user)
-
     return HttpResponseRedirect(favorite_annonce.get_absolute_url())
 
 

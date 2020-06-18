@@ -25,18 +25,7 @@
         
         <br>
         
-            
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <div class="s009">
+        <div class="s009" id="Avance-search-filter">
             <form method="GET"  action="{% url 'filter' %}">
               <div class="inner-form">
                 
@@ -132,17 +121,7 @@
           </div>
           <script src="{% static 'js/extention/choices.js' %}"></script>
           
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
+        
         <div class="col-sm-12 " >
             
             <br>
@@ -160,11 +139,14 @@
           <br>
           <br><br>
             <div class="row add-filter">
-              <div>
+              <div class="col-12">
 
+                <h2 class="section-title" style="
+                color: #252525;
+                line-height: 52px;
+                font-weight: 700;" > {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize}}</h6>
               </div>
                 {% for details in search_list %}
-                <h6 > {{ count_list }} annonce{{count_list|pluralize }} trouvé{{count_list|pluralize }}</h6>
 
                 <div class="col-lg-6 col-md-6 col-sm-6" >
                   <div class="blog__item">
@@ -188,7 +170,7 @@
 
             </div>
 
-            <div class="row add-categorie">
+            <div class="row add-categorie" style="display: none;">
               <div class="col-12">
 
                 <h2 class="section-title" style="
@@ -262,70 +244,8 @@
         </div>
 
 
-        <section class="blog spad">
-          <div class="container">
-              <div class="row">
-                  
-                  <div class="col-lg-8 col-md-7">
-                      <div class="row">
-                          {% for details in annonces %}
-                          <div class="col-lg-6 col-md-6 col-sm-6">
-                              <div class="blog__item">
-                                  <div class="blog__item__pic">
-                                      <img src="{{details.image.all.0.image.url }}" alt="">
-                                  </div>
-                                  <div class="blog__item__text">
-                                      <ul>
-                                          <li><i class="fa fa-calendar-o"></i> {{ details.created }}</li>
-                                          <li><i class="fa fa-comment-o"></i> {{ details.comment.all.count  }}</li>
-                                      </ul>
-                                      <h5><a href="#">{{ details.title|upper|truncatechars:24  }}</a></h5>
-                                      <h5>{{ details.price|intcomma}}€</h5>
-                                      <p>{{ details.description|truncatechars:120  }}. </p>
-                                      
-                                      <a href="{{details.get_absolute_url}}" class="blog__btn">Détail <span class="arrow_right"></span></a>
-                                  </div>
-                              </div>
-                          </div>
-                          {% endfor %}
-  
-  
-  
-  
-                          <div class="col-lg-12">
-                              <div class="row">
-                                  <div class="col-12">
-                                      {% include "pagination.html" with liste=annonces view="home" %}
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-  
-      </section>
+       
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!---->
-<!---->
-<!---->
-<!---->
-
-
-
-
-
-
 
 {% endblock context %}
