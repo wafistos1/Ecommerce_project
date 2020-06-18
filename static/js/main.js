@@ -345,7 +345,7 @@ $('#advanced-search').fadeToggle();
 
     });
 
-$('.btn-search').on('click', function (e) {
+$('#btn-search').on('click', function (e) {
     e.preventDefault();
     
     var categories = $('#categories').val();
