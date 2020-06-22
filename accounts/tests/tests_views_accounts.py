@@ -66,32 +66,27 @@ class TestModels(TestCase):
     def test_home_template(self):
         self.client.force_login(self.profile)   
         response = self.client.get(self.add_edit_url)
-        print(response)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html')
     
     def test_edit_ok_get(self):
         self.client.force_login(self.profile)   
         response = self.client.get('/accounts/compte')
-        print(response)
         self.assertEquals(response.status_code, 200)
     
     def test_list_annonces_ok_get(self):
         self.client.force_login(self.profile)   
         response = self.client.get('/accounts/list_annonces')
-        print(response)
         self.assertEquals(response.status_code, 200)
 
     def test_list_annonces_down_get(self):
         self.client.force_login(self.profile)   
         response = self.client.get('/accounts/toto')
-        print(response)
         self.assertEquals(response.status_code, 404)
 
     def test_form_edit_ok_get(self):
         self.client.force_login(self.profile) 
         response = self.client.post('/accounts/compte', data=self.data)
-        print(response)
         self.assertEquals(response.status_code, 200)
 
    

@@ -70,7 +70,7 @@ class TestModels(TestCase):
         # client
         self.client = Client()
 
-    def test_home_get(self):
+    def test_home_get_is_ok(self):
         response = self.client.get('')
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed('base.html')
