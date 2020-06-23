@@ -1,5 +1,6 @@
 from django.contrib.staticfiles.testing import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.firefox.options import Options
 from accounts.models import Profile
 from annonce.models import Annonce, Image, Categorie
 import time
@@ -10,6 +11,7 @@ class MySeleniumTests(LiveServerTestCase):
         """
         """
         self.selenium = WebDriver(executable_path='C:/geckodriver.exe')
+        # self.selenium = WebDriver()
         self.selenium.implicitly_wait(10)
         self.profile = Profile.objects.create_user(
             username='wafistos6',

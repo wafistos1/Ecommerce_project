@@ -122,7 +122,7 @@ def search_categorie(request, search):
     print(categorie)
     
     context = {
-        'categories': categorie,
+        'search_list': categorie,
         'count_list': count,
 
     }
