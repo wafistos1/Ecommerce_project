@@ -10,8 +10,8 @@ class MySeleniumTests(LiveServerTestCase):
     def setUp(self):
         """
         """
-        self.selenium = WebDriver(executable_path='C:/geckodriver.exe')
-        # self.selenium = WebDriver()
+        # self.selenium = WebDriver(executable_path='C:/geckodriver.exe')
+        self.selenium = WebDriver()
         self.selenium.implicitly_wait(10)
         self.profile = Profile.objects.create_user(
             username='wafistos6',
