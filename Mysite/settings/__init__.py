@@ -27,7 +27,7 @@ SECRET_KEY = 'd(%-&+xi1ui=%#jn&dv4vw15!ga&@h%l$ahk98n9b32020by#a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['178.79.185.140']
 
 sentry_sdk.init(
     dsn="https://719ea76105d044f28b089465d317e11d@o353316.ingest.sentry.io/5273462",
